@@ -1,0 +1,15 @@
+<section class="page-hero">
+  <app-islamic-pattern class="pattern" position="top-right" />
+  <div class="page-hero__inner">
+    @if (eyebrow()) {
+      <p class="eyebrow">{{ eyebrow() }}</p>
+    }
+    <h1>{{ heading() }}</h1>
+    @if (body()) {
+      <p class="body">{{ body() }}</p>
+    }
+    <div class="extra">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

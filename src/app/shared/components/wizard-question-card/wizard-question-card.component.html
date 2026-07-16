@@ -1,0 +1,35 @@
+<div class="card">
+  <h2 #questionHeading tabindex="-1">{{ question() }}</h2>
+  @if (helper()) {
+    <p class="helper">{{ helper() }}</p>
+  }
+
+  <div class="answer-area">
+    <ng-content></ng-content>
+  </div>
+
+  @if (whyWeAsk()) {
+    <div class="why-panel">
+      <app-icon name="Info" [size]="18" />
+      <div>
+        <p class="why-title">Why we ask this?</p>
+        <p class="why-body">{{ whyWeAsk() }}</p>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="nav-actions">
+  @if (showBack()) {
+    <button type="button" class="btn btn-secondary" (click)="back.emit()">
+      <app-icon name="ArrowLeft" [size]="18" />
+      Back
+    </button>
+  } @else {
+    <span></span>
+  }
+  <button type="button" class="btn btn-primary" [disabled]="!canContinue()" (click)="continue.emit()">
+    {{ continueLabel() }}
+    <app-icon name="ArrowRight" [size]="18" />
+  </button>
+</div>

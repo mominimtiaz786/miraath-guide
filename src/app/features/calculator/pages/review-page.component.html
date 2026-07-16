@@ -1,0 +1,34 @@
+<div class="review-page">
+  <header class="review-header">
+    <p class="eyebrow">REVIEW</p>
+    <h1>Review your family details</h1>
+    <p class="body">Check everything below before we calculate the shares. You can edit any section.</p>
+  </header>
+
+  <div class="sections-grid">
+    <app-review-section title="Deceased" [items]="deceasedItems()" (edit)="editSection('deceasedGender')" />
+    <app-review-section title="Spouse" [items]="spouseItems()" (edit)="editSection('husbandAlive')" />
+    <app-review-section title="Parents and grandparents" [items]="parentsItems()" (edit)="editSection('fatherAlive')" />
+    <app-review-section title="Children and descendants" [items]="childrenItems()" (edit)="editSection('hasDescendants')" />
+    <app-review-section title="Siblings" [items]="siblingsItems()" (edit)="editSection('fullBrothersCount')" />
+    @if (extendedItems().length > 0) {
+      <app-review-section title="Extended family" [items]="extendedItems()" (edit)="editSection('fullNephewsCount')" />
+    }
+    <app-review-section title="Estate" [items]="estateItems()" (edit)="editSection('estateValue')" />
+  </div>
+
+  @if (skippedExplanations().length > 0) {
+    <section class="skipped">
+      <h2><app-icon name="Info" [size]="18" /> Relatives not asked because they could not affect this case</h2>
+      <ul>
+        @for (explanation of skippedExplanations(); track explanation) {
+          <li>{{ explanation }}</li>
+        }
+      </ul>
+    </section>
+  }
+
+  <div class="cta">
+    <app-primary-button (click)="calculateShares()">Calculate Shares</app-primary-button>
+  </div>
+</div>

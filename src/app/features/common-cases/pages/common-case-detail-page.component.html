@@ -1,0 +1,89 @@
+@if (case(); as c) {
+  <div class="detail">
+    <a class="back-link" routerLink="/common-cases"><app-icon name="ArrowLeft" [size]="16" /> All common cases</a>
+
+    <header class="case-header">
+      <span class="badge">Case {{ c.number }}</span>
+      <h1>{{ c.title }}</h1>
+      <p class="scenario">{{ c.scenario }}</p>
+    </header>
+
+    <section class="tree-section">
+      <app-family-tree-mini [heirs]="c.heirs" />
+    </section>
+
+    <section class="two-col">
+      <div class="col">
+        <h2><app-icon name="UserCheck" [size]="18" /> Eligible heirs</h2>
+        <ul class="fact-list">
+          @for (heir of c.eligibleHeirs; track heir.label) {
+            <li>
+              <span class="label">{{ heir.label }}</span>
+              <span class="value">{{ heir.value }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="col">
+        <h2><app-icon name="UserX" [size]="18" /> Blocked heirs</h2>
+        @if (c.blockedHeirs.length === 0) {
+          <p class="muted">No relatives are blocked in this case.</p>
+        } @else {
+          <ul class="fact-list">
+            @for (heir of c.blockedHeirs; track heir.relationship) {
+              <li>
+                <span class="label">{{ heir.relationship }}</span>
+                <span class="value">{{ heir.reason }}</span>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2><app-icon name="ChartPie" [size]="18" /> Calculation steps</h2>
+      <ol class="steps-list">
+        @for (step of c.calculationSteps; track step) {
+          <li>{{ step }}</li>
+        }
+      </ol>
+    </section>
+
+    <section class="estate-section">
+      <h2><app-icon name="WalletCards" [size]="18" /> Example monetary distribution</h2>
+      <p class="muted">Estate value used for this example: PKR {{ c.exampleEstate | number: '1.0-0' }}</p>
+      <div class="money-grid">
+        @for (share of c.keyShares; track share.label) {
+          <div class="money-card">
+            <span class="label">{{ share.label }}</span>
+            <span class="fraction numeric">{{ share.value }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2><app-icon name="FileText" [size]="18" /> Rule explanation</h2>
+      <p class="explanation">{{ c.ruleExplanation }}</p>
+    </section>
+
+    <section>
+      <h2>Related concepts</h2>
+      <div class="chips">
+        @for (concept of c.relatedConcepts; track concept) {
+          <span class="chip">{{ concept }}</span>
+        }
+      </div>
+    </section>
+
+    <div class="cta">
+      <app-primary-button routerLink="/calculator/wizard">Try this scenario in the calculator</app-primary-button>
+    </div>
+  </div>
+} @else {
+  <div class="not-found">
+    <p>We couldn't find that case.</p>
+    <a routerLink="/common-cases" class="text-link">Back to common cases</a>
+  </div>
+}

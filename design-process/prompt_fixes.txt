@@ -1,0 +1,319 @@
+==================================================
+13B. CALCULATION RULES (NORMATIVE)
+==================================================
+
+This section is the single source of truth for the calculation
+engine. Where any other source (training knowledge, external
+references, mockup text) disagrees with this section, this
+section wins. Do not substitute rules from other madhhabs or
+from general knowledge.
+
+Methodology: Sunni, Hanafi positions where schools differ.
+
+All shares below are fractions of the distributable estate
+(after expenses, debts, and wasiyyah, which are outside the
+MVP calculation).
+
+--------------------------------------------------
+13B.1 DERIVED FACTS
+--------------------------------------------------
+
+fatherFigure = fatherAlive OR paternalGrandfatherAlive
+maleDescendant = sonsCount > 0 OR paternalGrandsonsCount > 0
+femaleDescendant = daughtersCount > 0 OR paternalGranddaughtersCount > 0
+anyDescendant = maleDescendant OR femaleDescendant
+totalSiblings = fullBrothers + fullSisters
+              + paternalHalfBrothers + paternalHalfSisters
+              + maternalSiblings
+
+The paternal grandfather is considered only when the father is
+dead. The father always blocks the paternal grandfather.
+
+Hanafi position: the father figure (father OR paternal
+grandfather) blocks ALL siblings and everything below them in
+the residuary chain.
+
+--------------------------------------------------
+13B.2 FIXED SHARES (ASHAB AL-FURUD)
+--------------------------------------------------
+
+Husband:
+1/2 if no descendant.
+1/4 if any descendant.
+
+Wife or wives:
+1/4 if no descendant.
+1/8 if any descendant.
+The share is a single pool divided equally among up to four
+wives.
+
+Mother:
+1/6 if anyDescendant OR totalSiblings >= 2.
+Siblings count toward this rule EVEN WHEN they are blocked
+by the father figure and inherit nothing themselves.
+Otherwise 1/3, EXCEPT in the Umariyyatayn case (13B.5).
+
+Father:
+1/6 only, if maleDescendant.
+1/6 plus any residue, if femaleDescendant only.
+Residue only (as residuary heir), if no descendant.
+
+Paternal grandfather (father dead):
+Identical to the father in all share rules above,
+with ONE exception: Umariyyatayn does not apply to the
+grandfather (13B.5).
+
+Grandmothers (mother dead):
+1/6 as a single pool shared equally by the eligible
+grandmothers (0 to 2). The MVP treats eligibility as a
+user-confirmed count with a help panel; it does not model
+per-line grandmother blocking beyond "mother blocks all
+grandmothers".
+
+Daughters (no sons):
+1/2 if exactly one.
+2/3 shared equally if two or more.
+With one or more sons, daughters have no fixed share; they
+become residuary with the sons (13B.3).
+
+Son's daughters (no sons, no son's sons):
+Take the daughters' rule if there are no daughters.
+1/6 (completing 2/3) if exactly one daughter.
+Blocked if two or more daughters.
+With son's sons present they become residuary with them.
+
+Full sisters (no father figure, no descendant, no full brother):
+1/2 if exactly one.
+2/3 shared equally if two or more.
+EXCEPTION: if femaleDescendant is true, full sisters take no
+fixed share and instead become residuary (13B.3, tier 4b).
+
+Paternal half-sisters (same gate as full sisters, and no
+paternal half-brother):
+Take the full sisters' rule if there are no full sisters.
+1/6 (completing 2/3) if exactly one full sister.
+Blocked if two or more full sisters.
+With paternal half-brothers present they become residuary
+with them.
+
+Maternal siblings (only when no descendant AND no father
+figure — the kalalah condition):
+1/6 if exactly one.
+1/3 shared EQUALLY if two or more.
+Males and females share EQUALLY. The 2:1 male/female ratio
+NEVER applies to maternal siblings.
+
+--------------------------------------------------
+13B.3 RESIDUARY CHAIN (ASABAH)
+--------------------------------------------------
+
+After fixed shares, the remainder goes to exactly one tier,
+evaluated strictly in this order. The first non-empty tier
+takes the entire residue; all lower tiers receive nothing.
+
+ 1. Sons. Daughters join them at male:female = 2:1.
+ 2. Son's sons. Son's daughters join them at 2:1.
+ 3. Father, else paternal grandfather.
+    (When the father/grandfather also holds a fixed 1/6 from
+    13B.2, the residue is ADDED to that 1/6.)
+ 4. Full brothers. Full sisters join them at 2:1.
+ 4b. Full sisters alone, when femaleDescendant is true
+    (asabah ma'a al-ghayr). This tier also blocks every tier
+    below it, including paternal half-brothers.
+ 5. Paternal half-brothers. Paternal half-sisters join at 2:1.
+ 6. Full brothers' sons (full nephews).
+ 7. Paternal half-brothers' sons (half nephews).
+ 8. Full nephews' sons.
+ 9. Half nephews' sons.
+10. Father's full brothers (full paternal uncles).
+11. Father's paternal half-brothers (half uncles).
+12. Full uncles' sons (full cousins).
+13. Half uncles' sons (half cousins).
+
+Ordering principle encoded above: a nearer degree blocks a
+more remote degree; within the same degree, full blood blocks
+half blood. Note that degree beats blood across generations:
+a half nephew (tier 7) outranks a full nephew's son (tier 8).
+
+Females never appear in tiers 6-13.
+
+--------------------------------------------------
+13B.4 AWL AND RADD
+--------------------------------------------------
+
+Awl:
+If the sum of assigned shares exceeds 1, scale every share
+down proportionally so the total equals 1. Awl applies to all
+fixed-share heirs including the spouse.
+
+Radd:
+If the sum of assigned shares is less than 1 and no residuary
+tier is populated, return the surplus proportionally to the
+fixed-share heirs EXCLUDING the spouse. The spouse's share
+never increases through Radd.
+If the spouse is the only heir, the surplus is not
+distributed; label it as passing to distant kindred
+(dhawil-arham) or Bayt al-Mal, outside MVP scope.
+
+--------------------------------------------------
+13B.5 UMARIYYATAYN
+--------------------------------------------------
+
+Trigger, ALL of:
+- A spouse share exists (husband or wife/wives).
+- The FATHER is alive. (Not the grandfather. If the father
+  figure is the grandfather, Umariyyatayn does NOT apply and
+  the mother takes her normal 1/3.)
+- anyDescendant is false.
+- totalSiblings < 2.
+
+Effect:
+Mother receives 1/3 of the REMAINDER after the spouse's
+share, not 1/3 of the whole estate. The father takes the
+rest as residuary.
+
+Rationale note for explanations: a single sibling neither
+inherits (blocked by the father) nor reduces the mother to
+1/6, so the operative heirs are still spouse + parents; the
+ruling therefore applies with 0 or 1 sibling. This "< 2"
+condition is a deliberate, documented choice; record it in
+the methodology page.
+
+--------------------------------------------------
+13B.6 SPECIAL CASE NOTES
+--------------------------------------------------
+
+Mushtaraka (himariyya): husband + mother + 2 or more maternal
+siblings + full brothers can exhaust the estate before the
+full brothers' tier. HANAFI POSITION (use this): the full
+brothers receive nothing; they do NOT share in the maternal
+siblings' 1/3. See fixture GF-15.
+
+Grandfather with siblings: HANAFI POSITION (use this): the
+grandfather blocks all siblings entirely. See fixture GF-16.
+
+Blocked-heir reporting: the wizard intentionally never
+collects counts for relatives who cannot inherit. Blocked
+heirs on the results page are therefore CATEGORY-LEVEL
+statements derived from routing logic (example: "Siblings —
+blocked by the father"), plus the specific answered-but-
+blocked cases the engine can detect (example: son's
+daughters blocked by two daughters). Do not add wizard
+questions solely to enumerate blocked individuals.
+
+--------------------------------------------------
+13B.7 GOLDEN FIXTURES (NORMATIVE EXPECTED VALUES)
+--------------------------------------------------
+
+Every fixture below was generated by a reference
+implementation and cross-checked against classical worked
+examples. Unit tests MUST assert these exact fractions.
+Shares are exact rationals; percentages are display-only.
+"Pool" means the total for that group before per-person
+division.
+
+GF-01 Wife, 2 sons, 1 daughter, father, mother
+  wife 1/8, mother 1/6, father 1/6,
+  sons pool 13/30, daughters pool 13/120. Total 1.
+
+GF-02 Minbariyya (Awl to 27): wife, 2 daughters, father, mother
+  wife 1/9 (=3/27), daughters pool 16/27,
+  mother 4/27, father 4/27. Total 1.
+
+GF-03 Umariyyatayn A: wife, father, mother
+  wife 1/4, mother 1/4, father 1/2. Total 1.
+
+GF-04 Umariyyatayn B: husband, father, mother
+  husband 1/2, mother 1/6, father 1/3. Total 1.
+
+GF-05 Umariyyatayn with ONE blocked sibling (the "< 2" rule):
+  wife, father, mother, 1 full brother
+  wife 1/4, mother 1/4, father 1/2, brother nothing. Total 1.
+
+GF-06 Mother reduced by two BLOCKED brothers: father, mother,
+  2 full brothers
+  mother 1/6, father 5/6, brothers nothing. Total 1.
+
+GF-07 Awl to 8: husband, mother, 2 full sisters
+  husband 3/8, mother 1/8, sisters pool 1/2. Total 1.
+
+GF-08 Awl to 7: husband, 2 full sisters
+  husband 3/7, sisters pool 4/7. Total 1.
+
+GF-09 Radd never increases spouse: wife, 1 daughter
+  wife 1/8 (unchanged), daughter 7/8. Total 1.
+
+GF-10 Radd among blood heirs: mother, 1 daughter
+  mother 1/4, daughter 3/4. Total 1.
+  (From fixed 1/6 and 1/2, surplus 1/3 returned 1:3.)
+
+GF-11 Son's daughter completes 2/3: 1 daughter,
+  1 son's daughter, 1 full uncle
+  daughter 1/2, son's daughter 1/6, uncle 1/3. Total 1.
+
+GF-12 Sister as asabah ma'a al-ghayr blocks half-brother:
+  1 daughter, 1 full sister, 1 paternal half-brother
+  daughter 1/2, full sister 1/2 (residue),
+  half-brother nothing. Total 1.
+
+GF-13 Full sister alone does NOT block half-brother:
+  1 full sister, 1 paternal half-brother
+  sister 1/2 (fixed), half-brother 1/2 (residue). Total 1.
+
+GF-14 Kalalah: husband, 1 maternal sibling, 1 full brother
+  husband 1/2, maternal sibling 1/6,
+  full brother 1/3. Total 1.
+
+GF-15 Mushtaraka, Hanafi: husband, mother,
+  2 maternal siblings, 1 full brother
+  husband 1/2, mother 1/6, maternal siblings pool 1/3,
+  full brother nothing. Total 1.
+
+GF-16 Grandfather blocks siblings, Hanafi:
+  paternal grandfather, 2 full brothers
+  grandfather 1 (everything), brothers nothing.
+
+GF-17 Full nephew blocks half nephew: wife, 1 full nephew,
+  3 half nephews
+  wife 1/4, full nephew 3/4, half nephews nothing. Total 1.
+
+GF-18 Half nephew inherits: 1 daughter, 1 half nephew
+  daughter 1/2, half nephew 1/2. Total 1.
+
+GF-19 Full uncle blocks half uncle: wife, 1 full uncle,
+  2 half uncles
+  wife 1/4, full uncle 3/4, half uncles nothing. Total 1.
+
+GF-20 Spouse only: husband, no other relatives
+  husband 1/2. Remaining 1/2 is NOT distributed; label it
+  as passing to distant kindred / Bayt al-Mal.
+
+Mark GF-01 through GF-20 in the fixture files as
+"reference-implementation verified, scholarly review
+pending". Do not label them scholar-approved.
+
+--------------------------------------------------
+13B.8 ENGINE IMPLEMENTATION NOTES
+--------------------------------------------------
+
+Pipeline order (consistent with Section 22):
+fixed shares -> residuary chain -> Awl -> Radd.
+The residuary chain must run BEFORE Radd, and Radd must run
+only when no residuary tier was populated.
+
+The "fixedSharesSoFar < 1" gate in the wizard's chainOpen
+condition (Section 13) may be computed with a sentinel: run
+the engine with a hypothetical lowest-tier heir
+(half cousin = 1) added to the current answers; if that
+sentinel receives a share greater than zero, residue exists
+and the chain questions are relevant. This reuses the engine
+instead of duplicating fixed-share math in the router.
+
+Known MVP limitations to record in the README and
+methodology page:
+- Grandmother eligibility simplified to a confirmed count.
+- Paternal half-sisters do not act as asabah ma'a al-ghayr
+  with daughters in the MVP (rare case; full sisters absent).
+- Dhawil-arham (distant kindred) not distributed.
+- Estate deductions (debts, wasiyyah) not calculated.
+==================================================

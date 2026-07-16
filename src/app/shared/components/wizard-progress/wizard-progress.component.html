@@ -1,0 +1,22 @@
+<nav class="wizard-progress" aria-label="Wizard progress">
+  <ol class="sections">
+    @for (section of sections; track section) {
+      @if (section !== 'review') {
+        <li [class]="sectionState(section)" [attr.aria-current]="sectionState(section) === 'active' ? 'step' : null">
+          <span class="dot">
+            @if (sectionState(section) === 'done') {
+              <app-icon name="Check" [size]="14" />
+            } @else {
+              <app-icon [name]="sectionIcons[section]" [size]="14" />
+            }
+          </span>
+          <span class="section-label">{{ sectionLabels[section] }}</span>
+        </li>
+      }
+    }
+  </ol>
+  <div class="bar-track">
+    <div class="bar-fill" [style.width.%]="percent()"></div>
+  </div>
+  <p class="current-section-label">{{ sectionLabels[currentSection()] }}</p>
+</nav>

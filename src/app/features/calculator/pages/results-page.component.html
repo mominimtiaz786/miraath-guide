@@ -1,0 +1,82 @@
+<div class="results-page">
+  <header class="results-header no-print">
+    <p class="status"><app-icon name="CircleCheck" [size]="18" /> Calculation complete</p>
+    <h1>Your inheritance shares</h1>
+    <div class="summary-chips">
+      <span class="chip">Hanafi methodology</span>
+      <span class="chip">{{ result().eligibleHeirs.length }} eligible heir(s)</span>
+      <span class="chip">{{ uniqueBlockedByRelationship().length }} blocked relative(s)</span>
+      @if (result().estateValue !== null) {
+        <span class="chip">Estate: PKR {{ result().estateValue!.toLocaleString() }}</span>
+      }
+    </div>
+  </header>
+
+  <section class="chart-section">
+    <app-calculation-chart [segments]="chartSegments()" />
+  </section>
+
+  <div class="tabs no-print" role="tablist">
+    <button type="button" role="tab" [class.active]="activeTab() === 'simple'" (click)="setTab('simple')">Simple explanation</button>
+    <button type="button" role="tab" [class.active]="activeTab() === 'detailed'" (click)="setTab('detailed')">Detailed calculation</button>
+  </div>
+
+  <section class="heirs-section">
+    <h2>Who inherits</h2>
+    <div class="grid">
+      @for (share of result().eligibleHeirs; track share.relationship; let i = $index) {
+        <app-share-card
+          [share]="share"
+          [explanation]="eligibleExplanations()[i]"
+          [estateValue]="result().estateValue"
+          [detailed]="activeTab() === 'detailed'"
+        />
+      }
+    </div>
+  </section>
+
+  @if (result().blockedHeirs.length > 0) {
+    <section class="heirs-section">
+      <h2>Who does not inherit</h2>
+      <div class="grid">
+        @for (blocked of uniqueBlockedByRelationship(); track blocked.relationship; let i = $index) {
+          <app-blocked-heir-card [explanation]="blockedExplanations()[i]" />
+        }
+      </div>
+    </section>
+  }
+
+  @if (activeTab() === 'detailed') {
+    <section class="detailed-section">
+      <h2>Detailed calculation steps</h2>
+      <ol>
+        @for (step of result().detailedSteps; track step.label) {
+          <li><strong>{{ step.label }}:</strong> {{ step.value }}</li>
+        }
+      </ol>
+      @if (result().adjustments.length > 0) {
+        <div class="adjustments">
+          <h3>Adjustments applied</h3>
+          <ul>
+            @for (adjustment of result().adjustments; track adjustment.description) {
+              <li><span class="badge">{{ adjustment.type | uppercase }}</span> {{ adjustment.description }}</li>
+            }
+          </ul>
+        </div>
+      }
+      @if (result().unassignedRemainderNote) {
+        <p class="unassigned-note"><app-icon name="Info" [size]="16" /> {{ result().unassignedRemainderNote }}</p>
+      }
+    </section>
+  }
+
+  <div class="actions no-print">
+    <app-download-report-button [result]="result()" />
+    <app-secondary-button (click)="print()">
+      <app-icon name="Printer" [size]="18" />
+      Print Report
+    </app-secondary-button>
+    <app-secondary-button (click)="editDetails()">Edit family details</app-secondary-button>
+    <app-primary-button [showArrow]="false" (click)="startAnother()">Start another calculation</app-primary-button>
+  </div>
+</div>

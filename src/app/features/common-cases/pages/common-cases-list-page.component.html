@@ -1,0 +1,54 @@
+<app-page-hero
+  eyebrow="COMMON CASES"
+  heading="Understand inheritance through real-life examples"
+  body="Explore common family situations and see how shares are determined. Each case includes eligible heirs, blocked relatives, exact shares, and clear explanations."
+>
+  <app-info-banner icon="Info" tone="green">
+    <p><strong>Shares are calculated according to the Hanafi school.</strong></p>
+    <p>Examples are educational and not case-specific legal advice.</p>
+  </app-info-banner>
+</app-page-hero>
+
+<section class="tabs-section">
+  <h2 class="tabs-heading">Browse by category</h2>
+  <div class="tabs" role="tablist" aria-label="Case categories">
+    @for (tab of tabs; track tab.id) {
+      <button
+        type="button"
+        role="tab"
+        class="tab"
+        [class.active]="activeTab() === tab.id"
+        [attr.aria-selected]="activeTab() === tab.id"
+        (click)="selectTab(tab.id)"
+      >
+        <app-icon [name]="tab.icon" [size]="16" />
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+
+  <div class="grid">
+    @for (case of visibleCases(); track case.slug) {
+      <app-case-card [case]="case" />
+    }
+  </div>
+</section>
+
+<section class="cta">
+  <app-icon name="BookOpen" [size]="24" />
+  <div class="cta-text">
+    <h3>Want to see these examples in action?</h3>
+    <p>Try any of the above cases in the calculator and see the complete breakdown.</p>
+  </div>
+  <app-primary-button routerLink="/calculator/wizard">Start Calculation</app-primary-button>
+</section>
+
+<section class="learning-outcomes">
+  <h2>What you will learn from each case</h2>
+  <div class="grid grid-4">
+    <app-icon-feature-card icon="UserCheck" heading="Who inherits" description="See eligible heirs and why they inherit." />
+    <app-icon-feature-card icon="UserX" heading="Who does not inherit" description="Understand blocking rules with clear reasons." />
+    <app-icon-feature-card icon="ChartPie" heading="Exact shares" description="View precise fractions and amounts." />
+    <app-icon-feature-card icon="FileText" heading="Simple explanation" description="Learn the fiqh rule behind each share." />
+  </div>
+</section>

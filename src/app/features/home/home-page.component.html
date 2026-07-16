@@ -1,0 +1,155 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">GUIDED ISLAMIC INHERITANCE CALCULATOR</p>
+      <h1>Calculate inheritance with clarity and confidence</h1>
+      <p class="body-lg">
+        A guided, step-by-step calculator that asks only the questions that matter. It identifies who
+        inherits, who is blocked, and explains each share clearly according to Hanafi Islamic
+        inheritance rules.
+      </p>
+      <div class="hero-actions">
+        <app-primary-button routerLink="/calculator/wizard">Start Calculation</app-primary-button>
+        <app-secondary-button routerLink="/methodology">Learn how it works</app-secondary-button>
+      </div>
+      <div class="trust-chips">
+        <span class="chip"><app-icon name="Scale" [size]="16" /> Hanafi method</span>
+        <span class="chip"><app-icon name="LockKeyhole" [size]="16" /> No login required</span>
+        <span class="chip"><app-icon name="Languages" [size]="16" /> English &amp; Urdu</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="wizard-preview">
+        <p class="step-label">Step 2 of 7</p>
+        <h3>What is the gender of the deceased?</h3>
+        <div class="gender-options">
+          <div class="option selected"><app-icon name="PersonStanding" [size]="22" /> Male</div>
+          <div class="option"><app-icon name="PersonStanding" [size]="22" /> Female</div>
+        </div>
+      </div>
+      <div class="result-preview">
+        <p class="result-label"><app-icon name="CircleCheck" [size]="14" /> Calculation complete</p>
+        <app-calculation-chart [segments]="previewChart" />
+      </div>
+    </div>
+  </div>
+  <app-islamic-pattern position="top-right" />
+</section>
+
+<section class="section quran-panel">
+  <app-quran-reference-card
+    arabic="يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ"
+    translation="Allah commands you concerning your children: to the male, a share equal to that of two females."
+    reference="Surah An-Nisa (4:11)"
+  />
+</section>
+
+<section class="section">
+  <app-section-heading eyebrow="Why us" heading="Why this calculator is different" [centered]="true" />
+  <div class="grid grid-3">
+    <app-icon-feature-card icon="MessageCircleQuestionMark" heading="Only relevant questions"
+      description="We ask only what's needed. Irrelevant and blocked relatives are skipped automatically." />
+    <app-icon-feature-card icon="Scale" heading="Every share explained"
+      description="See the rule, reason, and source reference behind each share." />
+    <app-icon-feature-card icon="BookOpen" heading="Built for learning and real cases"
+      description="Plain-language explanations grounded in a documented Hanafi methodology." />
+  </div>
+</section>
+
+<section class="section ivory">
+  <app-section-heading heading="How it works" [centered]="true" />
+  <div class="grid grid-4">
+    <app-process-step [index]="1" icon="UserRound" heading="Tell us about the deceased"
+      description="Start with basic details like gender and estate information." />
+    <app-process-step [index]="2" icon="UsersRound" heading="Add immediate family"
+      description="Add spouse, parents, and children with simple yes/no or counts." />
+    <app-process-step [index]="3" icon="MessageCircleQuestionMark" heading="Answer only necessary follow-ups"
+      description="We guide you with smart, one-by-one questions that matter." />
+    <app-process-step [index]="4" icon="ClipboardCheck" heading="Review shares and reasoning"
+      description="See who inherits, their shares, who is blocked, and why." />
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading heading="Most common scenarios, explained simply" [centered]="true" />
+  <div class="grid grid-4">
+    @for (case of scenarioCases; track case.slug) {
+      <a class="scenario-card" [routerLink]="['/common-cases', case.slug]">
+        <app-family-tree-mini [heirs]="case.heirs" [rootLabel]="case.title" />
+        <p class="scenario-title">{{ case.title }}</p>
+        <p class="scenario-summary">{{ case.summary }}</p>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="section ivory">
+  <app-section-heading heading="Key concepts in Faraid" [centered]="true" />
+  <div class="grid grid-4">
+    <a class="concept-card" routerLink="/glossary">
+      <app-icon name="Shield" [size]="22" />
+      <h3>Hajb</h3>
+      <p>Some relatives block others from inheriting - we explain who blocks whom, and why.</p>
+    </a>
+    <a class="concept-card" routerLink="/glossary">
+      <app-icon name="GitBranch" [size]="22" />
+      <h3>Kalalah</h3>
+      <p>When the deceased leaves no descendants or father figure, the estate goes to relatives.</p>
+    </a>
+    <a class="concept-card" routerLink="/glossary">
+      <app-icon name="Scale" [size]="22" />
+      <h3>Awl</h3>
+      <p>When total shares exceed the estate, all shares are proportionally reduced.</p>
+    </a>
+    <a class="concept-card" routerLink="/glossary">
+      <app-icon name="ChartPie" [size]="22" />
+      <h3>Radd</h3>
+      <p>When there is a remainder, it is returned to eligible heirs in specific cases.</p>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading heading="Learn Faraid" subheading="Build your understanding with structured lessons and practical examples." [centered]="true" />
+  <div class="grid grid-4">
+    @for (lesson of featuredLessons; track lesson.slug) {
+      <app-lesson-card [lesson]="lesson" />
+    }
+  </div>
+  <div class="learn-links">
+    <a class="text-link" routerLink="/learn">Browse all lessons <app-icon name="ArrowRight" [size]="16" /></a>
+  </div>
+</section>
+
+<section class="section trust-strip">
+  <app-section-heading heading="Rooted in scholarship. Built for clarity." [centered]="true" />
+  <div class="grid grid-4">
+    <div class="trust-item">
+      <app-icon name="BadgeCheck" [size]="24" />
+      <h4>Reference-implementation verified</h4>
+      <p>Every rule follows the documented Hanafi methodology, cross-checked against classical examples.</p>
+    </div>
+    <div class="trust-item">
+      <app-icon name="BookOpenCheck" [size]="24" />
+      <h4>Clear methodology</h4>
+      <p>Based on documented rules and transparent, testable logic.</p>
+    </div>
+    <div class="trust-item">
+      <app-icon name="FileText" [size]="24" />
+      <h4>Detailed result breakdowns</h4>
+      <p>See exact shares, reasons, and adjustments (Awl/Radd) with full transparency.</p>
+    </div>
+    <div class="trust-item">
+      <app-icon name="UsersRound" [size]="24" />
+      <h4>For guidance and learning</h4>
+      <p>Built for education and understanding - not a substitute for personal legal advice.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section final-cta">
+  <h2>Ready to understand the shares in your case?</h2>
+  <app-primary-button routerLink="/calculator/wizard">Start guided calculation</app-primary-button>
+  <p class="note">No account required</p>
+</section>

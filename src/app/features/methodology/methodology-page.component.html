@@ -1,0 +1,154 @@
+<app-page-hero
+  eyebrow="METHODOLOGY"
+  heading="How Mirath Guide calculates inheritance"
+  body="Mirath Guide follows a documented Hanafi methodology. We ask only relevant questions, identify who inherits and who is blocked, and calculate exact shares with clear explanations and sources."
+>
+  <div class="trust-chips">
+    <span class="chip"><app-icon name="Scale" [size]="16" /> Hanafi methodology</span>
+    <span class="chip"><app-icon name="FileSearch" [size]="16" /> Reference-implementation verified</span>
+    <span class="chip"><app-icon name="FileText" [size]="16" /> Clear reasoning</span>
+    <span class="chip"><app-icon name="LockKeyhole" [size]="16" /> No login required</span>
+  </div>
+</app-page-hero>
+
+<section class="section process-card">
+  <div class="steps">
+    <app-process-step [index]="1" icon="MessageCircleQuestionMark" heading="Ask relevant questions"
+      description="A wizard asks only the questions that matter to this case." />
+    <app-process-step [index]="2" icon="ShieldCheck" heading="Apply rules and blocking"
+      description="Hanafi rules identify eligible heirs and apply blocking (hajb)." />
+    <app-process-step [index]="3" icon="ChartPie" heading="Calculate shares"
+      description="Fixed shares, residue, Awl, and Radd are calculated precisely." />
+    <app-process-step [index]="4" icon="FileCheck" heading="Explain results"
+      description="You see exact shares with reasons and source references." />
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading heading="1. Our methodology principles" [centered]="true" />
+  <div class="grid grid-4">
+    <app-icon-feature-card icon="MessageCircleQuestionMark" heading="Only relevant questions"
+      description="The wizard asks only about relatives who can affect the result." />
+    <app-icon-feature-card icon="Shield" heading="Blocking rules applied"
+      description="Relatives blocked by closer heirs are automatically identified." />
+    <app-icon-feature-card icon="ChartPie" heading="Fixed shares and residue"
+      description="Prescribed shares, residuary heirs, and remaining estate are calculated clearly." />
+    <app-icon-feature-card icon="FileSearch" heading="Transparent explanations"
+      description="Every result includes why the heir inherits, their fraction, and the source logic." />
+  </div>
+</section>
+
+<section class="section ivory">
+  <app-section-heading heading="2. How the calculation works" [centered]="true" />
+  <div class="grid grid-5">
+    <app-process-step [index]="1" icon="UsersRound" heading="Capture family facts"
+      description="You answer only relevant questions about the deceased and relatives." />
+    <app-process-step [index]="2" icon="UserCheck" heading="Determine eligible heirs"
+      description="We identify potential heirs based on the Hanafi school." />
+    <app-process-step [index]="3" icon="ShieldCheck" heading="Apply hajb (blocking)"
+      description="Closer relatives may block others according to Hanafi rules." />
+    <app-process-step [index]="4" icon="ChartPie" heading="Calculate shares, Awl, and Radd"
+      description="We compute fixed shares, remainder distribution, and any adjustments." />
+    <app-process-step [index]="5" icon="FileText" heading="Present explained results"
+      description="You receive clear results with reasons, fractions, and source references." />
+  </div>
+
+  <div class="routing-panel">
+    <h3><app-icon name="GitBranch" [size]="18" /> Question routing</h3>
+    <p>
+      If the father is alive, sibling questions are skipped or only asked when needed (for example, to
+      determine the mother's share). This keeps the wizard short and relevant.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading heading="3. What is included in this MVP" [centered]="true" />
+  <ul class="checklist">
+    <li><app-icon name="Check" [size]="16" /> Hanafi calculation mode</li>
+    <li><app-icon name="Check" [size]="16" /> English and Urdu UI structure</li>
+    <li><app-icon name="Check" [size]="16" /> Conditional one-question wizard</li>
+    <li><app-icon name="Check" [size]="16" /> Fixed shares and Asabah</li>
+    <li><app-icon name="Check" [size]="16" /> Blocking explanations (hajb)</li>
+    <li><app-icon name="Check" [size]="16" /> Awl and Radd</li>
+    <li><app-icon name="Check" [size]="16" /> Umariyyatayn</li>
+    <li><app-icon name="Check" [size]="16" /> Optional estate amount</li>
+    <li><app-icon name="Check" [size]="16" /> Detailed and simple result views</li>
+    <li><app-icon name="Check" [size]="16" /> PDF and print-ready report</li>
+    <li><app-icon name="Check" [size]="16" /> Core learning pages</li>
+    <li><app-icon name="Check" [size]="16" /> Common scenarios</li>
+  </ul>
+</section>
+
+<section class="section ivory">
+  <app-section-heading heading="4. Sources and references" [centered]="true" />
+  <div class="grid grid-4">
+    @for (source of sources; track source.id) {
+      <div class="source-card">
+        <app-icon name="BookMarked" [size]="20" />
+        <h4>{{ source.label }}</h4>
+        <p>{{ source.note }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading heading="5. How results are explained" [centered]="true" />
+  <div class="grid grid-4">
+    <div class="example-card">
+      <span class="tag inherit">Inherits</span>
+      <h4>Mother</h4>
+      <p class="fraction numeric">1/6</p>
+      <p class="reason">Fixed share - the deceased left children, so the mother receives one-sixth.</p>
+    </div>
+    <div class="example-card">
+      <span class="tag inherit">Inherits</span>
+      <h4>Wife</h4>
+      <p class="fraction numeric">1/8</p>
+      <p class="reason">Fixed share - the deceased left children, so the wife receives one-eighth.</p>
+    </div>
+    <div class="example-card">
+      <span class="tag inherit">Inherits</span>
+      <h4>Son</h4>
+      <p class="fraction">Residue</p>
+      <p class="reason">Residuary (Asabah) - the son takes the remainder after fixed shares.</p>
+    </div>
+    <div class="example-card blocked">
+      <span class="tag blocked">Blocked</span>
+      <h4>Blocked heir</h4>
+      <p class="fraction">-</p>
+      <p class="reason">Does not inherit - excluded by a closer heir (hajb).</p>
+    </div>
+  </div>
+</section>
+
+<section class="section scope-section">
+  <app-section-heading heading="6. Scope and clarity" [centered]="true" />
+  <div class="grid grid-3">
+    <div class="scope-card">
+      <app-icon name="GraduationCap" [size]="24" />
+      <h4>Educational and practical</h4>
+      <p>Built to help you understand and apply inheritance rules with confidence in real-life cases.</p>
+    </div>
+    <div class="scope-card">
+      <app-icon name="FileSearch" [size]="24" />
+      <h4>Transparent assumptions</h4>
+      <p>Calculations are presented with visible reasoning, fractions, and source-based logic.</p>
+    </div>
+    <div class="scope-card">
+      <app-icon name="RefreshCw" [size]="24" />
+      <h4>Continuous review</h4>
+      <p>Rule definitions are versioned, testable, and open to ongoing scholarly review.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <app-icon name="FileText" [size]="28" />
+  <div class="cta-text">
+    <h3>Ready to calculate with clarity?</h3>
+    <p>Use the guided calculator to answer only the relevant questions and see fully explained shares.</p>
+  </div>
+  <app-primary-button routerLink="/calculator/wizard">Start guided calculation</app-primary-button>
+</section>

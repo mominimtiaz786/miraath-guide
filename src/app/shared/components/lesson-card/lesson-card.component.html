@@ -1,0 +1,15 @@
+<article class="lesson-card">
+  <div class="top">
+    <div class="icon-badge"><app-icon [name]="lesson().icon" [size]="22" /></div>
+    <span class="number numeric">{{ lesson().number }}</span>
+  </div>
+  <h3>{{ lesson().title }}</h3>
+  <p class="summary">{{ lesson().summary }}</p>
+  <div class="footer">
+    <span class="difficulty">{{ lesson().difficulty }}</span>
+    <a class="text-link" [routerLink]="['/learn', lesson().slug]">
+      Start lesson
+      <app-icon name="ArrowRight" [size]="16" />
+    </a>
+  </div>
+</article>

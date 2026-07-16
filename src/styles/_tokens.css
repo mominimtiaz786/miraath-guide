@@ -1,0 +1,142 @@
+/**
+ * Mirath Guide design tokens.
+ * Five brand colors only (spec section 5) - every other visual state is
+ * derived from these via opacity/lightness, never a new hue.
+ */
+:root {
+  /* Brand colors */
+  --color-green: #17483f;
+  --color-gold: #c39a52;
+  --color-ivory: #f7f4ea;
+  --color-white: #ffffff;
+  --color-charcoal: #252b29;
+
+  /* Derived surfaces */
+  --color-green-soft-06: rgba(23, 72, 63, 0.06);
+  --color-green-soft-09: rgba(23, 72, 63, 0.09);
+  --color-green-border-15: rgba(23, 72, 63, 0.15);
+  --color-green-soft-25: rgba(23, 72, 63, 0.25);
+  --color-gold-soft-12: rgba(195, 154, 82, 0.12);
+  --color-gold-soft-30: rgba(195, 154, 82, 0.3);
+  --color-charcoal-secondary-70: rgba(37, 43, 41, 0.7);
+  --color-charcoal-disabled-35: rgba(37, 43, 41, 0.35);
+  --color-charcoal-shadow-08: rgba(37, 43, 41, 0.08);
+  --color-charcoal-shadow-12: rgba(37, 43, 41, 0.12);
+  --color-charcoal-soft-06: rgba(37, 43, 41, 0.06);
+
+  /* Semantic aliases */
+  --color-bg: var(--color-white);
+  --color-bg-ivory: var(--color-ivory);
+  --color-bg-green-tint: var(--color-green-soft-06);
+  --color-bg-gold-tint: var(--color-gold-soft-12);
+  --color-text: var(--color-charcoal);
+  --color-text-secondary: var(--color-charcoal-secondary-70);
+  --color-text-disabled: var(--color-charcoal-disabled-35);
+  --color-border: var(--color-green-border-15);
+  --color-shadow: var(--color-charcoal-shadow-08);
+  --color-primary: var(--color-green);
+  --color-on-primary: var(--color-white);
+  --color-accent: var(--color-gold);
+
+  /* Typography */
+  --font-latin: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-urdu: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+  --font-quranic: 'Noto Naskh Arabic', 'Noto Sans Arabic', serif;
+
+  --fs-hero: 52px;
+  --fs-page-heading: 40px;
+  --fs-section-heading: 32px;
+  --fs-card-heading: 21px;
+  --fs-wizard-question: 30px;
+  --fs-body-lg: 18px;
+  --fs-body: 16px;
+  --fs-helper: 14px;
+  --fs-button: 16px;
+  --fs-fraction-lg: 38px;
+  --fs-money-lg: 28px;
+  --fs-eyebrow: 13px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --page-max-width: 1240px;
+  --content-width: 720px;
+  --wizard-width: 720px;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms ease;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px var(--color-shadow);
+  --shadow-card-strong: 0 6px 20px var(--color-charcoal-shadow-12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14201d;
+    --color-bg-ivory: #1a2521;
+    --color-bg-green-tint: rgba(23, 72, 63, 0.28);
+    --color-bg-gold-tint: rgba(195, 154, 82, 0.14);
+    --color-text: #f2f0e9;
+    --color-text-secondary: rgba(242, 240, 233, 0.72);
+    --color-text-disabled: rgba(242, 240, 233, 0.38);
+    --color-border: rgba(195, 197, 190, 0.18);
+    --color-shadow: rgba(0, 0, 0, 0.35);
+    --color-on-primary: #ffffff;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #14201d;
+  --color-bg-ivory: #1a2521;
+  --color-bg-green-tint: rgba(23, 72, 63, 0.28);
+  --color-bg-gold-tint: rgba(195, 154, 82, 0.14);
+  --color-text: #f2f0e9;
+  --color-text-secondary: rgba(242, 240, 233, 0.72);
+  --color-text-disabled: rgba(242, 240, 233, 0.38);
+  --color-border: rgba(195, 197, 190, 0.18);
+  --color-shadow: rgba(0, 0, 0, 0.35);
+  --color-on-primary: #ffffff;
+}
+
+:root[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-bg-ivory: var(--color-ivory);
+  --color-bg-green-tint: var(--color-green-soft-06);
+  --color-bg-gold-tint: var(--color-gold-soft-12);
+  --color-text: var(--color-charcoal);
+  --color-text-secondary: var(--color-charcoal-secondary-70);
+  --color-text-disabled: var(--color-charcoal-disabled-35);
+  --color-border: var(--color-green-border-15);
+  --color-shadow: var(--color-charcoal-shadow-08);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --fs-hero: 36px;
+    --fs-page-heading: 32px;
+    --fs-section-heading: 26px;
+    --fs-wizard-question: 25px;
+    --fs-fraction-lg: 32px;
+    --fs-money-lg: 24px;
+  }
+}

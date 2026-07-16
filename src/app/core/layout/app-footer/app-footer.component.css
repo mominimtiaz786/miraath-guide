@@ -1,0 +1,101 @@
+.site-footer {
+  background: var(--color-primary);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  --icon-color: #ffffff;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wordmark {
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.brand-col p {
+  margin: 0;
+  font-size: var(--fs-helper);
+  max-width: 260px;
+}
+
+h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: var(--space-1);
+}
+
+.col a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: var(--fs-body);
+}
+
+.col a:hover {
+  text-decoration: underline;
+}
+
+.quote-col .arabic {
+  font-family: var(--font-quranic);
+  font-size: 18px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.quote-col .translation {
+  margin: 0;
+  font-size: var(--fs-helper);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: var(--space-4) var(--space-6);
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width: 800px) {
+  .inner {
+    grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+  }
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,18 @@
+<article class="case-card">
+  <div class="badge">{{ case().number }}</div>
+  <h3>{{ case().title }}</h3>
+  <app-family-tree-mini [heirs]="case().heirs" />
+  <p class="summary">{{ case().summary }}</p>
+  <dl class="key-shares">
+    @for (share of case().keyShares; track share.label) {
+      <div class="row">
+        <dt>{{ share.label }}</dt>
+        <dd class="numeric">{{ share.value }}</dd>
+      </div>
+    }
+  </dl>
+  <a class="text-link" [routerLink]="['/common-cases', case().slug]">
+    View case details
+    <app-icon name="ArrowRight" [size]="16" />
+  </a>
+</article>

@@ -1,0 +1,49 @@
+<app-page-hero eyebrow="PRIVACY" heading="Your privacy, by design"
+  body="Mirath Guide runs entirely in your browser. Here is exactly what that means for your data.">
+</app-page-hero>
+
+<div class="content">
+  <section class="feature-grid">
+    <app-icon-feature-card icon="LockKeyhole" heading="No account required"
+      description="You never create a login or profile to use the calculator, learning pages, or common cases." />
+    <app-icon-feature-card icon="ShieldCheck" heading="Processed locally"
+      description="Every answer you give in the wizard is held in your browser's memory and session storage only." />
+    <app-icon-feature-card icon="FileSearch" heading="No calculation data uploaded"
+      description="Family details, estate values, and results are never sent to a server - there is no backend to send them to." />
+    <app-icon-feature-card icon="RefreshCw" heading="Clearing removes it"
+      description="Refreshing the page, closing the tab, or using Clear Calculation removes your session data immediately." />
+  </section>
+
+  <section>
+    <h2>What we do not do</h2>
+    <ul>
+      <li>We do not use analytics or third-party trackers.</li>
+      <li>We do not load unnecessary external scripts.</li>
+      <li>We do not store your family details, estate values, or results remotely.</li>
+      <li>We do not require - or ask for - your name, email, or any account information.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What is stored, and where</h2>
+    <p>
+      While you are using the guided wizard, your in-progress answers are kept in your browser's
+      <code>sessionStorage</code> so that reloading the page does not lose your progress. This data
+      never leaves your device and is cleared automatically when you close the browser tab, or
+      immediately when you choose "Clear Calculation".
+    </p>
+    <p>
+      Fonts are self-hosted with the application bundle rather than loaded from a third-party font
+      service, so simply loading the page does not contact an external font provider either.
+    </p>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <p>
+      See the <a class="text-link-inline" routerLink="/disclaimer">Disclaimer</a> page for the scope and
+      limitations of the calculations themselves, or the <a class="text-link-inline" routerLink="/about">About</a>
+      page for how to reach us.
+    </p>
+  </section>
+</div>

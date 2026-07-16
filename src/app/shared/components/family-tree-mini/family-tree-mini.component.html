@@ -1,0 +1,20 @@
+<div class="tree" role="img" [attr.aria-label]="ariaLabel()">
+  <div class="root">
+    <span class="node root-node"><app-icon name="User" [size]="16" /></span>
+    <span class="label">{{ rootLabel() }}</span>
+  </div>
+  <div class="connector-vertical" aria-hidden="true"></div>
+  <div class="branches" aria-hidden="true">
+    @for (heir of heirs(); track heir.label) {
+      <div class="branch">
+        <div class="connector-h"></div>
+        <span class="node"><app-icon [name]="heir.icon ?? 'User'" [size]="16" /></span>
+      </div>
+    }
+  </div>
+  <div class="labels" aria-hidden="true">
+    @for (heir of heirs(); track heir.label) {
+      <span class="heir-label">{{ heir.label }}</span>
+    }
+  </div>
+</div>

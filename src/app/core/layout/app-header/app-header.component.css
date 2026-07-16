@@ -1,0 +1,139 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--color-text);
+  margin-right: auto;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-green-soft-09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.wordmark {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.tagline {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  display: none;
+}
+
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-desktop a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 15px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-desktop a.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lang-switcher {
+  display: none;
+}
+
+.start-btn {
+  display: none;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.nav-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.nav-mobile a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.nav-mobile a.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@media (min-width: 900px) {
+  .tagline {
+    display: block;
+  }
+  .nav-desktop {
+    display: flex;
+  }
+  .lang-switcher {
+    display: inline-flex;
+  }
+  .start-btn {
+    display: inline-flex;
+  }
+  .menu-toggle {
+    display: none;
+  }
+}

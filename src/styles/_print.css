@@ -1,0 +1,30 @@
+@media print {
+  app-header,
+  app-footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  a[href]::after {
+    content: '';
+  }
+
+  .report-page {
+    max-width: 100%;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+.print-only {
+  display: none;
+}

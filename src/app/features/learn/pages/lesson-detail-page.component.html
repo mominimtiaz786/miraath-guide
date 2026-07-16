@@ -1,0 +1,47 @@
+@if (lesson(); as l) {
+  <div class="detail">
+    <a class="back-link" routerLink="/learn"><app-icon name="ArrowLeft" [size]="16" /> All lessons</a>
+
+    <header class="lesson-header">
+      <div class="icon-badge"><app-icon [name]="l.icon" [size]="24" /></div>
+      <div>
+        <p class="eyebrow">Lesson {{ l.number }} - {{ l.difficulty }}</p>
+        <h1>{{ l.title }}</h1>
+        <p class="summary">{{ l.summary }}</p>
+      </div>
+    </header>
+
+    @for (section of l.sections; track section.heading) {
+      <section class="lesson-section">
+        <h2>{{ section.heading }}</h2>
+        <p>{{ section.body }}</p>
+      </section>
+    }
+
+    @if (l.relatedGlossaryTerms.length > 0) {
+      <section class="related">
+        <h2>Related terms</h2>
+        <div class="chips">
+          @for (term of l.relatedGlossaryTerms; track term) {
+            <a class="chip" routerLink="/glossary">{{ term }}</a>
+          }
+        </div>
+      </section>
+    }
+
+    <div class="lesson-actions">
+      <app-primary-button routerLink="/calculator/wizard">Try it in the calculator</app-primary-button>
+      @if (nextLesson(); as next) {
+        <a class="text-link" [routerLink]="['/learn', next.slug]">
+          Next: {{ next.title }}
+          <app-icon name="ArrowRight" [size]="16" />
+        </a>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="not-found">
+    <p>We couldn't find that lesson.</p>
+    <a routerLink="/learn" class="text-link">Back to Learn Faraid</a>
+  </div>
+}

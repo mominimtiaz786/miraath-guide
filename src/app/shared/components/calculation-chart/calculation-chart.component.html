@@ -1,0 +1,46 @@
+<div class="chart-wrap">
+  <svg viewBox="0 0 140 140" class="donut" role="img" aria-hidden="true">
+    <circle cx="70" cy="70" r="60" fill="none" stroke="var(--color-green-soft-06)" stroke-width="20" />
+    @for (segment of rendered(); track segment.label) {
+      <circle
+        cx="70"
+        cy="70"
+        r="60"
+        fill="none"
+        [attr.stroke]="segment.color"
+        stroke-width="20"
+        [attr.stroke-dasharray]="segment.dashArray"
+        [attr.stroke-dashoffset]="segment.dashOffset"
+        transform="rotate(-90 70 70)"
+      />
+    }
+  </svg>
+
+  <ul class="legend">
+    @for (segment of rendered(); track segment.label) {
+      <li>
+        <span class="swatch" [style.background]="segment.color"></span>
+        <span class="label">{{ segment.label }}</span>
+        <span class="value numeric">{{ segment.percentage }}%</span>
+      </li>
+    }
+  </ul>
+</div>
+
+<table class="visually-hidden">
+  <caption>Share distribution</caption>
+  <thead>
+    <tr>
+      <th scope="col">Heir</th>
+      <th scope="col">Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (segment of rendered(); track segment.label) {
+      <tr>
+        <td>{{ segment.label }}</td>
+        <td>{{ segment.percentage }}%</td>
+      </tr>
+    }
+  </tbody>
+</table>

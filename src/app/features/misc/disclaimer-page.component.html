@@ -1,0 +1,45 @@
+<app-page-hero eyebrow="DISCLAIMER" heading="Please read before you rely on a result">
+</app-page-hero>
+
+<div class="content">
+  <app-info-banner icon="TriangleAlert" tone="charcoal">
+    <p>
+      Mirath Guide is an educational calculation aid based on the implemented Hanafi methodology.
+      Complex cases, disputed facts, local law, estate ownership, debts, bequests, missing persons,
+      unborn heirs, and other special circumstances should be reviewed by a qualified scholar and
+      relevant legal professional.
+    </p>
+  </app-info-banner>
+
+  <section>
+    <h2>This is not a fatwa</h2>
+    <p>
+      Mirath Guide does not issue a fatwa and is not a substitute for one. It applies a documented set
+      of Hanafi inheritance rules (see <a class="text-link-inline" routerLink="/methodology">Methodology</a>)
+      to the family facts you enter, and shows its working. Any result should be treated as a starting
+      point for a conversation with a qualified scholar, not a final legal or religious ruling.
+    </p>
+  </section>
+
+  <section>
+    <h2>Scholarly review status</h2>
+    <p>
+      The calculation engine has been built and tested against a set of reference-implementation
+      fixtures cross-checked with classical worked examples. These fixtures are marked
+      "reference-implementation verified, scholarly review pending" throughout the codebase and this
+      site - we do not claim formal scholarly approval unless actual reviewers have approved the
+      implementation.
+    </p>
+  </section>
+
+  <section>
+    <h2>Known limitations</h2>
+    <ul>
+      <li>Grandmother eligibility is simplified to a confirmed count rather than modelling every line of descent.</li>
+      <li>Paternal half-sisters do not act as asabah ma'a al-ghayr alongside daughters in this MVP (a rare case).</li>
+      <li>Distant kindred (dhawil al-arham) are not distributed; any such surplus is labelled but not divided.</li>
+      <li>Estate deductions - debts, funeral expenses, and bequests - are not calculated; enter the net distributable estate yourself.</li>
+      <li>Only the Hanafi school is modelled in this MVP.</li>
+    </ul>
+  </section>
+</div>

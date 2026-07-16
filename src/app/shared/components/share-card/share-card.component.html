@@ -1,0 +1,18 @@
+<article class="share-card">
+  <header>
+    <h3>{{ explanation().relationship }}</h3>
+    <span class="badge">{{ shareTypeLabel() }}</span>
+  </header>
+
+  <div class="figures numeric">
+    <span class="fraction">{{ share().poolShare.toDisplayString() }}</span>
+    <span class="percentage">{{ percentage() }}%</span>
+    @if (moneyAmount(); as amount) {
+      <span class="money">PKR {{ amount | number: '1.2-2' }}</span>
+    }
+  </div>
+
+  <p class="reason">{{ detailed() ? explanation().detailed : explanation().simple }}</p>
+
+  <app-source-reference [sourceIds]="explanation().sourceRefs" />
+</article>

@@ -1,0 +1,63 @@
+.share-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-card);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+h3 {
+  font-size: var(--fs-card-heading);
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-green-soft-09);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.figures {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.fraction {
+  font-size: var(--fs-fraction-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.percentage {
+  font-size: var(--fs-body-lg);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.money {
+  font-size: var(--fs-money-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.reason {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-body);
+}

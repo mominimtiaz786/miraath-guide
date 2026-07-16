@@ -1,0 +1,64 @@
+<div class="wizard-shell">
+  <header class="wizard-header">
+    <a routerLink="/" class="logo">
+      <app-icon name="BookOpenCheck" [size]="20" />
+      <span>Mirath Guide</span>
+    </a>
+    <button type="button" class="exit-btn" (click)="exit()">
+      Exit
+      <app-icon name="X" [size]="16" />
+    </button>
+  </header>
+
+  <app-wizard-progress class="progress" [currentSection]="store.currentSection()" [percent]="store.progressPercent()" />
+
+  <main class="wizard-main">
+    <app-wizard-question-card
+      [question]="content().question"
+      [helper]="content().helper ?? null"
+      [whyWeAsk]="content().whyWeAsk ?? null"
+      [canContinue]="store.canGoNext()"
+      [showBack]="true"
+      [continueLabel]="store.isLastStep() ? 'Review' : 'Continue'"
+      (back)="back()"
+      (continue)="continue()"
+    >
+      @switch (content().kind) {
+        @case ('choice') {
+          @if (stepId() === 'deceasedGender') {
+            <app-yes-no-choice [options]="genderOptions" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
+          } @else {
+            <app-yes-no-choice [options]="yesNoOptions" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
+          }
+        }
+        @case ('count') {
+          <app-count-selector
+            [value]="$any(currentValue()) ?? 0"
+            [min]="$any(content()).min"
+            [max]="$any(content()).max"
+            (valueChange)="onCountChange($event)"
+          />
+        }
+        @case ('estate') {
+          <div class="estate-input">
+            <span class="prefix">PKR</span>
+            <input
+              type="number"
+              min="0"
+              step="1000"
+              [value]="$any(currentValue()) ?? ''"
+              (input)="onEstateChange($any($event.target).value)"
+              placeholder="e.g. 5,000,000"
+              aria-label="Distributable estate value in PKR"
+            />
+          </div>
+        }
+      }
+    </app-wizard-question-card>
+
+    <p class="tip">
+      <app-icon name="Lightbulb" [size]="16" />
+      We will only ask about relatives who may affect the inheritance. You can edit your answers before viewing the results.
+    </p>
+  </main>
+</div>

@@ -1,0 +1,7 @@
+:host {
+  display: inline-flex;
+}
+
+:host([data-full-width]) {
+  display: flex;
+}

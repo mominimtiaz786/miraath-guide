@@ -1,0 +1,53 @@
+<section class="intro">
+  <div class="intro-inner">
+    <h1>Calculate inheritance with clarity and confidence</h1>
+    <p class="body-lg">
+      Answer a few relevant questions about the deceased's surviving family. The calculator
+      automatically identifies eligible heirs, applies blocking rules, and explains every share.
+    </p>
+
+    <div class="grid grid-4">
+      <app-icon-feature-card icon="UsersRound" heading="Only relevant questions" description="We ask only what matters for your case." />
+      <app-icon-feature-card icon="BookOpenCheck" heading="Every share explained" description="See the rule, reason, and reference for each share." />
+      <app-icon-feature-card icon="ShieldCheck" heading="Documented methodology" description="Hanafi calculations based on the Qur'an and authentic Sunnah." />
+      <app-icon-feature-card icon="LockKeyhole" heading="Private and secure" description="No sign-up required. Your data stays with you." />
+    </div>
+
+    <div class="how-it-works">
+      <h2>How it works</h2>
+      <div class="steps">
+        <app-process-step [index]="1" heading="Tell us about the deceased" description="Start with basic details like gender and estate information." />
+        <app-process-step [index]="2" heading="Add surviving close relatives" description="Add spouse, parents, and children with simple counts." />
+        <app-process-step [index]="3" heading="We ask additional questions only when necessary" description="Conditional follow-ups keep the wizard short." />
+        <app-process-step [index]="4" heading="Review shares with clear explanations" description="See who inherits, who is blocked, and why." />
+      </div>
+    </div>
+
+    <app-quran-reference-card
+      arabic="يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ"
+      translation="Allah commands you concerning your children: to the male, a share equal to that of two females."
+      reference="Surah An-Nisa (4:11)"
+    />
+
+    <div class="start-cta">
+      <app-primary-button routerLink="/calculator/wizard" [fullWidth]="true">Start Calculation Now</app-primary-button>
+      <p class="trust-note">
+        <app-icon name="ShieldCheck" [size]="14" /> 100% free
+        <span class="dot">&middot;</span>
+        <app-icon name="LockKeyhole" [size]="14" /> No account required
+        <span class="dot">&middot;</span>
+        <app-icon name="CircleAlert" [size]="14" /> No data stored
+      </p>
+    </div>
+
+    <div class="situations">
+      <h2>Common situations we cover</h2>
+      <div class="situations-list">
+        @for (situation of situations; track situation) {
+          <span class="situation-chip">{{ situation }}</span>
+        }
+        <span class="situation-chip more">And many more...</span>
+      </div>
+    </div>
+  </div>
+</section>

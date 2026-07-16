@@ -1,0 +1,10 @@
+<a class="skip-link" href="#main-content">Skip to main content</a>
+@if (showChrome()) {
+  <app-header />
+}
+<main id="main-content" tabindex="-1">
+  <router-outlet />
+</main>
+@if (showChrome()) {
+  <app-footer />
+}

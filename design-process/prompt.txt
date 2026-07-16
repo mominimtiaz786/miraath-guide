@@ -1,0 +1,2645 @@
+Build a production-quality frontend-only Angular application called “Mirath Guide”.
+
+The application is a guided Islamic inheritance calculator based on the Hanafi school. It must use a one-question-per-step conditional wizard that asks only questions relevant to the current family structure.
+
+The complete visual direction must closely follow the supplied mockups and logo assets.
+
+The supplied design mockups are the primary visual reference. Reproduce their visual language, spacing, hierarchy, proportions, card layouts, section order, icon style, and responsive behavior as closely as reasonably possible.
+
+Do not create a generic Angular dashboard. This is a calm, scholarly, content-led Islamic inheritance web application.
+
+==================================================
+1. CORE PRODUCT GOALS
+==================================================
+
+The application must:
+
+1. Explain Islamic inheritance in plain language.
+2. Ask only questions that may affect the result.
+3. Hide or skip relatives who are blocked by closer heirs.
+4. Show who inherits.
+5. Show who does not inherit.
+6. Explain why each heir inherits or is blocked.
+7. Display exact fractions, percentages, and optional PKR values.
+8. Support Awl and Radd.
+9. Support Umariyyatayn.
+10. Provide simple and detailed result views.
+11. Allow the user to download or print the final result as a PDF.
+12. Require no login.
+13. Require no backend.
+14. Store no personal data remotely.
+15. Work completely in the browser.
+16. Support English and Urdu UI structure.
+17. Support Roman Urdu helper terminology where relevant.
+18. Follow the Hanafi methodology only for the MVP.
+
+Do not implement:
+
+- Authentication
+- User accounts
+- Cloud storage
+- Server APIs
+- Database integration
+- Multiple madhhabs
+- AI chatbot
+- Saved user profiles
+- Legal document generation
+- Unreviewed public content submission
+
+==================================================
+2. TECHNOLOGY REQUIREMENTS
+==================================================
+
+Use Angular with:
+
+- Standalone components
+- Angular Router
+- Reactive Forms
+- Signals for local and application state where appropriate
+- Strict TypeScript
+- Strict template type checking
+- Lazy-loaded page routes
+- Route-level code splitting
+- OnPush change detection
+- Accessible semantic HTML
+- Responsive CSS
+- CSS custom properties for design tokens
+- Angular built-in control flow syntax
+- No jQuery
+- No Bootstrap
+- No large UI framework unless absolutely necessary
+
+Prefer custom reusable components rather than importing a full component library.
+
+For icons, use one consistent outline icon library such as Lucide Icons.
+
+Do not mix different icon families.
+
+Use SVG icons, not emoji.
+
+For PDF export, implement a browser-only report generator using a suitable client-side PDF solution such as jsPDF with a structured layout, or PDFMake.
+
+Do not merely take a low-resolution screenshot of the page.
+
+The PDF should be generated from result data and should include:
+
+- Mirath Guide logo
+- Date generated
+- Methodology label: Hanafi
+- Family summary
+- Distributable estate
+- Eligible heirs
+- Blocked heirs
+- Fractions
+- Percentages
+- PKR values where entered
+- Simple explanation
+- Detailed calculation steps
+- Relevant source references
+- Disclaimer
+- Footer
+
+Also provide a print-friendly stylesheet.
+
+==================================================
+3. APPLICATION ROUTES
+==================================================
+
+Create these routes:
+
+/
+Home page
+
+/calculator
+Calculator introduction/start page
+
+/calculator/wizard
+Conditional calculation wizard
+
+/calculator/review
+Review entered family details before calculation
+
+/calculator/results
+Calculation results page
+
+/common-cases
+Common inheritance cases listing page
+
+/common-cases/:slug
+Detailed common case page
+
+/learn
+Learn Faraid landing page
+
+/learn/:slug
+Individual learning lesson page
+
+/methodology
+Methodology page
+
+/about
+About page
+
+/glossary
+Faraid glossary page
+
+/privacy
+Privacy page
+
+/disclaimer
+Disclaimer page
+
+/404
+Not-found page
+
+The navbar “Common Cases” link must navigate to /common-cases, not scroll to the homepage section.
+
+The homepage may still include a Common Cases preview section linking to case detail routes.
+
+==================================================
+4. BRAND AND VISUAL IDENTITY
+==================================================
+
+Brand name:
+Mirath Guide
+
+Tagline:
+Understand. Calculate. Share fairly.
+
+Use the supplied logo asset.
+
+Do not redesign the logo.
+
+Provide variants in the layout:
+
+1. Full logo with icon, wordmark, and tagline for desktop header/footer.
+2. Icon plus wordmark for compact header.
+3. Icon-only version for favicon/mobile use.
+
+==================================================
+5. FINAL COLOR PALETTE
+==================================================
+
+Use only these five core colors:
+
+Primary green:
+#17483F
+
+Muted gold:
+#C39A52
+
+Warm ivory:
+#F7F4EA
+
+White:
+#FFFFFF
+
+Deep charcoal:
+#252B29
+
+Do not introduce additional brand colors.
+
+All other visual states must be derived using opacity, lightness, or transparency from these five colors.
+
+Examples:
+
+Soft green background:
+rgba(23, 72, 63, 0.06)
+
+Selected option background:
+rgba(23, 72, 63, 0.09)
+
+Soft gold background:
+rgba(195, 154, 82, 0.12)
+
+Border:
+rgba(23, 72, 63, 0.15)
+
+Secondary text:
+rgba(37, 43, 41, 0.70)
+
+Disabled text:
+rgba(37, 43, 41, 0.35)
+
+Subtle shadow:
+rgba(37, 43, 41, 0.08)
+
+Primary actions must always use green.
+
+Gold must be used sparingly for:
+
+- Qur’anic reference accents
+- Small decorative lines
+- Special rule labels
+- Awl and Radd badges
+- Small icon highlights
+- Decorative geometric motifs
+
+Do not use gold as the main button color.
+
+Blocked heirs should use muted charcoal, not red.
+
+Validation errors may use a darker charcoal treatment with icon and text rather than adding a sixth brand color.
+
+==================================================
+6. TYPOGRAPHY
+==================================================
+
+English and Roman Urdu:
+Inter
+
+Urdu interface:
+Noto Sans Arabic
+
+Qur’anic Arabic and formal Arabic quotations:
+Noto Naskh Arabic
+
+Use serif styling only where visually appropriate in large editorial headings if it matches the mockup, but the primary implementation should remain consistent with the approved font system.
+
+Recommended type scale:
+
+Hero heading desktop:
+52px, 700, line-height 1.12
+
+Page heading:
+40px, 700, line-height 1.2
+
+Section heading:
+32px, 700, line-height 1.25
+
+Card heading:
+20–22px, 600
+
+Wizard question:
+30px, 600
+
+Body large:
+18px, 400, line-height 1.65
+
+Body:
+16px, 400, line-height 1.65
+
+Helper text:
+14px, 400
+
+Button:
+16px, 600
+
+Large fraction:
+36–40px, 700
+
+Large monetary result:
+24–32px, 700
+
+Mobile:
+
+Hero:
+36px
+
+Page heading:
+32px
+
+Section heading:
+26px
+
+Wizard question:
+25px
+
+Body:
+16px minimum
+
+Use sentence case for headings.
+
+Use uppercase only for small eyebrow labels such as:
+
+METHODOLOGY
+COMMON CASES
+LEARN FARAID
+
+Use tabular numerals for:
+
+- Fractions
+- Percentages
+- Estate amounts
+- Calculated amounts
+
+==================================================
+7. DESIGN SYSTEM
+==================================================
+
+Create reusable design tokens.
+
+Spacing scale:
+4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96
+
+Border radii:
+
+Small:
+8px
+
+Medium:
+12px
+
+Large:
+20px
+
+Pill:
+999px
+
+Page max width:
+1200px to 1280px
+
+Content reading width:
+680px to 760px
+
+Wizard card width:
+680px to 760px
+
+Cards:
+
+- White background
+- Thin translucent green border
+- Soft shadow
+- Medium or large radius
+- Generous padding
+- No heavy gradients
+
+Primary button:
+
+- Green background
+- White text
+- 48–52px height
+- 10–12px radius
+- Arrow-right icon where suitable
+
+Secondary button:
+
+- White background
+- Green text
+- Green border
+
+Text button:
+
+- Green text
+- Arrow-right icon
+- No background
+
+Selected choice card:
+
+- White or soft green background
+- Green border
+- Green icon
+- Slightly stronger shadow
+
+Section backgrounds:
+
+- White
+- Warm ivory
+- Very soft green tint
+- Soft gold tint for scripture/reference panels
+
+Use subtle Islamic geometric line patterns only as corner or background decoration.
+
+Do not cover large areas with dense patterns.
+
+==================================================
+8. SHARED LAYOUT COMPONENTS
+==================================================
+
+Create these reusable components:
+
+AppHeaderComponent
+AppFooterComponent
+PageHeroComponent
+SectionHeadingComponent
+PrimaryButtonComponent
+SecondaryButtonComponent
+IconFeatureCardComponent
+InfoBannerComponent
+QuranReferenceCardComponent
+IslamicPatternComponent
+CaseCardComponent
+LessonCardComponent
+GlossaryTermCardComponent
+ProcessStepComponent
+ShareCardComponent
+BlockedHeirCardComponent
+FamilyTreeMiniComponent
+CalculationChartComponent
+WizardProgressComponent
+WizardQuestionCardComponent
+YesNoChoiceComponent
+CountSelectorComponent
+ReviewSectionComponent
+SourceReferenceComponent
+DownloadReportButtonComponent
+LanguageSwitcherComponent
+
+The header should include:
+
+- Mirath Guide logo
+- Calculator
+- Common Cases
+- Learn Faraid
+- Methodology
+- About
+- Language selector where appropriate
+- Start Calculation button
+
+Desktop:
+Full navigation.
+
+Mobile:
+Compact header with menu drawer and visible Start button where practical.
+
+The active route should show a subtle green underline.
+
+==================================================
+9. ICON SYSTEM
+==================================================
+
+Use Lucide-style outline icons with consistent stroke width.
+
+Use green icons by default.
+
+Use gold only as a small accent.
+
+Do not use filled multicolor icons.
+
+HOME PAGE ICON MAPPING
+
+Hero trust chips:
+
+Hanafi method:
+Scale or BookOpenCheck
+
+No login required:
+LockKeyhole or UserRoundX
+
+English and Urdu:
+Languages or Globe2
+
+Why this calculator is different:
+
+Only relevant questions:
+MessageCircleQuestion or ListFilter
+
+Every share explained:
+Scale or FileSearch
+
+Built for learning:
+BookOpen
+
+How it works:
+
+Tell us about the deceased:
+UserRound
+
+Add immediate family:
+UsersRound
+
+Answer only necessary follow-ups:
+MessageCircleQuestion
+
+Review shares:
+ClipboardCheck
+
+Common scenarios:
+
+Spouse and children:
+UsersRound
+
+Parents and children:
+Family-style grouped users icon
+
+One daughter with parents:
+UserRound plus child icon in custom mini family diagram
+
+Kalalah:
+GitBranch or sibling family-tree icon
+
+Key concepts:
+
+Hajb:
+Shield
+
+Kalalah:
+UsersRound or GitBranch
+
+Awl:
+Scale
+
+Radd:
+PieChart
+
+Learn section:
+
+Foundations:
+BookOpen
+
+Fixed-share heirs:
+UsersRound
+
+Residuary heirs:
+Network or GitBranch
+
+Worked examples:
+ClipboardList
+
+Video lessons:
+CirclePlay
+
+Reference library:
+Library or BookMarked
+
+Trust section:
+
+Scholar reviewed:
+BadgeCheck
+
+Clear methodology:
+BookOpenCheck
+
+Detailed results:
+FileText
+
+Built for guidance:
+UsersRound
+
+METHODOLOGY PAGE ICON MAPPING
+
+Top methodology process:
+
+Ask relevant questions:
+MessageCircleQuestion
+
+Apply rules and blocking:
+Network or ShieldCheck
+
+Calculate shares:
+PieChart
+
+Explain results:
+FileCheck2
+
+Methodology principles:
+
+Only relevant questions:
+MessageCircleQuestion
+
+Blocking rules:
+Shield
+
+Fixed shares and residue:
+PieChart
+
+Transparent explanations:
+FileSearch
+
+Calculation steps:
+
+Capture family facts:
+UsersRound
+
+Determine eligible heirs:
+UserCheck
+
+Apply Hajb:
+ShieldCheck
+
+Calculate shares:
+PieChart
+
+Present results:
+FileText
+
+Question routing panel:
+GitBranch
+
+MVP checklist:
+CircleCheck
+
+Sources:
+
+Qur’an 4:11:
+BookOpen
+
+Qur’an 4:12:
+BookOpen
+
+Qur’an 4:176:
+BookOpen
+
+Sahih al-Bukhari:
+BookMarked
+
+Result explanation examples:
+
+Mother:
+UserRound
+
+Wife:
+Person-standing female icon where available or custom simple person icon
+
+Son:
+PersonStanding
+
+Blocked heir:
+UserX
+
+Exact fraction:
+PieChart
+
+Plain-language reasoning:
+FileText
+
+Share type:
+Shield or Tag
+
+Scope and clarity:
+
+Educational:
+GraduationCap
+
+Transparent assumptions:
+FileSearch
+
+Continuous review:
+UsersRound or RefreshCw
+
+LEARN FARAID PAGE ICON MAPPING
+
+Hero:
+Large open-book illustration with inheritance tree and pie chart.
+
+Feature row:
+
+Structured learning:
+BookOpen
+
+Hanafi school:
+UsersRound or BadgeCheck
+
+Clear explanations:
+FileSearch
+
+No login:
+LockKeyhole
+
+Lesson cards:
+
+Foundations:
+BookOpen
+
+Estate before distribution:
+FileSpreadsheet or Calculator
+
+Spouses:
+Rings or UsersRound
+
+Parents and grandparents:
+UsersRound
+
+Children and grandchildren:
+Family tree icon
+
+Full and half siblings:
+UsersRound
+
+Hajb:
+Shield
+
+Kalalah:
+GitBranch
+
+Awl:
+Scale
+
+Radd:
+PieChart
+
+Worked examples:
+ClipboardList
+
+Learning path:
+
+Estate:
+FileText
+
+Fixed-share heirs:
+UsersRound
+
+Residuary heirs:
+Network
+
+Special rules:
+ShieldCheck
+
+Practice:
+BookOpenCheck
+
+Featured resources:
+
+Written lesson:
+FileText
+
+Video:
+CirclePlay
+
+Glossary:
+
+Ashab al-Furud:
+BookOpenCheck
+
+Asabah:
+Network
+
+Hajb:
+Shield
+
+Kalalah:
+GitBranch
+
+Awl:
+Scale
+
+Radd:
+PieChart
+
+COMMON CASES PAGE ICON MAPPING
+
+Category tabs:
+
+All cases:
+UsersRound
+
+Spouse and children:
+UsersRound
+
+Parents and siblings:
+Family grouped icon
+
+Kalalah:
+GitBranch
+
+Special rules:
+Scale or Percent
+
+Each case card must show:
+
+- Case number badge
+- Title
+- Mini family tree diagram
+- One-sentence explanation
+- Key shares
+- View case details link
+- ArrowRight icon
+
+Learning outcomes section:
+
+Who inherits:
+UserCheck
+
+Who does not inherit:
+UserX
+
+Exact shares:
+PieChart
+
+Simple explanation:
+FileText
+
+CALCULATOR INTRO SCREEN ICON MAPPING
+
+Feature row:
+
+Only relevant questions:
+UsersRound or ListFilter
+
+Every share explained:
+BookOpenCheck
+
+Scholar-reviewed:
+ShieldCheck
+
+Private and secure:
+LockKeyhole
+
+How it works:
+Use the same process icons as the homepage.
+
+Common situations strip:
+Use small custom family-tree icons and Scale/PieChart for special rules.
+
+WIZARD SCREEN ICON MAPPING
+
+Section progress:
+
+About the deceased:
+UserRound
+
+Immediate family:
+UsersRound
+
+Children and descendants:
+Baby or family-tree icon
+
+Siblings:
+UsersRound
+
+Extended family:
+Network
+
+Estate:
+FileText or WalletCards
+
+Review:
+CircleCheck
+
+Gender selection:
+
+Male:
+PersonStanding
+
+Female:
+PersonStanding or custom female outline
+
+Why we ask:
+Info
+
+Back:
+ArrowLeft
+
+Continue:
+ArrowRight
+
+Exit:
+X
+
+Tip panel:
+Lightbulb
+
+==================================================
+10. HOME PAGE
+==================================================
+
+Match the supplied homepage mockup.
+
+Sections in order:
+
+1. Header
+
+2. Hero
+
+Left:
+
+Eyebrow:
+GUIDED ISLAMIC INHERITANCE CALCULATOR
+
+Heading:
+Calculate inheritance with clarity and confidence
+
+Body:
+A guided, step-by-step calculator that asks only the questions that matter. It identifies who inherits, who is blocked, and explains each share clearly according to Hanafi Islamic inheritance rules.
+
+Primary button:
+Start Calculation
+
+Secondary button:
+Learn how it works
+
+Trust chips:
+Hanafi method
+No login required
+English & Urdu
+
+Right:
+Large visual preview showing:
+
+- Wizard question card
+- Gender selection
+- Small result preview card
+- Donut chart
+- Blocked heir summary
+
+3. Qur’anic reference panel
+
+Show Arabic text from Surah An-Nisa 4:11.
+
+Show English translation.
+
+Use a subtle gold border and open-book icon.
+
+4. Why this calculator is different
+
+Three cards:
+
+Only relevant questions
+Every share explained
+Built for learning and real cases
+
+5. How it works
+
+Four horizontal steps.
+
+6. Most common scenarios
+
+Show four preview cards:
+
+Wife + son + daughter
+Husband + mother + father
+Two daughters + parents
+Kalalah case
+
+Each must have:
+
+- Mini family tree
+- One sentence
+- Link to detailed case
+
+7. Key concepts in Faraid
+
+Four compact cards:
+
+Hajb
+Kalalah
+Awl
+Radd
+
+8. Learn Faraid preview
+
+Four cards:
+
+Foundations
+Fixed-share heirs
+Residuary heirs and blocking
+Worked examples
+
+Add:
+
+Video lessons
+Reference library
+
+9. Trust strip
+
+Rooted in scholarship. Built for clarity.
+
+Show:
+
+Scholar reviewed
+Clear methodology
+Detailed result breakdowns
+Built for guidance and learning
+
+10. Final CTA
+
+Ready to understand the shares in your case?
+
+Button:
+Start guided calculation
+
+11. Footer
+
+==================================================
+11. CALCULATOR INTRO PAGE
+==================================================
+
+Match the supplied calculator mockup left panel.
+
+Purpose:
+Prepare the user before entering the wizard.
+
+Include:
+
+Heading:
+Calculate inheritance with clarity and confidence
+
+Intro paragraph.
+
+Four feature cards:
+
+Only relevant questions
+Every share explained
+Scholar-reviewed
+Private and secure
+
+“How it works” horizontal four-step card.
+
+Qur’anic reference panel.
+
+Large Start Calculation Now button.
+
+Trust note:
+
+100% free
+No account required
+No data stored
+
+Common situations strip.
+
+The Start Calculation button routes to /calculator/wizard.
+
+==================================================
+12. WIZARD PAGE
+==================================================
+
+Match the supplied wizard mockup right panel.
+
+The wizard must show one question per screen.
+
+Top:
+
+- Compact logo
+- Exit action
+- Semantic section progress
+
+Progress sections:
+
+About the Deceased
+Immediate Family
+Children & Descendants
+Siblings
+Extended Family
+Estate
+Review
+
+Do not show a fixed total such as “Step 1 of 20” because conditional routing changes the number of questions.
+
+Instead show:
+
+Current section name
+Question number within current branch where meaningful
+Soft overall progress bar
+
+Main card:
+
+- Question
+- One-line helper text
+- Answer choices
+- Optional explanation panel
+- Back and Continue actions
+
+Use large choice cards for binary choices.
+
+Use count selectors for numerical questions.
+
+No dropdown for Yes/No.
+
+Do not include a “Not sure” option.
+
+Disable Continue until a required answer is provided.
+
+Preserve answers when navigating backward.
+
+Provide a summary of skipped sections on review where useful.
+
+==================================================
+13. FINALIZED CONDITIONAL WIZARD FLOW
+==================================================
+
+Implement the following flow exactly as the initial MVP specification.
+
+Derived values:
+
+fatherFigure = fatherAlive OR paternalGrandfatherAlive
+
+maleDescendant =
+sonsCount > 0 OR paternalGrandsonsCount > 0
+
+femaleDescendant =
+daughtersCount > 0 OR paternalGranddaughtersCount > 0
+
+anyDescendant =
+sonsCount > 0 OR
+daughtersCount > 0 OR
+paternalGrandsonsCount > 0 OR
+paternalGranddaughtersCount > 0
+
+1. Gender of deceased
+
+Values:
+male
+female
+
+2. Spouse
+
+If deceased is female:
+Ask whether husband is alive.
+
+If deceased is male:
+Ask wives count from 0 to 4.
+
+3. Descendant gate
+
+Ask:
+Are any children or son’s descendants alive?
+
+If no:
+Set sons, daughters, paternal grandsons, and paternal granddaughters to 0.
+Skip descendant count questions.
+
+4. Father alive?
+
+5. If father is not alive:
+Ask whether paternal grandfather is alive.
+
+Do not ask about paternal grandfather when father is alive.
+
+6. Mother alive?
+
+7. If mother is not alive:
+Ask eligible grandmothers count, 0 to 2.
+
+The UI must explain eligible grandmother categories in a help panel.
+
+8. If descendant gate is yes:
+Ask sons count.
+
+Then ask daughters count.
+
+9. If descendant gate is yes and sons count is 0:
+
+Ask paternal grandsons count.
+
+Ask paternal granddaughters count only if:
+
+paternalGrandsonsCount > 0
+OR
+daughtersCount <= 1
+
+Sibling branch:
+
+10. If fatherFigure is true AND motherAlive is true AND anyDescendant is false:
+
+Ask one combined question:
+Total number of siblings of any type.
+
+This count is used only to determine the mother’s share.
+
+Explain that they may be blocked from receiving a share but can still affect the mother’s fraction.
+
+Skip this question if:
+
+anyDescendant is true
+OR
+mother is not alive
+
+11. If fatherFigure is false AND maleDescendant is false:
+
+Ask:
+
+full brothers count
+full sisters count
+
+If anyDescendant is false:
+Ask maternal siblings count
+
+If full brothers count is 0 AND NOT (
+full sisters count > 0 AND femaleDescendant is true
+):
+Ask paternal half-brothers count
+
+If paternal half-brothers question was asked AND (
+paternal half-brothers count > 0
+OR
+full sisters count <= 1
+):
+Ask paternal half-sisters count
+
+Asabah chain:
+
+chainOpen =
+fatherFigure is false
+AND maleDescendant is false
+AND fullBrothersCount is 0
+AND paternalHalfBrothersCount is 0
+AND NOT (
+fullSistersCount > 0 AND femaleDescendant is true
+)
+AND fixedSharesSoFar < 1
+
+If chainOpen:
+
+12. Full brothers’ sons count
+
+13. If 0:
+Paternal half-brothers’ sons count
+
+14. If 0:
+Full nephews’ sons count
+
+15. If 0:
+Paternal half-nephews’ sons count
+
+16. If 0:
+Full paternal uncles count
+
+17. If 0:
+Paternal half-uncles count
+
+18. If 0:
+Full paternal cousins count
+
+19. If 0:
+Paternal half-cousins count
+
+20. Optional estate value in PKR
+
+Make this step skippable.
+
+21. Review
+
+22. Results
+
+
+==================================================
+13B. CALCULATION RULES (NORMATIVE)
+==================================================
+
+This section is the single source of truth for the calculation
+engine. Where any other source (training knowledge, external
+references, mockup text) disagrees with this section, this
+section wins. Do not substitute rules from other madhhabs or
+from general knowledge.
+
+Methodology: Sunni, Hanafi positions where schools differ.
+
+All shares below are fractions of the distributable estate
+(after expenses, debts, and wasiyyah, which are outside the
+MVP calculation).
+
+--------------------------------------------------
+13B.1 DERIVED FACTS
+--------------------------------------------------
+
+fatherFigure = fatherAlive OR paternalGrandfatherAlive
+maleDescendant = sonsCount > 0 OR paternalGrandsonsCount > 0
+femaleDescendant = daughtersCount > 0 OR paternalGranddaughtersCount > 0
+anyDescendant = maleDescendant OR femaleDescendant
+totalSiblings = fullBrothers + fullSisters
+              + paternalHalfBrothers + paternalHalfSisters
+              + maternalSiblings
+
+The paternal grandfather is considered only when the father is
+dead. The father always blocks the paternal grandfather.
+
+Hanafi position: the father figure (father OR paternal
+grandfather) blocks ALL siblings and everything below them in
+the residuary chain.
+
+--------------------------------------------------
+13B.2 FIXED SHARES (ASHAB AL-FURUD)
+--------------------------------------------------
+
+Husband:
+1/2 if no descendant.
+1/4 if any descendant.
+
+Wife or wives:
+1/4 if no descendant.
+1/8 if any descendant.
+The share is a single pool divided equally among up to four
+wives.
+
+Mother:
+1/6 if anyDescendant OR totalSiblings >= 2.
+Siblings count toward this rule EVEN WHEN they are blocked
+by the father figure and inherit nothing themselves.
+Otherwise 1/3, EXCEPT in the Umariyyatayn case (13B.5).
+
+Father:
+1/6 only, if maleDescendant.
+1/6 plus any residue, if femaleDescendant only.
+Residue only (as residuary heir), if no descendant.
+
+Paternal grandfather (father dead):
+Identical to the father in all share rules above,
+with ONE exception: Umariyyatayn does not apply to the
+grandfather (13B.5).
+
+Grandmothers (mother dead):
+1/6 as a single pool shared equally by the eligible
+grandmothers (0 to 2). The MVP treats eligibility as a
+user-confirmed count with a help panel; it does not model
+per-line grandmother blocking beyond "mother blocks all
+grandmothers".
+
+Daughters (no sons):
+1/2 if exactly one.
+2/3 shared equally if two or more.
+With one or more sons, daughters have no fixed share; they
+become residuary with the sons (13B.3).
+
+Son's daughters (no sons, no son's sons):
+Take the daughters' rule if there are no daughters.
+1/6 (completing 2/3) if exactly one daughter.
+Blocked if two or more daughters.
+With son's sons present they become residuary with them.
+
+Full sisters (no father figure, no descendant, no full brother):
+1/2 if exactly one.
+2/3 shared equally if two or more.
+EXCEPTION: if femaleDescendant is true, full sisters take no
+fixed share and instead become residuary (13B.3, tier 4b).
+
+Paternal half-sisters (same gate as full sisters, and no
+paternal half-brother):
+Take the full sisters' rule if there are no full sisters.
+1/6 (completing 2/3) if exactly one full sister.
+Blocked if two or more full sisters.
+With paternal half-brothers present they become residuary
+with them.
+
+Maternal siblings (only when no descendant AND no father
+figure — the kalalah condition):
+1/6 if exactly one.
+1/3 shared EQUALLY if two or more.
+Males and females share EQUALLY. The 2:1 male/female ratio
+NEVER applies to maternal siblings.
+
+--------------------------------------------------
+13B.3 RESIDUARY CHAIN (ASABAH)
+--------------------------------------------------
+
+After fixed shares, the remainder goes to exactly one tier,
+evaluated strictly in this order. The first non-empty tier
+takes the entire residue; all lower tiers receive nothing.
+
+ 1. Sons. Daughters join them at male:female = 2:1.
+ 2. Son's sons. Son's daughters join them at 2:1.
+ 3. Father, else paternal grandfather.
+    (When the father/grandfather also holds a fixed 1/6 from
+    13B.2, the residue is ADDED to that 1/6.)
+ 4. Full brothers. Full sisters join them at 2:1.
+ 4b. Full sisters alone, when femaleDescendant is true
+    (asabah ma'a al-ghayr). This tier also blocks every tier
+    below it, including paternal half-brothers.
+ 5. Paternal half-brothers. Paternal half-sisters join at 2:1.
+ 6. Full brothers' sons (full nephews).
+ 7. Paternal half-brothers' sons (half nephews).
+ 8. Full nephews' sons.
+ 9. Half nephews' sons.
+10. Father's full brothers (full paternal uncles).
+11. Father's paternal half-brothers (half uncles).
+12. Full uncles' sons (full cousins).
+13. Half uncles' sons (half cousins).
+
+Ordering principle encoded above: a nearer degree blocks a
+more remote degree; within the same degree, full blood blocks
+half blood. Note that degree beats blood across generations:
+a half nephew (tier 7) outranks a full nephew's son (tier 8).
+
+Females never appear in tiers 6-13.
+
+--------------------------------------------------
+13B.4 AWL AND RADD
+--------------------------------------------------
+
+Awl:
+If the sum of assigned shares exceeds 1, scale every share
+down proportionally so the total equals 1. Awl applies to all
+fixed-share heirs including the spouse.
+
+Radd:
+If the sum of assigned shares is less than 1 and no residuary
+tier is populated, return the surplus proportionally to the
+fixed-share heirs EXCLUDING the spouse. The spouse's share
+never increases through Radd.
+If the spouse is the only heir, the surplus is not
+distributed; label it as passing to distant kindred
+(dhawil-arham) or Bayt al-Mal, outside MVP scope.
+
+--------------------------------------------------
+13B.5 UMARIYYATAYN
+--------------------------------------------------
+
+Trigger, ALL of:
+- A spouse share exists (husband or wife/wives).
+- The FATHER is alive. (Not the grandfather. If the father
+  figure is the grandfather, Umariyyatayn does NOT apply and
+  the mother takes her normal 1/3.)
+- anyDescendant is false.
+- totalSiblings < 2.
+
+Effect:
+Mother receives 1/3 of the REMAINDER after the spouse's
+share, not 1/3 of the whole estate. The father takes the
+rest as residuary.
+
+Rationale note for explanations: a single sibling neither
+inherits (blocked by the father) nor reduces the mother to
+1/6, so the operative heirs are still spouse + parents; the
+ruling therefore applies with 0 or 1 sibling. This "< 2"
+condition is a deliberate, documented choice; record it in
+the methodology page.
+
+--------------------------------------------------
+13B.6 SPECIAL CASE NOTES
+--------------------------------------------------
+
+Mushtaraka (himariyya): husband + mother + 2 or more maternal
+siblings + full brothers can exhaust the estate before the
+full brothers' tier. HANAFI POSITION (use this): the full
+brothers receive nothing; they do NOT share in the maternal
+siblings' 1/3. See fixture GF-15.
+
+Grandfather with siblings: HANAFI POSITION (use this): the
+grandfather blocks all siblings entirely. See fixture GF-16.
+
+Blocked-heir reporting: the wizard intentionally never
+collects counts for relatives who cannot inherit. Blocked
+heirs on the results page are therefore CATEGORY-LEVEL
+statements derived from routing logic (example: "Siblings —
+blocked by the father"), plus the specific answered-but-
+blocked cases the engine can detect (example: son's
+daughters blocked by two daughters). Do not add wizard
+questions solely to enumerate blocked individuals.
+
+--------------------------------------------------
+13B.7 GOLDEN FIXTURES (NORMATIVE EXPECTED VALUES)
+--------------------------------------------------
+
+Every fixture below was generated by a reference
+implementation and cross-checked against classical worked
+examples. Unit tests MUST assert these exact fractions.
+Shares are exact rationals; percentages are display-only.
+"Pool" means the total for that group before per-person
+division.
+
+GF-01 Wife, 2 sons, 1 daughter, father, mother
+  wife 1/8, mother 1/6, father 1/6,
+  sons pool 13/30, daughters pool 13/120. Total 1.
+
+GF-02 Minbariyya (Awl to 27): wife, 2 daughters, father, mother
+  wife 1/9 (=3/27), daughters pool 16/27,
+  mother 4/27, father 4/27. Total 1.
+
+GF-03 Umariyyatayn A: wife, father, mother
+  wife 1/4, mother 1/4, father 1/2. Total 1.
+
+GF-04 Umariyyatayn B: husband, father, mother
+  husband 1/2, mother 1/6, father 1/3. Total 1.
+
+GF-05 Umariyyatayn with ONE blocked sibling (the "< 2" rule):
+  wife, father, mother, 1 full brother
+  wife 1/4, mother 1/4, father 1/2, brother nothing. Total 1.
+
+GF-06 Mother reduced by two BLOCKED brothers: father, mother,
+  2 full brothers
+  mother 1/6, father 5/6, brothers nothing. Total 1.
+
+GF-07 Awl to 8: husband, mother, 2 full sisters
+  husband 3/8, mother 1/8, sisters pool 1/2. Total 1.
+
+GF-08 Awl to 7: husband, 2 full sisters
+  husband 3/7, sisters pool 4/7. Total 1.
+
+GF-09 Radd never increases spouse: wife, 1 daughter
+  wife 1/8 (unchanged), daughter 7/8. Total 1.
+
+GF-10 Radd among blood heirs: mother, 1 daughter
+  mother 1/4, daughter 3/4. Total 1.
+  (From fixed 1/6 and 1/2, surplus 1/3 returned 1:3.)
+
+GF-11 Son's daughter completes 2/3: 1 daughter,
+  1 son's daughter, 1 full uncle
+  daughter 1/2, son's daughter 1/6, uncle 1/3. Total 1.
+
+GF-12 Sister as asabah ma'a al-ghayr blocks half-brother:
+  1 daughter, 1 full sister, 1 paternal half-brother
+  daughter 1/2, full sister 1/2 (residue),
+  half-brother nothing. Total 1.
+
+GF-13 Full sister alone does NOT block half-brother:
+  1 full sister, 1 paternal half-brother
+  sister 1/2 (fixed), half-brother 1/2 (residue). Total 1.
+
+GF-14 Kalalah: husband, 1 maternal sibling, 1 full brother
+  husband 1/2, maternal sibling 1/6,
+  full brother 1/3. Total 1.
+
+GF-15 Mushtaraka, Hanafi: husband, mother,
+  2 maternal siblings, 1 full brother
+  husband 1/2, mother 1/6, maternal siblings pool 1/3,
+  full brother nothing. Total 1.
+
+GF-16 Grandfather blocks siblings, Hanafi:
+  paternal grandfather, 2 full brothers
+  grandfather 1 (everything), brothers nothing.
+
+GF-17 Full nephew blocks half nephew: wife, 1 full nephew,
+  3 half nephews
+  wife 1/4, full nephew 3/4, half nephews nothing. Total 1.
+
+GF-18 Half nephew inherits: 1 daughter, 1 half nephew
+  daughter 1/2, half nephew 1/2. Total 1.
+
+GF-19 Full uncle blocks half uncle: wife, 1 full uncle,
+  2 half uncles
+  wife 1/4, full uncle 3/4, half uncles nothing. Total 1.
+
+GF-20 Spouse only: husband, no other relatives
+  husband 1/2. Remaining 1/2 is NOT distributed; label it
+  as passing to distant kindred / Bayt al-Mal.
+
+Mark GF-01 through GF-20 in the fixture files as
+"reference-implementation verified, scholarly review
+pending". Do not label them scholar-approved.
+
+--------------------------------------------------
+13B.8 ENGINE IMPLEMENTATION NOTES
+--------------------------------------------------
+
+Pipeline order (consistent with Section 22):
+fixed shares -> residuary chain -> Awl -> Radd.
+The residuary chain must run BEFORE Radd, and Radd must run
+only when no residuary tier was populated.
+
+The "fixedSharesSoFar < 1" gate in the wizard's chainOpen
+condition (Section 13) may be computed with a sentinel: run
+the engine with a hypothetical lowest-tier heir
+(half cousin = 1) added to the current answers; if that
+sentinel receives a share greater than zero, residue exists
+and the chain questions are relevant. This reuses the engine
+instead of duplicating fixed-share math in the router.
+
+Known MVP limitations to record in the README and
+methodology page:
+- Grandmother eligibility simplified to a confirmed count.
+- Paternal half-sisters do not act as asabah ma'a al-ghayr
+  with daughters in the MVP (rare case; full sisters absent).
+- Dhawil-arham (distant kindred) not distributed.
+- Estate deductions (debts, wasiyyah) not calculated.
+==================================================
+
+==================================================
+14. ESTATE STEP
+==================================================
+
+For the MVP, the estate amount is optional.
+
+Use:
+
+Label:
+Distributable estate value
+
+Currency:
+PKR
+
+Clearly explain:
+
+Enter the net distributable estate after valid expenses, debts, and bequests.
+
+Provide a collapsible explanation covering:
+
+- Funeral and estate expenses
+- Outstanding debts
+- Valid wasiyyah
+- Jointly owned assets
+
+Do not build a complete estate deduction calculator in the MVP unless already included in the final approved requirements.
+
+The user may skip the estate value and still receive fractional results.
+
+==================================================
+15. REVIEW PAGE
+==================================================
+
+Show a clean summary grouped by:
+
+Deceased
+Spouse
+Parents and grandparents
+Children and descendants
+Siblings
+Extended family
+Estate
+
+Each section must have an Edit button.
+
+Also show:
+
+Relatives not asked because they could not affect this case
+
+Explain skipped branches clearly.
+
+Examples:
+
+Paternal grandfather was not asked because the father is alive.
+
+Sibling inheritance questions were skipped because the father blocks siblings.
+
+Extended male relatives were skipped because a closer residuary heir exists.
+
+Button:
+Calculate Shares
+
+==================================================
+16. RESULTS PAGE
+==================================================
+
+Build the results page as a major product feature.
+
+Top summary:
+
+Calculation complete
+Hanafi methodology
+Eligible heirs count
+Blocked heirs count
+Distributable estate if provided
+
+Main visualization:
+
+- Responsive donut chart or horizontal segmented share chart
+- Use green, gold, and opacity variations only
+- Never depend on color alone
+- Add labels and patterns where needed
+
+Eligible heir cards must show:
+
+- Relationship
+- Fraction
+- Percentage
+- PKR amount if estate entered
+- Share type
+- Reason
+- Source reference
+
+Example:
+
+Mother
+1/6
+16.67%
+PKR 1,666,666.67
+
+Type:
+Fixed share
+
+Reason:
+The deceased left descendants, so the mother receives one-sixth.
+
+Blocked heir cards must show:
+
+- Relationship
+- “Does not inherit in this case”
+- Blocking reason
+- Blocking heir
+
+Do not display blocked heirs in red.
+
+Use neutral charcoal and soft backgrounds.
+
+Add tabs or segmented controls:
+
+Simple explanation
+Detailed calculation
+
+Detailed calculation should show:
+
+- Original shares
+- Common denominator
+- Fixed shares
+- Residue
+- Asabah distribution
+- Awl adjustment if applicable
+- Radd adjustment if applicable
+- Final fractions
+- Rounding approach
+
+Actions:
+
+Download PDF report
+Print report
+Start another calculation
+Edit family details
+
+==================================================
+17. COMMON CASES PAGE
+==================================================
+
+Match the supplied Common Cases page mockup.
+
+Hero:
+
+Eyebrow:
+COMMON CASES
+
+Heading:
+Understand inheritance through real-life examples
+
+Body:
+Explore common family situations and see how shares are determined. Each case includes eligible heirs, blocked relatives, exact shares, and clear explanations.
+
+Info banner:
+Shares are calculated according to the Hanafi school.
+Examples are educational and not case-specific legal advice.
+
+Category tabs:
+
+All Cases
+Spouse & Children
+Parents & Siblings
+Kalalah Cases
+Special Rules
+
+Create at least these case cards:
+
+1. Husband, wife and parents
+2. Wife, one son and one daughter
+3. Parents and one daughter
+4. One daughter with parents
+5. Two or more daughters with parents
+6. Siblings in a Kalalah case
+7. Sister with a daughter
+8. Mother and full sisters
+9. Awl example
+10. Radd example
+
+Each card:
+
+- Number badge
+- Title
+- Mini family tree
+- Short explanation
+- Key shares
+- View case details link
+
+Each case detail page should show:
+
+- Scenario summary
+- Family tree
+- Eligible heirs
+- Blocked heirs
+- Calculation steps
+- Fractions
+- Percentages
+- Example monetary distribution
+- Rule explanation
+- Related concepts
+- Try this scenario in calculator button
+
+==================================================
+18. LEARN FARAID PAGE
+==================================================
+
+Match the supplied Learn Faraid mockup.
+
+Hero:
+
+Eyebrow:
+LEARN FARAID
+
+Heading:
+Build your understanding of Islamic inheritance
+
+Subheading:
+Master the principles of Faraid through structured lessons, worked examples, a clear glossary, and curated resources.
+
+Hero illustration:
+Open book with family tree and share chart.
+
+Trust statement:
+All content follows the Hanafi school and uses plain-language explanations.
+
+Feature row:
+
+Structured learning path
+Hanafi school
+Clear explanations
+No login required
+
+Lesson filters:
+
+All Lessons
+Foundations
+Fixed-Share Heirs
+Residuary Heirs & Blocking
+Special Rules
+Worked Examples
+
+Lessons:
+
+1. Foundations of Inheritance
+2. Estate Before Distribution
+3. Spouses in Faraid
+4. Parents and Grandparents
+5. Children and Grandchildren
+6. Full and Half Siblings
+7. Hajb
+8. Kalalah
+9. Awl
+10. Radd
+11. Worked Examples
+
+Each lesson card:
+
+- Icon
+- Lesson number
+- Title
+- Short summary
+- Difficulty badge
+- Start lesson link
+
+Learning path:
+
+1. Understand the estate
+2. Learn fixed-share heirs
+3. Learn residuary heirs
+4. Understand special rules
+5. Practice with examples
+
+Featured resources:
+
+- Understanding Hajb
+- Kalalah cases and solutions
+- Awl explained simply
+- Introduction to Faraid video placeholder
+- Radd in practice video placeholder
+
+Do not embed unreviewed videos.
+
+Use local placeholder metadata until real approved video links are supplied.
+
+Glossary preview:
+
+Ashab al-Furud
+Asabah
+Hajb
+Kalalah
+Awl
+Radd
+
+Qur’anic guidance panel.
+
+Final CTA.
+
+==================================================
+19. METHODOLOGY PAGE
+==================================================
+
+Match the supplied Methodology mockup.
+
+Hero:
+
+Eyebrow:
+METHODOLOGY
+
+Heading:
+How Mirath Guide calculates inheritance
+
+Body:
+Mirath Guide follows a scholar-reviewed Hanafi methodology. We ask only relevant questions, identify who inherits and who is blocked, and calculate exact shares with clear explanations and sources.
+
+Trust chips:
+
+Hanafi methodology
+Scholar reviewed
+Clear reasoning
+No login required
+
+Top process card:
+
+1. Ask relevant questions
+2. Apply rules and blocking
+3. Calculate shares
+4. Explain results
+
+Section:
+Our methodology principles
+
+Cards:
+
+Only relevant questions
+Blocking rules applied
+Fixed shares and residue
+Transparent explanations
+
+Section:
+How the calculation works
+
+Steps:
+
+Capture family facts
+Determine eligible heirs
+Apply Hajb
+Calculate shares, Awl, and Radd
+Present explained results
+
+Add a Question Routing visual panel.
+
+Section:
+What is included in this MVP
+
+Include exactly:
+
+- Hanafi calculation mode
+- English and Urdu support
+- Conditional one-question wizard
+- Fixed shares and Asabah
+- Blocking explanations
+- Awl and Radd
+- Umariyyatayn
+- Optional estate amount
+- Detailed and simple result views
+- PDF or print-ready report
+- Core learning pages
+- Common scenarios
+
+Section:
+Sources and references
+
+Show cards for:
+
+Qur’an 4:11
+Qur’an 4:12
+Qur’an 4:176
+Sahih al-Bukhari 6732
+
+Section:
+How results are explained
+
+Show example cards:
+
+Mother inherits 1/6
+Wife inherits 1/8
+Son receives remainder
+Blocked heir receives no share
+
+Also show:
+
+Exact fraction and amount
+Plain-language reasoning
+Share type
+
+Section:
+Scope and clarity
+
+Educational and practical
+Transparent assumptions
+Continuous scholarly review
+
+Final CTA.
+
+==================================================
+20. ABOUT PAGE
+==================================================
+
+Create an About page consistent with the same design.
+
+Sections:
+
+- What Mirath Guide is
+- Why it was created
+- The problem with traditional long-form inheritance calculators
+- Guided question-routing approach
+- Hanafi scope
+- Educational purpose
+- Privacy approach
+- Scholarly review placeholder
+- Disclaimer
+- Contact placeholder
+
+Do not invent names or credentials for scholars.
+
+Use placeholder content clearly marked for later review.
+
+==================================================
+21. ARCHITECTURE
+==================================================
+
+Follow SOLID principles.
+
+Do not create one giant inheritance-calculator service.
+
+Use feature-based architecture.
+
+Suggested structure:
+
+src/app/
+  core/
+    layout/
+    services/
+    guards/
+    config/
+    models/
+  shared/
+    components/
+    directives/
+    pipes/
+    icons/
+    utils/
+  features/
+    home/
+    calculator/
+      pages/
+      components/
+      models/
+      state/
+      routing/
+      engine/
+        questions/
+        eligibility/
+        blocking/
+        shares/
+        adjustments/
+        explanations/
+        validation/
+    common-cases/
+    learn/
+    methodology/
+    about/
+    glossary/
+    report/
+  data/
+    lessons/
+    common-cases/
+    glossary/
+    sources/
+    rules/
+
+Use interfaces and abstract contracts.
+
+Recommended calculation architecture:
+
+A. Calculation Context
+
+Create an immutable CalculationContext interface containing:
+
+- Raw answers
+- Derived facts
+- Eligible heirs
+- Blocked heirs
+- Fixed shares
+- Residue
+- Adjustments
+- Final shares
+- Explanation log
+- Validation warnings
+
+B. Question Router
+
+QuestionRouterService
+
+Responsibilities:
+
+- Determine current question
+- Determine next relevant question
+- Determine previous question
+- Skip irrelevant questions
+- Track semantic section
+- Preserve navigation history
+
+It must not calculate inheritance shares.
+
+C. Derived Facts Service
+
+DerivedFactsService
+
+Responsibilities:
+
+- fatherFigure
+- maleDescendant
+- femaleDescendant
+- anyDescendant
+- sibling branch availability
+- Asabah chain availability
+
+D. Eligibility Engine
+
+HeirEligibilityEngine
+
+Responsibilities:
+
+- Identify potential heirs
+- Identify fixed-share heirs
+- Identify residuary heirs
+
+E. Blocking Engine
+
+BlockingEngine
+
+Responsibilities:
+
+- Determine blocked heirs
+- Record blocking heir
+- Record blocking rule
+- Produce explanation codes
+
+F. Fixed Share Engine
+
+FixedShareEngine
+
+Responsibilities:
+
+- Assign Qur’anic fixed shares
+- Return rational fractions
+
+G. Asabah Engine
+
+AsabahEngine
+
+Responsibilities:
+
+- Determine valid residuary tier
+- Allocate residue
+- Handle male/female 2:1 distribution where applicable
+
+H. Adjustment Engine
+
+AdjustmentEngine
+
+Responsibilities:
+
+- Awl
+- Radd
+- Umariyyatayn
+- Special denominator adjustment
+
+I. Explanation Engine
+
+ExplanationEngine
+
+Responsibilities:
+
+- Turn calculation facts into user-facing explanations
+- Support English and Urdu text keys
+- Return source references
+- Return simple and detailed variants
+
+J. Report Mapper
+
+ReportMapperService
+
+Responsibilities:
+
+- Convert result model into PDF-ready report model
+- Keep PDF rendering separate from inheritance logic
+
+==================================================
+22. BLACKBOARD-STYLE CONTEXT
+==================================================
+
+Use a blackboard-inspired calculation context, but do not implement uncontrolled mutation.
+
+Create a typed CalculationBlackboard or CalculationContext object that is passed through rule stages.
+
+Each rule reads from the context and returns a new context or a typed rule result.
+
+Example concept:
+
+interface CalculationRule {
+  id: string;
+  priority: number;
+  applies(context: CalculationContext): boolean;
+  evaluate(context: CalculationContext): RuleEvaluation;
+}
+
+interface RuleEvaluation {
+  updates: Partial<CalculationContext>;
+  explanations: ExplanationEntry[];
+  references: SourceReference[];
+}
+
+The calculation pipeline may be:
+
+1. Normalize answers
+2. Derive facts
+3. Validate logical consistency
+4. Determine eligible heirs
+5. Apply blocking
+6. Assign fixed shares
+7. Calculate total fixed shares
+8. Apply Awl if total exceeds one
+9. Determine residue
+10. Apply Asabah
+11. Apply Radd if applicable
+12. Produce final normalized fractions
+13. Calculate percentages
+14. Calculate monetary amounts
+15. Produce explanation log
+
+Use deterministic rule ordering.
+
+Do not allow rules to depend on hidden side effects.
+
+Do not use a service with dozens of mutable public properties.
+
+==================================================
+23. FRACTION ARITHMETIC
+==================================================
+
+Do not use floating-point arithmetic for inheritance fractions.
+
+Create a Rational or Fraction value object:
+
+numerator
+denominator
+
+Required operations:
+
+- add
+- subtract
+- multiply
+- divide
+- compare
+- simplify
+- equals
+- greaterThan
+- lessThan
+- toPercentage
+- toDisplayString
+
+Use greatest common divisor normalization.
+
+Only convert to decimal for display.
+
+Final monetary values may be rounded to two decimal places.
+
+Show any rounding difference clearly.
+
+==================================================
+24. STATE MANAGEMENT
+==================================================
+
+Use an application-level CalculatorStore service based on Angular Signals.
+
+State should include:
+
+- Session answers
+- Current question
+- Question history
+- Current section
+- Derived values
+- Review summary
+- Result
+- Calculation errors
+- Optional estate value
+
+Expose readonly signals.
+
+Mutations must occur through explicit methods.
+
+Example:
+
+setAnswer(questionId, value)
+goNext()
+goBack()
+resetCalculation()
+calculate()
+loadScenario(caseId)
+
+Do not expose writable signals directly to components.
+
+Persist current wizard progress only in sessionStorage if needed.
+
+Do not use localStorage for long-term family data.
+
+Provide a Clear Calculation action.
+
+==================================================
+25. CONTENT DATA
+==================================================
+
+Store static content in typed local data files.
+
+Examples:
+
+common-cases.data.ts
+lessons.data.ts
+glossary.data.ts
+sources.data.ts
+
+Do not hardcode large content blocks directly inside templates.
+
+Prepare all content for future localization.
+
+Use translation keys or typed localized content objects.
+
+==================================================
+26. ACCESSIBILITY
+==================================================
+
+Target WCAG AA.
+
+Requirements:
+
+- Keyboard-accessible wizard
+- Visible focus state
+- Proper labels
+- aria-current for active navigation
+- aria-live for validation and question transitions
+- Minimum 44px interactive targets
+- Sufficient contrast
+- Do not rely only on color
+- Respect prefers-reduced-motion
+- Proper heading order
+- Accessible chart table fallback
+- Printable text fallback for visual family trees
+
+When a wizard question changes, move focus to the new question heading.
+
+==================================================
+27. RESPONSIVE BEHAVIOR
+==================================================
+
+Desktop:
+
+- Max-width content container
+- Two-column hero where shown
+- Four- or five-column card grids
+- Horizontal progress where space allows
+
+Tablet:
+
+- Two-column grids
+- Reduced decorative graphics
+- Scrollable category tabs where needed
+
+Mobile:
+
+- Single-column layout
+- Sticky bottom Continue action in wizard
+- Compact progress
+- Choice cards stacked vertically
+- Tables become stacked cards
+- Charts use accessible vertical layouts
+- Header becomes menu drawer
+- Logo remains readable
+- No horizontal overflow
+
+==================================================
+28. ANIMATION
+==================================================
+
+Use subtle animation only:
+
+- 150–250ms transitions
+- Slight card lift on hover
+- Fade/slide wizard questions
+- Progress transition
+- Button hover state
+
+Respect reduced motion.
+
+Avoid:
+
+- Parallax
+- Large entrance animations
+- Excessive bouncing
+- Decorative motion that distracts from the task
+
+==================================================
+29. TESTING
+==================================================
+
+Create unit tests for:
+
+- Fraction arithmetic
+- Derived facts
+- Question routing
+- Father blocking grandfather
+- Father blocking siblings
+- Male descendants blocking sibling branches
+- Mother share affected by sibling count
+- Daughter and paternal granddaughter combinations
+- Sister with daughter as residuary
+- Asabah chain ordering
+- Awl
+- Radd
+- Umariyyatayn
+- Review summary
+- PDF report mapping
+
+Create component tests for:
+
+- Wizard choice selection
+- Back navigation
+- Conditional question skipping
+- Disabled Continue state
+- Count selector
+- Result card rendering
+
+Create a scholar-review case fixture structure:
+
+interface ApprovedCaseFixture {
+  id: string;
+  description: string;
+  answers: CalculatorAnswers;
+  expectedEligibleHeirs: ExpectedHeir[];
+  expectedBlockedHeirs: ExpectedBlockedHeir[];
+  expectedFinalShares: ExpectedShare[];
+  expectedAdjustment?: 'awl' | 'radd' | 'umariyyatayn';
+}
+
+Populate fixtures with clearly marked sample data and TODO labels where final scholarly verification is still pending.
+
+Do not falsely label unverified test cases as scholar-approved.
+
+==================================================
+30. CODE QUALITY
+==================================================
+
+Follow:
+
+- Single Responsibility Principle
+- Open/Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle
+
+Avoid:
+
+- God services
+- Deep nested conditions in components
+- Business logic in templates
+- Business logic in presentation components
+- Duplicated fraction logic
+- Magic strings
+- Giant switch statements
+- Any TypeScript type
+- Circular dependencies
+
+Use:
+
+- Typed enums or string unions
+- Discriminated unions
+- Pure functions
+- Immutable objects
+- Small services
+- Clear domain models
+- Dependency injection tokens for rule sets
+- Factory functions where suitable
+
+==================================================
+31. SECURITY AND PRIVACY
+==================================================
+
+This is frontend-only.
+
+Do not send family data to any remote endpoint.
+
+Do not add analytics by default.
+
+Do not include third-party trackers.
+
+Do not load unnecessary external scripts.
+
+Where external fonts are used, provide a self-hosting-ready configuration or use secure font loading.
+
+Add privacy copy:
+
+- No account required
+- Family details are processed locally
+- No calculation data is uploaded
+- Refreshing or clearing the calculation removes session data
+
+Only display these claims if the implementation actually satisfies them.
+
+==================================================
+32. DELIVERABLES
+==================================================
+
+Generate:
+
+1. Complete Angular project structure
+2. Responsive pages
+3. Reusable design system
+4. Conditional wizard
+5. Calculation domain models
+6. Rule engine skeleton
+7. Fraction arithmetic
+8. Result page
+9. PDF export
+10. Print stylesheet
+11. Common cases data
+12. Learning page data
+13. Methodology page
+14. Glossary
+15. Unit tests
+16. README
+
+README must include:
+
+- Project purpose
+- Setup steps
+- Development commands
+- Production build
+- Architecture overview
+- Rule engine overview
+- How to add a new wizard question
+- How to add a new inheritance rule
+- How to add a common case
+- How to add a lesson
+- How to add a source reference
+- PDF generation overview
+- Localization approach
+- Known MVP limitations
+- Scholarly verification warning
+
+==================================================
+33. IMPLEMENTATION ORDER
+==================================================
+
+Implement in this order:
+
+Phase 1:
+Project setup
+Design tokens
+Typography
+Header
+Footer
+Shared components
+Routing
+
+Phase 2:
+Home
+Calculator intro
+Common Cases
+Learn Faraid
+Methodology
+About
+
+Phase 3:
+Domain models
+Fraction class
+Calculator store
+Question router
+Wizard UI
+
+Phase 4:
+Eligibility
+Blocking
+Fixed shares
+Asabah
+Awl
+Radd
+Umariyyatayn
+Explanations
+
+Phase 5:
+Review
+Results
+Charts
+PDF export
+Print view
+
+Phase 6:
+Accessibility
+Responsive refinement
+Unit tests
+Documentation
+
+At the end of each phase:
+
+- Run formatting
+- Run linting
+- Run tests
+- Build the application
+- Fix all warnings and errors
+
+==================================================
+34. IMPORTANT VISUAL REQUIREMENT
+==================================================
+
+Treat the supplied mockups as the visual source of truth.
+
+Before implementing each page:
+
+1. Inspect its corresponding mockup.
+2. Identify major sections.
+3. Reproduce spacing and proportions.
+4. Match card hierarchy.
+5. Match icon placement.
+6. Match heading and body widths.
+7. Match decorative pattern placement.
+8. Match CTA positioning.
+9. Preserve the restrained five-color palette.
+10. Ensure the page still works responsively.
+
+Do not copy garbled text from generated images.
+
+Use the clean text and labels defined in this specification.
+
+==================================================
+35. IMPORTANT DOMAIN WARNING
+==================================================
+
+The visual application and calculation architecture may be implemented fully.
+
+However, inheritance rules are religiously sensitive.
+
+Keep all rule definitions:
+
+- Explicit
+- Testable
+- Source-linked
+- Versioned
+- Easy to review
+
+Add a visible disclaimer:
+
+Mirath Guide is an educational calculation aid based on the implemented Hanafi methodology. Complex cases, disputed facts, local law, estate ownership, debts, bequests, missing persons, unborn heirs, and other special circumstances should be reviewed by a qualified scholar and relevant legal professional.
+
+Do not describe the application as issuing a fatwa.
+
+Do not claim formal scholarly approval unless actual reviewers have approved the implementation.

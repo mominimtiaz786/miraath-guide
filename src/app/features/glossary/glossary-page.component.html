@@ -1,0 +1,9 @@
+<app-page-hero eyebrow="GLOSSARY" heading="Faraid glossary"
+  body="Key terms used throughout Mirath Guide, with their Roman Urdu equivalents where helpful.">
+</app-page-hero>
+
+<div class="grid">
+  @for (term of terms; track term.term) {
+    <app-glossary-term-card [term]="term" />
+  }
+</div>
