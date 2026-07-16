@@ -5,6 +5,8 @@
 }
 
 html {
+  color-scheme: light;
+  background: var(--color-white);
   -webkit-text-size-adjust: 100%;
 }
 
