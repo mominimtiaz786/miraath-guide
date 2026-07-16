@@ -15,14 +15,14 @@ import { AppIconComponent } from '../../icons/app-icon.component';
       <a class="btn btn-secondary" [class.full-width]="fullWidth()" [routerLink]="routerLink()">
         <ng-container [ngTemplateOutlet]="content"></ng-container>
         @if (showIcon()) {
-          <app-icon [name]="showIcon()!" [size]="18" />
+          <app-icon [name]="showIcon()!" [size]="18" color="var(--color-primary)" />
         }
       </a>
     } @else {
       <button class="btn btn-secondary" [class.full-width]="fullWidth()" [type]="type()" [disabled]="disabled()">
         <ng-container [ngTemplateOutlet]="content"></ng-container>
         @if (showIcon()) {
-          <app-icon [name]="showIcon()!" [size]="18" />
+          <app-icon [name]="showIcon()!" [size]="18" color="var(--color-primary)" />
         }
       </button>
     }

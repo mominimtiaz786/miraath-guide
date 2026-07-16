@@ -5,7 +5,7 @@
   <a class="btn btn-primary" [class.full-width]="fullWidth()" [routerLink]="routerLink()">
     <ng-container [ngTemplateOutlet]="content"></ng-container>
     @if (showArrow()) {
-      <app-icon name="ArrowRight" [size]="18" />
+      <app-icon name="ArrowRight" [size]="18" color="var(--color-on-primary)" />
     }
   </a>
 } @else {
@@ -17,7 +17,7 @@
   >
     <ng-container [ngTemplateOutlet]="content"></ng-container>
     @if (showArrow()) {
-      <app-icon name="ArrowRight" [size]="18" />
+      <app-icon name="ArrowRight" [size]="18" color="var(--color-on-primary)" />
     }
   </button>
 }

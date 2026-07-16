@@ -17,6 +17,9 @@ import { APP_ICONS, AppIconName } from './icon-registry';
       *ngComponentOutlet="iconComponent(); inputs: { size: size(), strokeWidth: strokeWidth() }"
     ></ng-container>
   `,
+  host: {
+    '[style.color]': 'color() ?? null',
+  },
   styles: [
     `
       :host {
@@ -32,6 +35,7 @@ export class AppIconComponent {
   readonly name = input.required<AppIconName>();
   readonly size = input<number>(20);
   readonly strokeWidth = input<number>(1.75);
+  readonly color = input<string | null>(null);
 
   protected readonly iconComponent = computed(() => APP_ICONS[this.name()]);
 }
