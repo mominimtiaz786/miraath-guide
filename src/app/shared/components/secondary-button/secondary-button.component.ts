@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppIconComponent } from '../../icons/app-icon.component';
@@ -5,18 +6,21 @@ import { AppIconComponent } from '../../icons/app-icon.component';
 @Component({
   selector: 'app-secondary-button',
   standalone: true,
-  imports: [RouterLink, AppIconComponent],
+  imports: [RouterLink, AppIconComponent, NgTemplateOutlet],
   template: `
+    <ng-template #content>
+      <ng-content></ng-content>
+    </ng-template>
     @if (routerLink()) {
       <a class="btn btn-secondary" [class.full-width]="fullWidth()" [routerLink]="routerLink()">
-        <ng-content></ng-content>
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
         @if (showIcon()) {
           <app-icon [name]="showIcon()!" [size]="18" />
         }
       </a>
     } @else {
       <button class="btn btn-secondary" [class.full-width]="fullWidth()" [type]="type()" [disabled]="disabled()">
-        <ng-content></ng-content>
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
         @if (showIcon()) {
           <app-icon [name]="showIcon()!" [size]="18" />
         }

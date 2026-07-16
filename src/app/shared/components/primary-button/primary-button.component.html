@@ -1,6 +1,9 @@
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
 @if (routerLink()) {
   <a class="btn btn-primary" [class.full-width]="fullWidth()" [routerLink]="routerLink()">
-    <ng-content></ng-content>
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
     @if (showArrow()) {
       <app-icon name="ArrowRight" [size]="18" />
     }
@@ -12,7 +15,7 @@
     [type]="type()"
     [disabled]="disabled()"
   >
-    <ng-content></ng-content>
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
     @if (showArrow()) {
       <app-icon name="ArrowRight" [size]="18" />
     }

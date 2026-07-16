@@ -212,6 +212,7 @@
   color: #ffffff;
   flex-wrap: wrap;
   --icon-color: var(--color-gold);
+  justify-self: center;
 }
 
 .cta-text {

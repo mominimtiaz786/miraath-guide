@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppIconComponent } from '../../icons/app-icon.component';
@@ -5,7 +6,7 @@ import { AppIconComponent } from '../../icons/app-icon.component';
 @Component({
   selector: 'app-primary-button',
   standalone: true,
-  imports: [RouterLink, AppIconComponent],
+  imports: [RouterLink, AppIconComponent, NgTemplateOutlet],
   templateUrl: './primary-button.component.html',
   styleUrl: './primary-button.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
