@@ -56,6 +56,25 @@ h3 {
   color: var(--color-text);
 }
 
+.per-person-line {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  color: var(--color-text-secondary);
+}
+
+.per-person-label {
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+
+.per-person-money {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
 .reason {
   margin: 0;
   color: var(--color-text-secondary);

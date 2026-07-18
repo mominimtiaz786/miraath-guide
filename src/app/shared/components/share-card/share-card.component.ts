@@ -31,4 +31,8 @@ export class ShareCardComponent {
     const estate = this.estateValue();
     return estate ? this.share().poolShare.toMoney(estate) : null;
   });
+  protected readonly perPersonMoney = computed(() => {
+    const amount = this.moneyAmount();
+    return amount !== null && this.share().count > 0 ? amount / this.share().count : null;
+  });
 }

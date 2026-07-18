@@ -11,6 +11,21 @@
       <span class="money">PKR {{ amount | number: '1.2-2' }}</span>
     }
   </div>
+  @if (share().count > 1) {
+    @if (perPersonMoney(); as perPersonAmount) {
+      <div style="gap: var(--var-space-2);">
+        <div class="figures per-person-line">
+          <span class="per-person-label">Total {{explanation().relationship}}:</span>
+          <span class="per-person-money">{{ share().count }}</span>
+        </div>
+
+        <div class="figures per-person-line">
+          <span class="per-person-label">Each inherits:</span>
+          <span class="per-person-money">PKR {{ perPersonAmount | number: '1.2-2' }}</span>
+        </div>
+      </div>
+    }
+  }
 
   <p class="reason">{{ detailed() ? explanation().detailed : explanation().simple }}</p>
 
