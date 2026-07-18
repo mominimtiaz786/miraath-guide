@@ -10,7 +10,7 @@ import { AppIconComponent } from '../../icons/app-icon.component';
   imports: [AppIconComponent],
   template: `
     <button type="button" class="btn btn-primary" (click)="download()">
-      <app-icon name="Download" [size]="18" />
+      <app-icon name="Download" [size]="18" color="var(--color-on-primary)" />
       Download PDF Report
     </button>
   `,
