@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://miraath-guide.islamictools.app/sitemap.xml
