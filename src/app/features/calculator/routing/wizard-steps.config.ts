@@ -16,7 +16,7 @@ export interface WizardStepDefinition {
   isAnswered: (answers: CalculatorAnswers) => boolean;
 }
 
-const isCount = (value: number | null): value is number => value != null;
+const isCountOrDefault = (value: number | null): boolean => value == null || value >= 0;
 
 /** Implements the exact conditional flow in spec section 13. Order matters. */
 export const WIZARD_STEPS: WizardStepDefinition[] = [
@@ -36,7 +36,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
     id: 'wivesCount',
     section: 'immediateFamily',
     isVisible: (ctx) => ctx.answers.deceasedGender === 'male',
-    isAnswered: (a) => isCount(a.wivesCount),
+    isAnswered: (a) => isCountOrDefault(a.wivesCount),
   },
   {
     id: 'hasDescendants',
@@ -66,25 +66,25 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
     id: 'grandmothersCount',
     section: 'immediateFamily',
     isVisible: (ctx) => ctx.answers.motherAlive === false,
-    isAnswered: (a) => isCount(a.grandmothersCount),
+    isAnswered: (a) => isCountOrDefault(a.grandmothersCount),
   },
   {
     id: 'sonsCount',
     section: 'childrenDescendants',
     isVisible: (ctx) => ctx.answers.hasDescendants === true,
-    isAnswered: (a) => isCount(a.sonsCount) || a.sonsCount === 0,
+    isAnswered: (a) => isCountOrDefault(a.sonsCount),
   },
   {
     id: 'daughtersCount',
     section: 'childrenDescendants',
     isVisible: (ctx) => ctx.answers.hasDescendants === true,
-    isAnswered: (a) => isCount(a.daughtersCount) || a.daughtersCount === 0,
+    isAnswered: (a) => isCountOrDefault(a.daughtersCount),
   },
   {
     id: 'paternalGrandsonsCount',
     section: 'childrenDescendants',
     isVisible: (ctx) => ctx.answers.hasDescendants === true && ctx.answers.sonsCount === 0,
-    isAnswered: (a) => isCount(a.paternalGrandsonsCount) || a.paternalGrandsonsCount === 0,
+    isAnswered: (a) => isCountOrDefault(a.paternalGrandsonsCount),
   },
   {
     id: 'paternalGranddaughtersCount',
@@ -93,31 +93,31 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.hasDescendants === true &&
       ctx.answers.sonsCount === 0 &&
       (ctx.answers.paternalGrandsonsCount > 0 || ctx.answers.daughtersCount <= 1),
-    isAnswered: (a) => isCount(a.paternalGranddaughtersCount) || a.paternalGranddaughtersCount === 0,
+    isAnswered: (a) => isCountOrDefault(a.paternalGranddaughtersCount),
   },
   {
     id: 'siblingsForMotherShareCount',
     section: 'siblings',
     isVisible: (ctx) => ctx.facts.fatherFigure && ctx.answers.motherAlive === true && !ctx.facts.anyDescendant,
-    isAnswered: (a) => isCount(a.siblingsForMotherShareCount),
+    isAnswered: (a) => isCountOrDefault(a.siblingsForMotherShareCount),
   },
   {
     id: 'fullBrothersCount',
     section: 'siblings',
     isVisible: (ctx) => !ctx.facts.fatherFigure && !ctx.facts.maleDescendant,
-    isAnswered: (a) => a.fullBrothersCount >= 0 && a.fullBrothersCount !== null,
+    isAnswered: (a) => isCountOrDefault(a.fullBrothersCount),
   },
   {
     id: 'fullSistersCount',
     section: 'siblings',
     isVisible: (ctx) => !ctx.facts.fatherFigure && !ctx.facts.maleDescendant,
-    isAnswered: (a) => a.fullSistersCount != null,
+    isAnswered: (a) => isCountOrDefault(a.fullSistersCount),
   },
   {
     id: 'maternalSiblingsCount',
     section: 'siblings',
     isVisible: (ctx) => !ctx.facts.fatherFigure && !ctx.facts.maleDescendant && !ctx.facts.anyDescendant,
-    isAnswered: (a) => a.maternalSiblingsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.maternalSiblingsCount),
   },
   {
     id: 'paternalHalfBrothersCount',
@@ -127,7 +127,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       !ctx.facts.maleDescendant &&
       ctx.answers.fullBrothersCount === 0 &&
       !(ctx.answers.fullSistersCount > 0 && ctx.facts.femaleDescendant),
-    isAnswered: (a) => a.paternalHalfBrothersCount != null,
+    isAnswered: (a) => isCountOrDefault(a.paternalHalfBrothersCount),
   },
   {
     id: 'paternalHalfSistersCount',
@@ -138,25 +138,25 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.fullBrothersCount === 0 &&
       !(ctx.answers.fullSistersCount > 0 && ctx.facts.femaleDescendant) &&
       (ctx.answers.paternalHalfBrothersCount > 0 || ctx.answers.fullSistersCount <= 1),
-    isAnswered: (a) => a.paternalHalfSistersCount != null,
+    isAnswered: (a) => isCountOrDefault(a.paternalHalfSistersCount),
   },
   {
     id: 'fullNephewsCount',
     section: 'extendedFamily',
     isVisible: (ctx) => ctx.chainOpen,
-    isAnswered: (a) => a.fullNephewsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.fullNephewsCount),
   },
   {
     id: 'halfNephewsCount',
     section: 'extendedFamily',
     isVisible: (ctx) => ctx.chainOpen && ctx.answers.fullNephewsCount === 0,
-    isAnswered: (a) => a.halfNephewsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.halfNephewsCount),
   },
   {
     id: 'fullNephewsSonsCount',
     section: 'extendedFamily',
     isVisible: (ctx) => ctx.chainOpen && ctx.answers.fullNephewsCount === 0 && ctx.answers.halfNephewsCount === 0,
-    isAnswered: (a) => a.fullNephewsSonsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.fullNephewsSonsCount),
   },
   {
     id: 'halfNephewsSonsCount',
@@ -166,7 +166,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.fullNephewsCount === 0 &&
       ctx.answers.halfNephewsCount === 0 &&
       ctx.answers.fullNephewsSonsCount === 0,
-    isAnswered: (a) => a.halfNephewsSonsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.halfNephewsSonsCount),
   },
   {
     id: 'fullUnclesCount',
@@ -177,7 +177,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.halfNephewsCount === 0 &&
       ctx.answers.fullNephewsSonsCount === 0 &&
       ctx.answers.halfNephewsSonsCount === 0,
-    isAnswered: (a) => a.fullUnclesCount != null,
+    isAnswered: (a) => isCountOrDefault(a.fullUnclesCount),
   },
   {
     id: 'halfUnclesCount',
@@ -189,7 +189,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.fullNephewsSonsCount === 0 &&
       ctx.answers.halfNephewsSonsCount === 0 &&
       ctx.answers.fullUnclesCount === 0,
-    isAnswered: (a) => a.halfUnclesCount != null,
+    isAnswered: (a) => isCountOrDefault(a.halfUnclesCount),
   },
   {
     id: 'fullCousinsCount',
@@ -202,7 +202,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.halfNephewsSonsCount === 0 &&
       ctx.answers.fullUnclesCount === 0 &&
       ctx.answers.halfUnclesCount === 0,
-    isAnswered: (a) => a.fullCousinsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.fullCousinsCount),
   },
   {
     id: 'halfCousinsCount',
@@ -216,7 +216,7 @@ export const WIZARD_STEPS: WizardStepDefinition[] = [
       ctx.answers.fullUnclesCount === 0 &&
       ctx.answers.halfUnclesCount === 0 &&
       ctx.answers.fullCousinsCount === 0,
-    isAnswered: (a) => a.halfCousinsCount != null,
+    isAnswered: (a) => isCountOrDefault(a.halfCousinsCount),
   },
   {
     id: 'estateValue',

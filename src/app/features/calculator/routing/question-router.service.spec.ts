@@ -92,6 +92,13 @@ describe('QuestionRouterService', () => {
     expect(router.getVisibleSteps(answers)).toContain('fullNephewsCount');
   });
 
+  it('treats zero as an answered default for count-based steps', () => {
+    const answers = createEmptyAnswers();
+    expect(router.isAnswered('wivesCount', answers)).toBeTrue();
+    expect(router.isAnswered('grandmothersCount', answers)).toBeTrue();
+    expect(router.isAnswered('siblingsForMotherShareCount', answers)).toBeTrue();
+  });
+
   it('always includes the estate step as the final question and treats it as answered', () => {
     const answers = { ...createEmptyAnswers(), deceasedGender: 'male' as const, hasDescendants: false };
     const visible = router.getVisibleSteps(answers);
