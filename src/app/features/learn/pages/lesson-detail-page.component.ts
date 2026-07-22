@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
+import { SeoService } from '../../../core/seo/seo.service';
 import { LESSONS } from '../../../data/lessons/lessons.data';
 
 @Component({
@@ -16,6 +17,7 @@ import { LESSONS } from '../../../data/lessons/lessons.data';
 })
 export class LessonDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly seo = inject(SeoService);
 
   private readonly slug = toSignal(this.route.paramMap.pipe(map((params) => params.get('slug'))), {
     initialValue: null,
@@ -30,4 +32,22 @@ export class LessonDetailPageComponent {
     }
     return LESSONS.find((l) => l.number === current.number + 1) ?? null;
   });
+
+  constructor() {
+    effect(() => {
+      const current = this.lesson();
+      const title = current
+        ? `${current.title} | Learn Faraid | Miraath Guide`
+        : 'Lesson Not Found | Miraath Guide';
+      const description = current
+        ? current.summary
+        : "This lesson couldn't be found. Browse other Faraid lessons on Miraath Guide.";
+      this.seo.update({
+        title,
+        description,
+        canonicalPath: `/learn/${this.slug() ?? ''}`,
+        robots: current ? undefined : 'noindex, follow',
+      });
+    });
+  }
 }

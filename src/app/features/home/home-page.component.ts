@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { StructuredDataService } from '../../core/seo/structured-data.service';
 import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading.component';
 import { IconFeatureCardComponent } from '../../shared/components/icon-feature-card/icon-feature-card.component';
 import { ProcessStepComponent } from '../../shared/components/process-step/process-step.component';
@@ -36,7 +37,39 @@ import { LESSONS } from '../../data/lessons/lessons.data';
   styleUrl: './home-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnDestroy {
+  private readonly structuredData = inject(StructuredDataService);
+
+  constructor() {
+    this.structuredData.set('website', {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Miraath Guide',
+      url: 'https://miraath-guide.islamictools.app/',
+      description: 'An educational Islamic inheritance calculator based on the principles of Ilm al-Faraid.',
+    });
+    this.structuredData.set('app', {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'Miraath Guide',
+      url: 'https://miraath-guide.islamictools.app/',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Any',
+      description:
+        'An educational Islamic inheritance calculator that helps users understand inheritance shares under the principles of Ilm al-Faraid.',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.structuredData.remove('website');
+    this.structuredData.remove('app');
+  }
+
   // Matches the "Wife, one son and one daughter" common case exactly (1/8 + 7/12 + 7/24 = 1).
   protected readonly previewChart = [
     { label: 'Wife (1/8)', fraction: Fraction.of(1, 8) },
