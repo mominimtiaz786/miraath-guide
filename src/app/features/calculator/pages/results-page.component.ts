@@ -1,5 +1,5 @@
-import { UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { UpperCasePipe, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareCardComponent } from '../../../shared/components/share-card/share-card.component';
 import { BlockedHeirCardComponent } from '../../../shared/components/blocked-heir-card/blocked-heir-card.component';
@@ -35,6 +35,7 @@ export class ResultsPageComponent {
   protected readonly store = inject(CalculatorStore);
   private readonly explanationEngine = inject(ExplanationEngine);
   private readonly router = inject(Router);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   protected readonly activeTab = signal<ResultTab>('simple');
 
@@ -64,7 +65,9 @@ export class ResultsPageComponent {
   }
 
   print(): void {
-    window.print();
+    if (this.isBrowser) {
+      window.print();
+    }
   }
 
   startAnother(): void {
