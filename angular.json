@@ -41,7 +41,16 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "security": {
+              "allowedHosts": ["miraath-guide.islamictools.app"]
+            },
+            "outputMode": "server",
+            "prerender": true,
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {

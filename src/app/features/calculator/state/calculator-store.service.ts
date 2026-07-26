@@ -1,4 +1,5 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { CalculationEngineService } from '../engine/calculation-engine.service';
 import { deriveFacts } from '../engine/derive-facts';
 import { CalculatorAnswers, createEmptyAnswers } from '../models/calculator-answers.model';
@@ -16,6 +17,7 @@ const SESSION_STORAGE_KEY = 'mirath-guide.wizard-answers';
 export class CalculatorStore {
   private readonly router = inject(QuestionRouterService);
   private readonly engine = inject(CalculationEngineService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly initialState = this.readPersistedState();
   private readonly answers_ = signal<CalculatorAnswers>(this.initialState.answers);
@@ -103,6 +105,9 @@ export class CalculatorStore {
     this.currentStepId_.set(this.router.getFirstStep(empty));
     this.result_.set(null);
     this.calculationErrors_.set([]);
+    if (!this.isBrowser) {
+      return;
+    }
     try {
       sessionStorage.removeItem(SESSION_STORAGE_KEY);
     } catch {
@@ -120,6 +125,9 @@ export class CalculatorStore {
   }
 
   private persist(): void {
+    if (!this.isBrowser) {
+      return;
+    }
     try {
       sessionStorage.setItem(
         SESSION_STORAGE_KEY,
@@ -131,6 +139,10 @@ export class CalculatorStore {
   }
 
   private readPersistedState(): { answers: CalculatorAnswers; stepId: WizardStepId } {
+    if (!this.isBrowser) {
+      const answers = createEmptyAnswers();
+      return { answers, stepId: this.router.getFirstStep(answers) };
+    }
     try {
       const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
       if (raw) {
