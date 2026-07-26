@@ -36,6 +36,7 @@
 }
 
 .process-card {
+  margin-top: var(--space-8);
   background: var(--color-bg-ivory);
   border-radius: var(--radius-lg);
 }
