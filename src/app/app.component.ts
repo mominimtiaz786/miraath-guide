@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
 import { AppFooterComponent } from './core/layout/app-footer/app-footer.component';
 import { AppHeaderComponent } from './core/layout/app-header/app-header.component';
+import { SeoService } from './core/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,9 @@ import { AppHeaderComponent } from './core/layout/app-header/app-header.componen
 })
 export class AppComponent {
   private readonly router = inject(Router);
+  // Injected purely to trigger its constructor, which subscribes to router
+  // navigation and keeps title/meta/canonical tags in sync (spec section 6).
+  private readonly seo = inject(SeoService);
 
   // The wizard is a distinct, focused, full-screen experience with its own
   // compact header (spec section 12) - the standard site chrome is hidden

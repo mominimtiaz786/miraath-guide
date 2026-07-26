@@ -42,6 +42,21 @@
   gap: var(--space-3);
 }
 
+.urdu-note {
+  margin-top: var(--space-4);
+  max-width: 560px;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-helper);
+}
+
+.section-intro {
+  max-width: var(--content-width);
+  margin: var(--space-3) auto 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-body-lg);
+}
+
 .chip {
   display: inline-flex;
   align-items: center;
