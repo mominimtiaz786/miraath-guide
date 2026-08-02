@@ -10,6 +10,9 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Beginner',
     readingMinutes: 6,
     summary: 'Introduction to Faraid, its sources, principles, and key terminology.',
+    metaTitle: 'Foundations of Inheritance | Miraath Guide',
+    metaDescription:
+      'Learn the foundations of Islamic inheritance, including Faraid, fixed shares, and the basic structure of inheritance law.',
     relatedGlossaryTerms: ['Faraid', 'Mirath', 'Ashab al-Furud', 'Asabah'],
     sections: [
       {
@@ -35,6 +38,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Core Topic',
     readingMinutes: 5,
     summary: 'Identify estate components, debts, wasiyyah, and expenses before distribution.',
+    metaDescription:
+      'Understand what must be settled before distributing an estate, including debts, funeral costs, bequests, and the distributable estate.',
     relatedGlossaryTerms: ['Mirath', 'Wasiyyah'],
     sections: [
       {
@@ -60,6 +65,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Core Topic',
     readingMinutes: 5,
     summary: 'Shares of husbands and wives, with and without children.',
+    metaDescription:
+      'See how husband and wife shares are assigned in Faraid, including cases with and without children.',
     relatedGlossaryTerms: ['Ashab al-Furud'],
     sections: [
       {
@@ -85,6 +92,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Core Topic',
     readingMinutes: 7,
     summary: 'Shares and rules for parents and ascendants in inheritance.',
+    metaDescription:
+      'Learn how mothers, fathers, grandmothers, and grandfathers inherit under Islamic inheritance rules.',
     relatedGlossaryTerms: ['Ashab al-Furud', 'Asabah', 'Umariyyatayn'],
     sections: [
       {
@@ -114,6 +123,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Core Topic',
     readingMinutes: 7,
     summary: "Shares of sons, daughters, and their children in different cases.",
+    metaDescription:
+      'Explore the inheritance shares of sons, daughters, and grandchildren under the rules of Faraid.',
     relatedGlossaryTerms: ['Ashab al-Furud', 'Asabah'],
     sections: [
       {
@@ -139,6 +150,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Intermediate',
     readingMinutes: 8,
     summary: 'Rules for siblings, uterine siblings, and their inheritance rights.',
+    metaDescription:
+      'Understand how full siblings, paternal half-siblings, and maternal siblings inherit in different cases.',
     relatedGlossaryTerms: ['Kalalah', 'Hajb', "Asabah ma'a al-ghayr"],
     sections: [
       {
@@ -172,6 +185,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Core Topic',
     readingMinutes: 6,
     summary: 'Understand the types of blocking rules and how heirs can be excluded.',
+    metaDescription:
+      'Learn what Hajb means, how blocking rules exclude or reduce inheritances, and when they apply.',
     relatedGlossaryTerms: ['Hajb'],
     sections: [
       {
@@ -197,6 +212,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Intermediate',
     readingMinutes: 6,
     summary: 'What is kalalah and how inheritance is resolved in its cases.',
+    metaDescription:
+      'Discover the meaning of Kalalah and how inheritance is distributed when no father or descendants survive.',
     relatedGlossaryTerms: ['Kalalah'],
     sections: [
       {
@@ -222,6 +239,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Advanced',
     readingMinutes: 6,
     summary: 'When total shares exceed the estate and how Awl adjusts the fractions.',
+    metaDescription:
+      'See how Awl adjusts fixed shares when the total of the inherited portions exceeds the estate.',
     relatedGlossaryTerms: ['Awl'],
     sections: [
       {
@@ -247,6 +266,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Advanced',
     readingMinutes: 6,
     summary: 'When there is a remainder and how it is returned to eligible heirs.',
+    metaDescription:
+      'Learn how Radd returns surplus shares to eligible heirs when no residuary heir exists to receive them.',
     relatedGlossaryTerms: ['Radd'],
     sections: [
       {
@@ -272,6 +293,8 @@ export const LESSONS: Lesson[] = [
     difficulty: 'Case-Based',
     readingMinutes: 10,
     summary: 'Step-by-step solved cases to strengthen understanding and build confidence.',
+    metaDescription:
+      'Work through practical inheritance scenarios and see how Faraid rules are applied in real examples.',
     relatedGlossaryTerms: ['Awl', 'Radd', 'Umariyyatayn', "Asabah ma'a al-ghayr"],
     sections: [
       {

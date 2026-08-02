@@ -21,6 +21,8 @@ export interface Lesson {
   category: LessonCategory;
   icon: AppIconName;
   summary: string;
+  metaTitle?: string;
+  metaDescription?: string;
   difficulty: LessonDifficulty;
   readingMinutes: number;
   sections: LessonSection[];
