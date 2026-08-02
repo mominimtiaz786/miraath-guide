@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "node scripts/generate-sitemap.mjs && ng build && node scripts/postprocess-prerender.mjs",
+    "watch": "node scripts/generate-sitemap.mjs && ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "serve:ssr:mirath-guide": "NG_ALLOWED_HOSTS=localhost node dist/mirath-guide/server/server.mjs"

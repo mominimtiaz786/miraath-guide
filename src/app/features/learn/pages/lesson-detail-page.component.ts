@@ -6,6 +6,7 @@ import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
 import { SeoService } from '../../../core/seo/seo.service';
 import { LESSONS } from '../../../data/lessons/lessons.data';
+import { getLessonSeoData } from '../../../data/lessons/lesson-seo.util';
 
 @Component({
   selector: 'app-lesson-detail-page',
@@ -36,18 +37,8 @@ export class LessonDetailPageComponent {
   constructor() {
     effect(() => {
       const current = this.lesson();
-      const title = current
-        ? `${current.title} | Learn Faraid | Miraath Guide`
-        : 'Lesson Not Found | Miraath Guide';
-      const description = current
-        ? current.summary
-        : "This lesson couldn't be found. Browse other Faraid lessons on Miraath Guide.";
-      this.seo.update({
-        title,
-        description,
-        canonicalPath: `/learn/${this.slug() ?? ''}`,
-        robots: current ? undefined : 'noindex, follow',
-      });
+      const seoData = getLessonSeoData(current, this.slug());
+      this.seo.update(seoData);
     });
   }
 }

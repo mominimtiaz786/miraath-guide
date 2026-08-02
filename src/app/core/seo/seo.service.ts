@@ -53,8 +53,10 @@ export class SeoService {
     this.setProperty('og:url', canonicalUrl);
     if (data.ogImage) {
       this.setProperty('og:image', this.absoluteUrl(data.ogImage));
+      this.setTag('twitter:image', this.absoluteUrl(data.ogImage));
     } else {
       this.meta.removeTag('property="og:image"');
+      this.meta.removeTag('name="twitter:image"');
     }
 
     this.setTag('twitter:card', data.twitterCard ?? 'summary_large_image');
