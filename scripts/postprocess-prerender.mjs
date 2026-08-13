@@ -55,4 +55,18 @@ for (const slug of slugs) {
   console.log(`Injected SEO meta into ${htmlPath}`);
 }
 
+// Angular prerenders the not-found page to `404/index.html`. Vercel's static
+// hosting looks for a root-level `404.html` (referenced by vercel.json) when a
+// request matches no file, so mirror it there. Without this, unmatched URLs
+// fall back to the homepage with a 200 - a soft 404 that search engines index
+// as duplicate homepage content.
+const notFoundSource = resolve(distBrowserRoot, '404', 'index.html');
+const notFoundTarget = resolve(distBrowserRoot, '404.html');
+if (existsSync(notFoundSource)) {
+  writeFileSync(notFoundTarget, readFileSync(notFoundSource, 'utf8'), 'utf8');
+  console.log(`Copied 404 page to ${notFoundTarget}`);
+} else {
+  console.warn(`Missing prerendered 404 page: ${notFoundSource}`);
+}
+
 console.log('Postprocess complete.');
