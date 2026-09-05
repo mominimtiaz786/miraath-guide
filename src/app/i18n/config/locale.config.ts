@@ -21,7 +21,7 @@ export const SUPPORTED_LOCALES: Record<AppLocale, LocaleDefinition> = {
     urlPrefix: '/ur',
     htmlLang: 'ur',
     ogLocale: 'ur_PK',
-    fontClass: 'font-arabic',
+    fontClass: 'font-urdu',
   },
   hi: {
     code: 'hi',

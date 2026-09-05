@@ -166,6 +166,8 @@ export const AR_TRANSLATIONS = {
     lessonLabel: 'درس',
     relatedTerms: 'مصطلحات مرتبطة',
     tryCalculator: 'جرّبه في الحاسبة',
+    featuredLesson: 'درس مميز',
+    videoLesson: 'درس مرئي',
     next: 'التالي',
     notFound: 'لم يتم العثور على هذا الدرس.',
     backToLearn: 'العودة إلى تعلّم الفرائض',
@@ -185,6 +187,11 @@ export const AR_TRANSLATIONS = {
     tryScenario: 'جرّب هذه الحالة في الحاسبة',
   },
   glossaryPage: { eyebrow: 'المصطلحات', heading: 'مصطلحات الفرائض', body: 'مصطلحات أساسية مستخدمة في Miraath Guide مع transliteration عند الحاجة.' },
+  methodologyPage: {
+    chips: ['المنهج الحنفي', 'تنفيذ مرجعي موثق', 'تعليل واضح', 'لا يلزم حساب'],
+    inherits: 'يرث',
+    blocked: 'محجوب',
+  },
   staticPages: {
     about: {
       eyebrow: 'عن الموقع',

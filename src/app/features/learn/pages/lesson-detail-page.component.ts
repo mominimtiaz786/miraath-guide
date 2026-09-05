@@ -7,6 +7,7 @@ import { PrimaryButtonComponent } from '../../../shared/components/primary-butto
 import { SeoService } from '../../../core/seo/seo.service';
 import { getLessonSeoData } from '../../../data/lessons/lesson-seo.util';
 import { LessonRepository } from '../../../data/lessons/lesson.repository';
+import { GlossaryRepository } from '../../../data/glossary/glossary.repository';
 import { LocaleUrlService } from '../../../i18n/locale-url.service';
 import { TranslationService } from '../../../i18n/translation.service';
 
@@ -22,6 +23,7 @@ export class LessonDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly seo = inject(SeoService);
   private readonly lessons = inject(LessonRepository);
+  private readonly glossary = inject(GlossaryRepository);
   protected readonly i18n = inject(TranslationService);
   protected readonly localeUrl = inject(LocaleUrlService);
 
@@ -30,6 +32,7 @@ export class LessonDetailPageComponent {
   });
 
   protected readonly lesson = computed(() => this.lessons.findBySlug(this.slug()));
+  protected readonly relatedTerms = computed(() => this.lesson()?.relatedGlossaryTerms.map((term) => this.glossary.labelFor(term)) ?? []);
 
   protected readonly nextLesson = computed(() => {
     const current = this.lesson();

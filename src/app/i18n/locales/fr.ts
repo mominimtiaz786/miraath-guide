@@ -167,6 +167,8 @@ export const FR_TRANSLATIONS = {
     lessonLabel: 'Leçon',
     relatedTerms: 'Termes associés',
     tryCalculator: 'Essayer dans le calculateur',
+    featuredLesson: 'Leçon vedette',
+    videoLesson: 'Leçon vidéo',
     next: 'Suivant',
     notFound: "Cette leçon est introuvable.",
     backToLearn: 'Retour à Apprendre les Faraid',
@@ -186,6 +188,11 @@ export const FR_TRANSLATIONS = {
     tryScenario: 'Essayer ce scénario dans le calculateur',
   },
   glossaryPage: { eyebrow: 'GLOSSAIRE', heading: 'Glossaire des Faraid', body: 'Les termes clés utilisés dans Miraath Guide, avec translittération lorsque c’est utile.' },
+  methodologyPage: {
+    chips: ['Méthode hanafite', 'Implémentation de référence vérifiée', 'Raisonnement clair', 'Aucun compte requis'],
+    inherits: 'Hérite',
+    blocked: 'Exclu',
+  },
   staticPages: {
     about: {
       eyebrow: 'À PROPOS',

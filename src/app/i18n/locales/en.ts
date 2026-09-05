@@ -341,6 +341,8 @@ export const EN_TRANSLATIONS = {
     lessonLabel: 'Lesson',
     relatedTerms: 'Related terms',
     tryCalculator: 'Try it in the calculator',
+    featuredLesson: 'Featured Lesson',
+    videoLesson: 'Video Lesson',
     next: 'Next',
     notFound: "We couldn't find that lesson.",
     backToLearn: 'Back to Learn Faraid',
@@ -386,6 +388,11 @@ export const EN_TRANSLATIONS = {
     eyebrow: 'GLOSSARY',
     heading: 'Faraid glossary',
     body: 'Key terms used throughout Miraath Guide, with transliteration where helpful.',
+  },
+  methodologyPage: {
+    chips: ['Hanafi methodology', 'Reference-implementation verified', 'Clear reasoning', 'No login required'],
+    inherits: 'Inherits',
+    blocked: 'Blocked',
   },
   staticPages: {
     about: {

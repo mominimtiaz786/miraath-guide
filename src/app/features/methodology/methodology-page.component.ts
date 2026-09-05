@@ -28,4 +28,5 @@ export class MethodologyPageComponent {
   protected readonly i18n = inject(TranslationService);
   protected readonly localeUrl = inject(LocaleUrlService);
   protected readonly sources = Object.values(SOURCE_REFERENCES);
+  protected readonly methodologyChips = () => this.i18n.value<string[]>('methodologyPage.chips');
 }

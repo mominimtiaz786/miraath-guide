@@ -20,9 +20,12 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-[dir='rtl'],
+[dir='rtl'] {
+  font-family: var(--font-arabic-body);
+}
+
 .lang-ur {
-  font-family: var(--font-urdu);
+  font-family: var(--font-urdu-body);
 }
 
 h1,

@@ -22,7 +22,7 @@
       <section class="related">
         <h2>{{ i18n.t('learnPage.relatedTerms') }}</h2>
         <div class="chips">
-          @for (term of l.relatedGlossaryTerms; track term) {
+        @for (term of relatedTerms(); track term) {
             <a class="chip" [routerLink]="localeUrl.localize('/glossary')">{{ term }}</a>
           }
         </div>

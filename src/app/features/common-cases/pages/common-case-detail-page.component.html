@@ -71,7 +71,7 @@
     <section>
       <h2>{{ i18n.t('commonCasesPage.relatedConcepts') }}</h2>
       <div class="chips">
-        @for (concept of c.relatedConcepts; track concept) {
+        @for (concept of relatedConcepts(); track concept) {
           <span class="chip">{{ concept }}</span>
         }
       </div>

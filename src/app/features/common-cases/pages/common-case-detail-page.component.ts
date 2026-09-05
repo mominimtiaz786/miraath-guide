@@ -8,6 +8,7 @@ import { PrimaryButtonComponent } from '../../../shared/components/primary-butto
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { SeoService } from '../../../core/seo/seo.service';
 import { CommonCaseRepository } from '../../../data/common-cases/common-case.repository';
+import { GlossaryRepository } from '../../../data/glossary/glossary.repository';
 import { LocaleUrlService } from '../../../i18n/locale-url.service';
 import { TranslationService } from '../../../i18n/translation.service';
 
@@ -23,6 +24,7 @@ export class CommonCaseDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly seo = inject(SeoService);
   private readonly commonCases = inject(CommonCaseRepository);
+  private readonly glossary = inject(GlossaryRepository);
   protected readonly i18n = inject(TranslationService);
   protected readonly localeUrl = inject(LocaleUrlService);
 
@@ -31,6 +33,7 @@ export class CommonCaseDetailPageComponent {
   });
 
   protected readonly case = computed(() => this.commonCases.findBySlug(this.slug()));
+  protected readonly relatedConcepts = computed(() => this.case()?.relatedConcepts.map((concept) => this.glossary.labelFor(concept)) ?? []);
 
   constructor() {
     effect(() => {

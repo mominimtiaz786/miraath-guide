@@ -4,10 +4,10 @@
   [body]="i18n.t('staticPages.methodology.body')"
 >
   <div class="trust-chips">
-    <span class="chip"><app-icon name="Scale" [size]="16" /> Hanafi methodology</span>
-    <span class="chip"><app-icon name="FileSearch" [size]="16" /> Reference-implementation verified</span>
-    <span class="chip"><app-icon name="FileText" [size]="16" /> Clear reasoning</span>
-    <span class="chip"><app-icon name="LockKeyhole" [size]="16" /> No login required</span>
+    <span class="chip"><app-icon name="Scale" [size]="16" /> {{ methodologyChips()[0] }}</span>
+    <span class="chip"><app-icon name="FileSearch" [size]="16" /> {{ methodologyChips()[1] }}</span>
+    <span class="chip"><app-icon name="FileText" [size]="16" /> {{ methodologyChips()[2] }}</span>
+    <span class="chip"><app-icon name="LockKeyhole" [size]="16" /> {{ methodologyChips()[3] }}</span>
   </div>
 </app-page-hero>
 
@@ -97,25 +97,25 @@
   <app-section-heading heading="5. How results are explained" [centered]="true" />
   <div class="grid grid-4">
     <div class="example-card">
-      <span class="tag inherit">Inherits</span>
+      <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
       <h4>Mother</h4>
       <p class="fraction numeric">1/6</p>
       <p class="reason">Fixed share - the deceased left children, so the mother receives one-sixth.</p>
     </div>
     <div class="example-card">
-      <span class="tag inherit">Inherits</span>
+      <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
       <h4>Wife</h4>
       <p class="fraction numeric">1/8</p>
       <p class="reason">Fixed share - the deceased left children, so the wife receives one-eighth.</p>
     </div>
     <div class="example-card">
-      <span class="tag inherit">Inherits</span>
+      <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
       <h4>Son</h4>
       <p class="fraction">Residue</p>
       <p class="reason">Residuary (Asabah) - the son takes the remainder after fixed shares.</p>
     </div>
     <div class="example-card blocked">
-      <span class="tag blocked">Blocked</span>
+      <span class="tag blocked">{{ i18n.t('methodologyPage.blocked') }}</span>
       <h4>Blocked heir</h4>
       <p class="fraction">-</p>
       <p class="reason">Does not inherit - excluded by a closer heir (hajb).</p>

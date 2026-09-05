@@ -6,16 +6,70 @@
 @import '@fontsource/noto-sans-arabic/600.css';
 @import '@fontsource/noto-sans-arabic/700.css';
 @import '@fontsource/noto-naskh-arabic/400.css';
+@import '@fontsource/noto-naskh-arabic/500.css';
 @import '@fontsource/noto-naskh-arabic/700.css';
+@import '@fontsource/noto-nastaliq-urdu/400.css';
+@import '@fontsource/noto-nastaliq-urdu/600.css';
+@import '@fontsource/noto-kufi-arabic/600.css';
+@import '@fontsource/noto-kufi-arabic/700.css';
 
 html.font-latin body {
-  font-family: var(--font-sans);
+  font-family: var(--font-latin);
+}
+
+html.font-urdu body {
+  font-family: var(--font-urdu-body);
+  line-height: 1.9;
+}
+
+html.font-urdu h1,
+html.font-urdu h2,
+html.font-urdu h3,
+html.font-urdu h4,
+html.font-urdu h5,
+html.font-urdu h6 {
+  font-family: var(--font-urdu-heading);
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+html.font-urdu button,
+html.font-urdu input,
+html.font-urdu select,
+html.font-urdu textarea,
+html.font-urdu .chip,
+html.font-urdu .tag,
+html.font-urdu .badge,
+html.font-urdu .eyebrow,
+html.font-urdu .nav-desktop,
+html.font-urdu .nav-mobile {
+  font-family: var(--font-urdu-ui);
 }
 
 html.font-arabic body {
-  font-family: 'Noto Sans Arabic', var(--font-sans);
+  font-family: var(--font-arabic-body);
+  line-height: 1.85;
+}
+
+html.font-arabic h1,
+html.font-arabic h2,
+html.font-arabic h3,
+html.font-arabic h4,
+html.font-arabic h5,
+html.font-arabic h6 {
+  font-family: var(--font-arabic-heading);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+html.font-arabic .eyebrow,
+html.font-arabic .badge,
+html.font-arabic .chip,
+html.font-arabic .tag {
+  font-family: var(--font-arabic-heading);
+  font-weight: 600;
 }
 
 html.font-devanagari body {
-  font-family: 'Noto Sans Devanagari', 'Nirmala UI', 'Mangal', var(--font-sans);
+  font-family: 'Noto Sans Devanagari', 'Nirmala UI', 'Mangal', var(--font-latin);
 }

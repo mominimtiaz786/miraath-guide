@@ -166,6 +166,8 @@ export const HI_TRANSLATIONS = {
     lessonLabel: 'पाठ',
     relatedTerms: 'संबंधित शब्द',
     tryCalculator: 'कैलकुलेटर में आज़माएँ',
+    featuredLesson: 'विशेष पाठ',
+    videoLesson: 'वीडियो पाठ',
     next: 'अगला',
     notFound: 'यह पाठ नहीं मिला।',
     backToLearn: 'Faraid सीखें पर वापस जाएँ',
@@ -185,6 +187,11 @@ export const HI_TRANSLATIONS = {
     tryScenario: 'इस स्थिति को कैलकुलेटर में आज़माएँ',
   },
   glossaryPage: { eyebrow: 'शब्दावली', heading: 'Faraid शब्दावली', body: 'Miraath Guide में उपयोग होने वाले प्रमुख शब्द, जहाँ उपयोगी हो वहाँ transliteration के साथ।' },
+  methodologyPage: {
+    chips: ['हनफ़ी कार्यप्रणाली', 'संदर्भ-कार्यान्वयन सत्यापित', 'स्पष्ट कारण', 'लॉगिन जरूरी नहीं'],
+    inherits: 'विरासत पाता है',
+    blocked: 'रोका गया',
+  },
   staticPages: {
     about: {
       eyebrow: 'परिचय',

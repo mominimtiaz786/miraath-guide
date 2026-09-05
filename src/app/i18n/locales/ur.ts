@@ -234,6 +234,8 @@ export const UR_TRANSLATIONS = {
     lessonLabel: 'سبق',
     relatedTerms: 'متعلقہ اصطلاحات',
     tryCalculator: 'کیلکولیٹر میں آزمائیں',
+    featuredLesson: 'نمایاں سبق',
+    videoLesson: 'ویڈیو سبق',
     next: 'اگلا',
     notFound: 'یہ سبق نہیں ملا۔',
     backToLearn: 'فرائض سیکھنے پر واپس جائیں',
@@ -267,6 +269,11 @@ export const UR_TRANSLATIONS = {
     eyebrow: 'اصطلاحات',
     heading: 'فرائض کی اصطلاحات',
     body: 'Miraath Guide میں استعمال ہونے والی اہم اصطلاحات، جہاں مناسب ہو transliteration کے ساتھ۔',
+  },
+  methodologyPage: {
+    chips: ['حنفی طریقہ کار', 'حوالہ جاتی عمل سے جانچ', 'واضح وجوہات', 'لاگ ان ضروری نہیں'],
+    inherits: 'وارث',
+    blocked: 'محروم',
   },
   staticPages: {
     about: {
