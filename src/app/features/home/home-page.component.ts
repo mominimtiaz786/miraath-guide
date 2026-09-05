@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, computed, inject } from '@angular/core';
 import { StructuredDataService } from '../../core/seo/structured-data.service';
 import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading.component';
 import { IconFeatureCardComponent } from '../../shared/components/icon-feature-card/icon-feature-card.component';
@@ -13,8 +13,10 @@ import { LessonCardComponent } from '../../shared/components/lesson-card/lesson-
 import { AppIconComponent } from '../../shared/icons/app-icon.component';
 import { RouterLink } from '@angular/router';
 import { Fraction } from '../../shared/utils/fraction';
-import { COMMON_CASES } from '../../data/common-cases/common-cases.data';
-import { LESSONS } from '../../data/lessons/lessons.data';
+import { CommonCaseRepository } from '../../data/common-cases/common-case.repository';
+import { LessonRepository } from '../../data/lessons/lesson.repository';
+import { LocaleUrlService } from '../../i18n/locale-url.service';
+import { TranslationService } from '../../i18n/translation.service';
 
 @Component({
   selector: 'app-home-page',
@@ -39,24 +41,27 @@ import { LESSONS } from '../../data/lessons/lessons.data';
 })
 export class HomePageComponent implements OnDestroy {
   private readonly structuredData = inject(StructuredDataService);
+  private readonly commonCases = inject(CommonCaseRepository);
+  private readonly lessons = inject(LessonRepository);
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
 
   constructor() {
     this.structuredData.set('website', {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Miraath Guide',
-      url: 'https://miraath-guide.islamictools.app/',
-      description: 'An educational Islamic inheritance calculator based on the principles of Ilm al-Faraid.',
+      url: `https://miraath-guide.islamictools.app${this.localeUrl.localize('/')}`,
+      description: this.i18n.t('home.body'),
     });
     this.structuredData.set('app', {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: 'Miraath Guide',
-      url: 'https://miraath-guide.islamictools.app/',
+      url: `https://miraath-guide.islamictools.app${this.localeUrl.localize('/')}`,
       applicationCategory: 'EducationalApplication',
       operatingSystem: 'Any',
-      description:
-        'An educational Islamic inheritance calculator that helps users understand inheritance shares under the principles of Ilm al-Faraid.',
+      description: this.i18n.t('home.body'),
       offers: {
         '@type': 'Offer',
         price: '0',
@@ -71,18 +76,21 @@ export class HomePageComponent implements OnDestroy {
   }
 
   // Matches the "Wife, one son and one daughter" common case exactly (1/8 + 7/12 + 7/24 = 1).
-  protected readonly previewChart = [
-    { label: 'Wife (1/8)', fraction: Fraction.of(1, 8) },
-    { label: 'Son (7/12)', fraction: Fraction.of(7, 12) },
-    { label: 'Daughter (7/24)', fraction: Fraction.of(7, 24) },
-  ];
+  protected readonly previewChart = computed(() => [
+    { label: this.i18n.t('heir.wife.singular') + ' (1/8)', fraction: Fraction.of(1, 8) },
+    { label: this.i18n.t('heir.son.singular') + ' (7/12)', fraction: Fraction.of(7, 12) },
+    { label: this.i18n.t('heir.daughter.singular') + ' (7/24)', fraction: Fraction.of(7, 24) },
+  ]);
 
-  protected readonly scenarioCases = [
-    COMMON_CASES.find((c) => c.slug === 'wife-son-daughter')!,
-    COMMON_CASES.find((c) => c.slug === 'wife-and-both-parents')!,
-    COMMON_CASES.find((c) => c.slug === 'two-daughters-with-parents')!,
-    COMMON_CASES.find((c) => c.slug === 'siblings-in-kalalah')!,
-  ];
+  protected readonly scenarioCases = () =>
+    ['wife-son-daughter', 'wife-and-both-parents', 'two-daughters-with-parents', 'siblings-in-kalalah']
+      .map((slug) => this.commonCases.findBySlug(slug))
+      .filter((commonCase) => commonCase !== null);
 
-  protected readonly featuredLessons = LESSONS.slice(0, 4);
+  protected readonly featuredLessons = () => this.lessons.lessons().slice(0, 4);
+  protected readonly homeChips = () => this.i18n.value<string[]>('home.chips');
+  protected readonly homeFeatures = () => this.i18n.value<string[][]>('home.features');
+  protected readonly homeSteps = () => this.i18n.value<string[][]>('home.steps');
+  protected readonly homeConcepts = () => this.i18n.value<string[][]>('home.concepts');
+  protected readonly trustItems = () => this.i18n.value<string[][]>('home.trustItems');
 }

@@ -9,6 +9,8 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync } from 'node:fs';
 import { LESSONS } from './app/data/lessons/lessons.data';
+import { COMMON_CASES } from './app/data/common-cases/common-cases.data';
+import { PREFIXED_LOCALE_CODES } from './app/i18n/config/locale.config';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -49,22 +51,31 @@ app.use(
 // serve the prerendered 404 page with an actual 404 status. This ensures
 // invalid lesson slugs do not render a false 200 with stale metadata.
 app.use((req, res, next) => {
-  const m = req.path.match(/^\/learn\/([^\/]+)\/?$/);
-  if (m) {
-    const slug = m[1];
-    const exists = LESSONS.some((l) => l.slug === slug);
-    if (!exists) {
-      const notFoundHtml = resolve(browserDistFolder, '404', 'index.html');
-      try {
-        const body = readFileSync(notFoundHtml, 'utf8');
-        res.status(404).type('html').send(body);
-        return;
-      } catch (e) {
-        // Fall through to Angular engine if reading the file fails.
-      }
-    }
+  const localePattern = `(?:${PREFIXED_LOCALE_CODES.join('|')})`;
+  const detailMatch = req.path.match(new RegExp(`^/(?:${localePattern}/)?(learn|common-cases)/([^/]+)/?$`));
+  if (!detailMatch) {
+    next();
+    return;
   }
-  next();
+
+  const [, section, slug] = detailMatch;
+  const exists =
+    section === 'learn'
+      ? LESSONS.some((lesson) => lesson.slug === slug)
+      : COMMON_CASES.some((commonCase) => commonCase.slug === slug);
+
+  if (exists) {
+    next();
+    return;
+  }
+
+  const notFoundHtml = resolve(browserDistFolder, '404', 'index.html');
+  try {
+    const body = readFileSync(notFoundHtml, 'utf8');
+    res.status(404).type('html').send(body);
+  } catch {
+    next();
+  }
 });
 
 /**

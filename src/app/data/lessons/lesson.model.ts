@@ -7,7 +7,7 @@ export type LessonCategory =
   | 'special-rules'
   | 'worked-examples';
 
-export type LessonDifficulty = 'Beginner' | 'Core Topic' | 'Intermediate' | 'Advanced' | 'Case-Based';
+export type LessonDifficulty = string;
 
 export interface LessonSection {
   heading: string;
@@ -15,6 +15,7 @@ export interface LessonSection {
 }
 
 export interface Lesson {
+  id: string;
   number: number;
   slug: string;
   title: string;

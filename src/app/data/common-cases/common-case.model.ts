@@ -14,6 +14,7 @@ export interface CommonCaseDetailSection {
 }
 
 export interface CommonCase {
+  id: string;
   number: number;
   slug: string;
   title: string;

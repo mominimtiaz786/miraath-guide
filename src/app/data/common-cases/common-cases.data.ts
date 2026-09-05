@@ -8,6 +8,7 @@ import { CommonCase } from './common-case.model';
  */
 export const COMMON_CASES: CommonCase[] = [
   {
+    id: 'wife-and-both-parents',
     number: 1,
     slug: 'wife-and-both-parents',
     title: 'Wife and both parents (Umariyyatayn)',
@@ -51,6 +52,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'wife-son-daughter',
     number: 2,
     slug: 'wife-son-daughter',
     title: 'Wife, one son and one daughter',
@@ -95,6 +97,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'parents-one-daughter',
     number: 3,
     slug: 'parents-one-daughter',
     title: 'Parents and one daughter',
@@ -138,6 +141,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'one-daughter-with-parents',
     number: 4,
     slug: 'one-daughter-with-parents',
     title: 'One daughter with parents',
@@ -182,6 +186,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'two-daughters-with-parents',
     number: 5,
     slug: 'two-daughters-with-parents',
     title: 'Two or more daughters with parents',
@@ -224,6 +229,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'siblings-in-kalalah',
     number: 6,
     slug: 'siblings-in-kalalah',
     title: 'Siblings in a Kalalah case',
@@ -265,6 +271,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'sister-with-a-daughter',
     number: 7,
     slug: 'sister-with-a-daughter',
     title: 'Sister with a daughter',
@@ -306,6 +313,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'mother-and-full-sisters',
     number: 8,
     slug: 'mother-and-full-sisters',
     title: 'Mother and full sisters',
@@ -347,6 +355,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'awl-example',
     number: 9,
     slug: 'awl-example',
     title: 'Awl (reduction) example',
@@ -391,6 +400,7 @@ export const COMMON_CASES: CommonCase[] = [
     },
   },
   {
+    id: 'radd-example',
     number: 10,
     slug: 'radd-example',
     title: 'Radd (remainder returned) example',

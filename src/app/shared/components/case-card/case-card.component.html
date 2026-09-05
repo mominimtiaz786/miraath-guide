@@ -11,8 +11,8 @@
       </div>
     }
   </dl>
-  <a class="text-link" [routerLink]="['/common-cases', case().slug]">
-    View case details
+  <a class="text-link" [routerLink]="localeUrl.localize('/common-cases/' + case().slug)">
+    {{ i18n.t('card.viewCaseDetails') }}
     <app-icon name="ArrowRight" [size]="16" />
   </a>
 </article>

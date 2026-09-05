@@ -13,3 +13,9 @@ export interface SeoData {
   twitterCard?: string;
   twitterDescription?: string;
 }
+
+export interface SeoApplyOptions {
+  seoKey?: string;
+  canonicalPath: string;
+  data?: Partial<SeoData>;
+}

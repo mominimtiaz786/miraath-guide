@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { SOURCE_REFERENCES } from '../../../data/sources/sources.data';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { SourceRepository } from '../../../data/sources/source.repository';
 import { AppIconComponent } from '../../icons/app-icon.component';
 
 @Component({
@@ -46,8 +46,9 @@ import { AppIconComponent } from '../../icons/app-icon.component';
 })
 export class SourceReferenceComponent {
   readonly sourceIds = input.required<string[]>();
+  private readonly sourceRepository = inject(SourceRepository);
 
   protected source(id: string) {
-    return SOURCE_REFERENCES[id];
+    return this.sourceRepository.findById(id);
   }
 }

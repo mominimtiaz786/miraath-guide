@@ -2,6 +2,7 @@ import { Lesson } from './lesson.model';
 
 export const LESSONS: Lesson[] = [
   {
+    id: 'foundations-of-inheritance',
     number: 1,
     slug: 'foundations-of-inheritance',
     title: 'Foundations of Inheritance',
@@ -30,6 +31,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'estate-before-distribution',
     number: 2,
     slug: 'estate-before-distribution',
     title: 'Estate Before Distribution',
@@ -57,6 +59,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'spouses-in-faraid',
     number: 3,
     slug: 'spouses-in-faraid',
     title: 'Spouses in Faraid',
@@ -84,6 +87,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'parents-and-grandparents',
     number: 4,
     slug: 'parents-and-grandparents',
     title: 'Parents and Grandparents',
@@ -115,6 +119,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'children-and-grandchildren',
     number: 5,
     slug: 'children-and-grandchildren',
     title: 'Children and Grandchildren',
@@ -142,6 +147,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'full-and-half-siblings',
     number: 6,
     slug: 'full-and-half-siblings',
     title: 'Full and Half Siblings',
@@ -177,6 +183,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'hajb',
     number: 7,
     slug: 'hajb',
     title: 'Hajb (Blocking)',
@@ -204,6 +211,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'kalalah',
     number: 8,
     slug: 'kalalah',
     title: 'Kalalah',
@@ -231,6 +239,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'awl',
     number: 9,
     slug: 'awl',
     title: 'Awl',
@@ -258,6 +267,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'radd',
     number: 10,
     slug: 'radd',
     title: 'Radd',
@@ -285,6 +295,7 @@ export const LESSONS: Lesson[] = [
     ],
   },
   {
+    id: 'worked-examples',
     number: 11,
     slug: 'worked-examples',
     title: 'Worked Examples',
