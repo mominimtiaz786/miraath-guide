@@ -16,4 +16,5 @@ import { TranslationService } from '../../i18n/translation.service';
 export class PrivacyPageComponent {
   protected readonly i18n = inject(TranslationService);
   protected readonly localeUrl = inject(LocaleUrlService);
+  protected readonly notDoItems = () => this.i18n.value<string[]>('privacyPage.notDo');
 }

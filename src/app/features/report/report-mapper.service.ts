@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SOURCE_REFERENCES } from '../../data/sources/sources.data';
+import { SourceRepository } from '../../data/sources/source.repository';
 import { CalculationResult } from '../calculator/models/calculation-result.model';
 import { ExplanationEngine } from '../calculator/engine/explanations/explanation-engine';
 import { heirLabel } from '../calculator/models/heir-labels';
@@ -12,6 +12,7 @@ const DISCLAIMER =
 @Injectable({ providedIn: 'root' })
 export class ReportMapperService {
   private readonly explanationEngine = inject(ExplanationEngine);
+  private readonly sourceRepository = inject(SourceRepository);
 
   map(result: CalculationResult): ReportModel {
     const eligibleExplanations = this.explanationEngine.buildEligibleExplanations(result.eligibleHeirs);
@@ -59,8 +60,8 @@ export class ReportMapperService {
       detailedSteps: result.detailedSteps,
       adjustments: result.adjustments.map((a) => a.description),
       sourceReferences: Array.from(sourceIds).map((id) => ({
-        label: SOURCE_REFERENCES[id]?.label ?? id,
-        translation: SOURCE_REFERENCES[id]?.translation ?? '',
+        label: this.sourceRepository.findById(id)?.label ?? id,
+        translation: this.sourceRepository.findById(id)?.translation ?? '',
       })),
       disclaimer: DISCLAIMER,
     };

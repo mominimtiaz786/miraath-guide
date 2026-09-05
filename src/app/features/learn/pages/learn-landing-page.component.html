@@ -8,10 +8,26 @@
 
 <section class="section">
   <div class="grid grid-4">
-    <app-icon-feature-card icon="BookOpen" heading="Structured learning path" description="Step-by-step from basics to mastery." />
-    <app-icon-feature-card icon="UsersRound" heading="Hanafi school" description="A single, documented methodology." />
-    <app-icon-feature-card icon="FileSearch" heading="Clear explanations" description="Plain language with real-world examples." />
-    <app-icon-feature-card icon="LockKeyhole" heading="No login required" description="Learn freely with no account needed." />
+    <app-icon-feature-card
+      icon="BookOpen"
+      [heading]="i18n.t('learnPage.highlights.pathHeading')"
+      [description]="i18n.t('learnPage.highlights.pathBody')"
+    />
+    <app-icon-feature-card
+      icon="UsersRound"
+      [heading]="i18n.t('learnPage.highlights.schoolHeading')"
+      [description]="i18n.t('learnPage.highlights.schoolBody')"
+    />
+    <app-icon-feature-card
+      icon="FileSearch"
+      [heading]="i18n.t('learnPage.highlights.clarityHeading')"
+      [description]="i18n.t('learnPage.highlights.clarityBody')"
+    />
+    <app-icon-feature-card
+      icon="LockKeyhole"
+      [heading]="i18n.t('learnPage.highlights.accessHeading')"
+      [description]="i18n.t('learnPage.highlights.accessBody')"
+    />
   </div>
 </section>
 
@@ -35,41 +51,61 @@
   <h2 class="centered-heading">{{ i18n.t('learnPage.pathHeading') }}</h2>
   <p class="centered-sub">{{ i18n.t('learnPage.pathSub') }}</p>
   <div class="path">
-    <app-process-step [index]="1" icon="FileText" heading="Understand the estate" description="Learn what makes up the distributable estate." />
-    <app-process-step [index]="2" icon="UsersRound" heading="Learn fixed-share heirs" description="Master the Qur'anic fixed fractions." />
-    <app-process-step [index]="3" icon="Network" heading="Learn residuary heirs" description="Understand the Asabah chain and blocking." />
-    <app-process-step [index]="4" icon="ShieldCheck" heading="Understand special rules" description="Awl, Radd, and Umariyyatayn." />
-    <app-process-step [index]="5" icon="BookOpenCheck" heading="Practice with examples" description="Apply everything to worked cases." />
+    <app-process-step
+      [index]="1"
+      icon="FileText"
+      [heading]="i18n.t('learnPage.steps.estateHeading')"
+      [description]="i18n.t('learnPage.steps.estateBody')"
+    />
+    <app-process-step
+      [index]="2"
+      icon="UsersRound"
+      [heading]="i18n.t('learnPage.steps.fixedHeading')"
+      [description]="i18n.t('learnPage.steps.fixedBody')"
+    />
+    <app-process-step
+      [index]="3"
+      icon="Network"
+      [heading]="i18n.t('learnPage.steps.residuaryHeading')"
+      [description]="i18n.t('learnPage.steps.residuaryBody')"
+    />
+    <app-process-step
+      [index]="4"
+      icon="ShieldCheck"
+      [heading]="i18n.t('learnPage.steps.specialHeading')"
+      [description]="i18n.t('learnPage.steps.specialBody')"
+    />
+    <app-process-step
+      [index]="5"
+      icon="BookOpenCheck"
+      [heading]="i18n.t('learnPage.steps.practiceHeading')"
+      [description]="i18n.t('learnPage.steps.practiceBody')"
+    />
   </div>
 </section>
 
 <section class="section ivory">
   <h2 class="centered-heading">{{ i18n.t('learnPage.featuredHeading') }}</h2>
   <div class="resources-grid">
-    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/hajb')">
-      <span class="tag">{{ i18n.t('learnPage.featuredLesson') }}</span>
-      <h3>Understanding Hajb (Blocking)</h3>
-      <p class="meta"><app-icon name="Clock" [size]="14" /> 10 min read</p>
-    </a>
-    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/kalalah')">
-      <span class="tag">{{ i18n.t('learnPage.featuredLesson') }}</span>
-      <h3>Kalalah: Cases and Solutions</h3>
-      <p class="meta"><app-icon name="Clock" [size]="14" /> 12 min read</p>
-    </a>
-    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/awl')">
-      <span class="tag">{{ i18n.t('learnPage.featuredLesson') }}</span>
-      <h3>Awl Explained Simply</h3>
-      <p class="meta"><app-icon name="Clock" [size]="14" /> 9 min read</p>
-    </a>
+    @for (lesson of featuredLessons(); track lesson.slug) {
+      <a class="resource-card" [routerLink]="localeUrl.localize('/learn/' + lesson.slug)">
+        <span class="tag">{{ i18n.t('learnPage.featuredLesson') }}</span>
+        <h3>{{ lesson.title }}</h3>
+        <p class="meta">
+          <app-icon name="Clock" [size]="14" />
+          {{ i18n.t('learnPage.featured.readMinutes', { minutes: lesson.readingMinutes }) }}
+        </p>
+      </a>
+    }
     <div class="resource-card video-card">
       <span class="tag">{{ i18n.t('learnPage.videoLesson') }}</span>
-      <h3>Introduction to Faraid</h3>
-      <p class="meta"><app-icon name="CirclePlay" [size]="14" /> Coming soon - placeholder</p>
+      <h3>{{ i18n.t('learnPage.featured.videoIntroTitle') }}</h3>
+      <p class="meta"><app-icon name="CirclePlay" [size]="14" /> {{ i18n.t('learnPage.featured.comingSoon') }}</p>
     </div>
     <div class="resource-card video-card">
       <span class="tag">{{ i18n.t('learnPage.videoLesson') }}</span>
-      <h3>Radd in Practice (Examples)</h3>
-      <p class="meta"><app-icon name="CirclePlay" [size]="14" /> Coming soon - placeholder</p>
+      <h3>{{ i18n.t('learnPage.featured.videoRaddTitle') }}</h3>
+      <p class="meta"><app-icon name="CirclePlay" [size]="14" /> {{ i18n.t('learnPage.featured.comingSoon') }}</p>
     </div>
   </div>
 </section>

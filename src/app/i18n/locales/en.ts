@@ -332,6 +332,34 @@ export const EN_TRANSLATIONS = {
     },
     pathHeading: 'Your learning path',
     pathSub: 'Follow this roadmap for a complete and confident understanding of Faraid.',
+    highlights: {
+      pathHeading: 'Structured learning path',
+      pathBody: 'Step-by-step from basics to mastery.',
+      schoolHeading: 'Hanafi school',
+      schoolBody: 'A single, documented methodology.',
+      clarityHeading: 'Clear explanations',
+      clarityBody: 'Plain language with real-world examples.',
+      accessHeading: 'No login required',
+      accessBody: 'Learn freely with no account needed.',
+    },
+    steps: {
+      estateHeading: 'Understand the estate',
+      estateBody: 'Learn what makes up the distributable estate.',
+      fixedHeading: 'Learn fixed-share heirs',
+      fixedBody: "Master the Qur'anic fixed fractions.",
+      residuaryHeading: 'Learn residuary heirs',
+      residuaryBody: 'Understand the Asabah chain and blocking.',
+      specialHeading: 'Understand special rules',
+      specialBody: 'Awl, Radd, and Umariyyatayn.',
+      practiceHeading: 'Practice with examples',
+      practiceBody: 'Apply everything to worked cases.',
+    },
+    featured: {
+      videoIntroTitle: 'Introduction to Faraid',
+      videoRaddTitle: 'Radd in Practice (Examples)',
+      readMinutes: '{{minutes}} min read',
+      comingSoon: 'Coming soon - placeholder',
+    },
     featuredHeading: 'Featured resources',
     termsHeading: 'Key terms in Faraid',
     fullGlossary: 'View full glossary',
@@ -354,6 +382,7 @@ export const EN_TRANSLATIONS = {
     bannerStrong: 'Shares are calculated according to the Hanafi school.',
     bannerBody: 'Examples are educational and not case-specific legal advice.',
     browse: 'Browse by category',
+    tabsAria: 'Case categories',
     tabs: {
       all: 'All Cases',
       'spouse-children': 'Spouse & Children',
@@ -393,6 +422,83 @@ export const EN_TRANSLATIONS = {
     chips: ['Hanafi methodology', 'Reference-implementation verified', 'Clear reasoning', 'No login required'],
     inherits: 'Inherits',
     blocked: 'Blocked',
+    overview: {
+      askHeading: 'Ask relevant questions',
+      askBody: 'A wizard asks only the questions that matter to this case.',
+      rulesHeading: 'Apply rules and blocking',
+      rulesBody: 'Hanafi rules identify eligible heirs and apply blocking (hajb).',
+      sharesHeading: 'Calculate shares',
+      sharesBody: 'Fixed shares, residue, Awl, and Radd are calculated precisely.',
+      explainHeading: 'Explain results',
+      explainBody: 'You see exact shares with reasons and source references.',
+    },
+    principlesHeading: '1. Our methodology principles',
+    principles: {
+      questionsHeading: 'Only relevant questions',
+      questionsBody: 'The wizard asks only about relatives who can affect the result.',
+      blockingHeading: 'Blocking rules applied',
+      blockingBody: 'Relatives blocked by closer heirs are automatically identified.',
+      sharesHeading: 'Fixed shares and residue',
+      sharesBody: 'Prescribed shares, residuary heirs, and remaining estate are calculated clearly.',
+      explanationsHeading: 'Transparent explanations',
+      explanationsBody: 'Every result includes why the heir inherits, their fraction, and the source logic.',
+    },
+    calculationHeading: '2. How the calculation works',
+    calculation: {
+      captureHeading: 'Capture family facts',
+      captureBody: 'You answer only relevant questions about the deceased and relatives.',
+      eligibleHeading: 'Determine eligible heirs',
+      eligibleBody: 'We identify potential heirs based on the Hanafi school.',
+      hajbHeading: 'Apply hajb (blocking)',
+      hajbBody: 'Closer relatives may block others according to Hanafi rules.',
+      sharesHeading: 'Calculate shares, Awl, and Radd',
+      sharesBody: 'We compute fixed shares, remainder distribution, and any adjustments.',
+      presentHeading: 'Present explained results',
+      presentBody: 'You receive clear results with reasons, fractions, and source references.',
+    },
+    routingHeading: 'Question routing',
+    routingBody:
+      "If the father is alive, sibling questions are skipped or only asked when needed (for example, to determine the mother's share). This keeps the wizard short and relevant.",
+    includedHeading: '3. What is included in this MVP',
+    included: [
+      'Hanafi calculation mode',
+      'English and Urdu UI structure',
+      'Conditional one-question wizard',
+      'Fixed shares and Asabah',
+      'Blocking explanations (hajb)',
+      'Awl and Radd',
+      'Umariyyatayn',
+      'Optional estate amount',
+      'Detailed and simple result views',
+      'PDF and print-ready report',
+      'Core learning pages',
+      'Common scenarios',
+    ],
+    sourcesHeading: '4. Sources and references',
+    examplesHeading: '5. How results are explained',
+    examples: {
+      motherLabel: 'Mother',
+      motherReason: 'Fixed share - the deceased left children, so the mother receives one-sixth.',
+      wifeLabel: 'Wife',
+      wifeReason: 'Fixed share - the deceased left children, so the wife receives one-eighth.',
+      sonLabel: 'Son',
+      sonFraction: 'Residue',
+      sonReason: 'Residuary (Asabah) - the son takes the remainder after fixed shares.',
+      blockedLabel: 'Blocked heir',
+      blockedReason: 'Does not inherit - excluded by a closer heir (hajb).',
+    },
+    scopeHeading: '6. Scope and clarity',
+    scope: {
+      educationalHeading: 'Educational and practical',
+      educationalBody:
+        'Built to help you understand and apply inheritance rules with confidence in real-life cases.',
+      assumptionsHeading: 'Transparent assumptions',
+      assumptionsBody: 'Calculations are presented with visible reasoning, fractions, and source-based logic.',
+      reviewHeading: 'Continuous review',
+      reviewBody: 'Rule definitions are versioned, testable, and open to ongoing scholarly review.',
+    },
+    ctaHeading: 'Ready to calculate with clarity?',
+    ctaBody: 'Use the guided calculator to answer only the relevant questions and see fully explained shares.',
   },
   staticPages: {
     about: {
@@ -416,6 +522,100 @@ export const EN_TRANSLATIONS = {
       eyebrow: 'DISCLAIMER',
       heading: 'Please read before you rely on a result',
     },
+  },
+  aboutPage: {
+    whatHeading: 'What Miraath Guide is',
+    whatBody:
+      "Miraath Guide is a free, guided calculator and learning resource for Islamic inheritance (Faraid) according to the Hanafi school. It walks you through a short series of questions about a deceased person's surviving family, then shows exactly who inherits, who does not, and why - with fractions, percentages, and plain-language reasoning for every share.",
+    whyHeading: 'Why it was created',
+    whyBody:
+      'Distributing an inheritance correctly is a religious obligation, but the rules involve real complexity: blocking relationships, residuary chains, and adjustments like Awl and Radd. Most people encounter this only once or twice in their lives, at a difficult time, and existing tools are often either an intimidating spreadsheet or a long-form article that assumes prior knowledge.',
+    problemHeading: 'The problem with traditional long-form calculators',
+    problemBody:
+      'Many existing calculators ask every possible question up front, regardless of whether it can affect your case, and present a final number with little explanation of how it was reached. Miraath Guide instead asks only what is relevant to your specific family structure, and treats the explanation of each share as just as important as the number itself.',
+    approachHeading: 'Our guided, question-routing approach',
+    approachBody:
+      'The wizard adapts as you answer. If the father is alive, we never ask about the paternal grandfather. If there is a son, sibling questions are skipped entirely, because a son blocks every sibling from inheriting. This keeps the process short for simple cases and only goes deep when your family structure requires it.',
+    scopeHeading: 'Hanafi scope',
+    scopeBody:
+      'This MVP implements the Hanafi madhhab only. Other schools of Islamic law reach different conclusions on a number of questions - Umariyyatayn, the treatment of the paternal grandfather alongside siblings, and Radd among others - and mixing positions from different schools within a single calculation would misrepresent all of them. Supporting additional madhhabs is a possible future direction, not part of this MVP.',
+    educationalHeading: 'Educational purpose',
+    educationalBefore:
+      'Miraath Guide is built for learning and for arriving at a well-informed starting point, not for issuing a religious ruling (fatwa) or a legal document. See the',
+    educationalAfter: 'page for the full scope and limitations.',
+    privacyHeading: 'Our privacy approach',
+    privacyBefore:
+      'The application runs entirely in your browser. There is no account, no server, and no database - see the',
+    privacyAfter: 'page for details.',
+    reviewStrong: 'Scholarly review - placeholder.',
+    reviewBody:
+      "This MVP's rule set has been reference-implementation verified against classical worked examples, but has not yet been formally reviewed by named scholars. We are not listing reviewer names or credentials until that review has actually taken place - this section will be updated once it has.",
+    disclaimerHeading: 'Disclaimer',
+    disclaimerBefore:
+      'Miraath Guide is an educational calculation aid based on the implemented Hanafi methodology. Complex cases, disputed facts, local law, estate ownership, debts, bequests, missing persons, unborn heirs, and other special circumstances should be reviewed by a qualified scholar and relevant legal professional. Read the full',
+    disclaimerAfter: '.',
+    contactHeading: 'Contact - placeholder',
+    contactBody:
+      'A dedicated contact channel is not yet published for this MVP. This section is a clearly marked placeholder, to be replaced with a real contact method once one is established.',
+    disclaimerLink: 'Disclaimer',
+    privacyLink: 'Privacy',
+  },
+  disclaimerPage: {
+    banner:
+      'Miraath Guide is an educational calculation aid based on the implemented Hanafi methodology. Complex cases, disputed facts, local law, estate ownership, debts, bequests, missing persons, unborn heirs, and other special circumstances should be reviewed by a qualified scholar and relevant legal professional.',
+    notFatwaHeading: 'This is not a fatwa',
+    notFatwaBefore:
+      'Miraath Guide does not issue a fatwa and is not a substitute for one. It applies a documented set of Hanafi inheritance rules (see',
+    notFatwaAfter:
+      'to the family facts you enter, and shows its working. Any result should be treated as a starting point for a conversation with a qualified scholar, not a final legal or religious ruling.',
+    methodologyLink: 'Methodology',
+    reviewHeading: 'Scholarly review status',
+    reviewBody:
+      'The calculation engine has been built and tested against a set of reference-implementation fixtures cross-checked with classical worked examples. These fixtures are marked "reference-implementation verified, scholarly review pending" throughout the codebase and this site - we do not claim formal scholarly approval unless actual reviewers have approved the implementation.',
+    limitationsHeading: 'Known limitations',
+    limitations: [
+      'Grandmother eligibility is simplified to a confirmed count rather than modelling every line of descent.',
+      "Paternal half-sisters do not act as asabah ma'a al-ghayr alongside daughters in this MVP (a rare case).",
+      'Distant kindred (dhawil al-arham) are not distributed; any such surplus is labelled but not divided.',
+      'Estate deductions - debts, funeral expenses, and bequests - are not calculated; enter the net distributable estate yourself.',
+      'Only the Hanafi school is modelled in this MVP.',
+    ],
+  },
+  privacyPage: {
+    cards: {
+      noAccountHeading: 'No account required',
+      noAccountBody:
+        'You never create a login or profile to use the calculator, learning pages, or common cases.',
+      localHeading: 'Processed locally',
+      localBody:
+        "Every answer you give in the wizard is held in your browser's memory and session storage only.",
+      noUploadHeading: 'No calculation data uploaded',
+      noUploadBody:
+        'Family details, estate values, and results are never sent to a server - there is no backend to send them to.',
+      clearingHeading: 'Clearing removes it',
+      clearingBody:
+        'Refreshing the page, closing the tab, or using Clear Calculation removes your session data immediately.',
+    },
+    notDoHeading: 'What we do not do',
+    notDo: [
+      'We do not load unnecessary external scripts.',
+      'We do not store your family details, estate values, or results remotely.',
+      'We do not require - or ask for - your name, email, or any account information.',
+    ],
+    storedHeading: 'What is stored, and where',
+    storedSessionBefore: 'While you are using the guided wizard, your in-progress answers are kept in your browser\u2019s',
+    storedSessionAfter:
+      'so that reloading the page does not lose your progress. This data never leaves your device and is cleared automatically when you close the browser tab, or immediately when you choose "Clear Calculation".',
+    storedFonts:
+      'Fonts are self-hosted with the application bundle rather than loaded from a third-party font service, so simply loading the page does not contact an external font provider either.',
+    storedAnalytics:
+      "We use Google Analytics to understand how users interact with our site. Google Analytics collects information such as your IP address, pages visited, and time spent on site. Data is governed by Google's privacy policy and our data retention practices.",
+    questionsHeading: 'Questions',
+    questionsBefore: 'See the',
+    questionsMiddle: 'page for the scope and limitations of the calculations themselves, or the',
+    questionsAfter: 'page for how to reach us.',
+    disclaimerLink: 'Disclaimer',
+    aboutLink: 'About',
   },
   notFound: {
     heading: 'Page not found',

@@ -16,4 +16,5 @@ import { TranslationService } from '../../i18n/translation.service';
 export class DisclaimerPageComponent {
   protected readonly i18n = inject(TranslationService);
   protected readonly localeUrl = inject(LocaleUrlService);
+  protected readonly limitations = () => this.i18n.value<string[]>('disclaimerPage.limitations');
 }

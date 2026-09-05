@@ -13,77 +13,78 @@
 
 <section class="section process-card">
   <div class="steps">
-    <app-process-step [index]="1" icon="MessageCircleQuestionMark" heading="Ask relevant questions"
-      description="A wizard asks only the questions that matter to this case." />
-    <app-process-step [index]="2" icon="ShieldCheck" heading="Apply rules and blocking"
-      description="Hanafi rules identify eligible heirs and apply blocking (hajb)." />
-    <app-process-step [index]="3" icon="ChartPie" heading="Calculate shares"
-      description="Fixed shares, residue, Awl, and Radd are calculated precisely." />
-    <app-process-step [index]="4" icon="FileCheck" heading="Explain results"
-      description="You see exact shares with reasons and source references." />
+    <app-process-step [index]="1" icon="MessageCircleQuestionMark"
+      [heading]="i18n.t('methodologyPage.overview.askHeading')"
+      [description]="i18n.t('methodologyPage.overview.askBody')" />
+    <app-process-step [index]="2" icon="ShieldCheck"
+      [heading]="i18n.t('methodologyPage.overview.rulesHeading')"
+      [description]="i18n.t('methodologyPage.overview.rulesBody')" />
+    <app-process-step [index]="3" icon="ChartPie"
+      [heading]="i18n.t('methodologyPage.overview.sharesHeading')"
+      [description]="i18n.t('methodologyPage.overview.sharesBody')" />
+    <app-process-step [index]="4" icon="FileCheck"
+      [heading]="i18n.t('methodologyPage.overview.explainHeading')"
+      [description]="i18n.t('methodologyPage.overview.explainBody')" />
   </div>
 </section>
 
 <section class="section">
-  <app-section-heading heading="1. Our methodology principles" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.principlesHeading')" [centered]="true" />
   <div class="grid grid-4">
-    <app-icon-feature-card icon="MessageCircleQuestionMark" heading="Only relevant questions"
-      description="The wizard asks only about relatives who can affect the result." />
-    <app-icon-feature-card icon="Shield" heading="Blocking rules applied"
-      description="Relatives blocked by closer heirs are automatically identified." />
-    <app-icon-feature-card icon="ChartPie" heading="Fixed shares and residue"
-      description="Prescribed shares, residuary heirs, and remaining estate are calculated clearly." />
-    <app-icon-feature-card icon="FileSearch" heading="Transparent explanations"
-      description="Every result includes why the heir inherits, their fraction, and the source logic." />
+    <app-icon-feature-card icon="MessageCircleQuestionMark"
+      [heading]="i18n.t('methodologyPage.principles.questionsHeading')"
+      [description]="i18n.t('methodologyPage.principles.questionsBody')" />
+    <app-icon-feature-card icon="Shield"
+      [heading]="i18n.t('methodologyPage.principles.blockingHeading')"
+      [description]="i18n.t('methodologyPage.principles.blockingBody')" />
+    <app-icon-feature-card icon="ChartPie"
+      [heading]="i18n.t('methodologyPage.principles.sharesHeading')"
+      [description]="i18n.t('methodologyPage.principles.sharesBody')" />
+    <app-icon-feature-card icon="FileSearch"
+      [heading]="i18n.t('methodologyPage.principles.explanationsHeading')"
+      [description]="i18n.t('methodologyPage.principles.explanationsBody')" />
   </div>
 </section>
 
 <section class="section ivory">
-  <app-section-heading heading="2. How the calculation works" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.calculationHeading')" [centered]="true" />
   <div class="grid grid-5">
-    <app-process-step [index]="1" icon="UsersRound" heading="Capture family facts"
-      description="You answer only relevant questions about the deceased and relatives." />
-    <app-process-step [index]="2" icon="UserCheck" heading="Determine eligible heirs"
-      description="We identify potential heirs based on the Hanafi school." />
-    <app-process-step [index]="3" icon="ShieldCheck" heading="Apply hajb (blocking)"
-      description="Closer relatives may block others according to Hanafi rules." />
-    <app-process-step [index]="4" icon="ChartPie" heading="Calculate shares, Awl, and Radd"
-      description="We compute fixed shares, remainder distribution, and any adjustments." />
-    <app-process-step [index]="5" icon="FileText" heading="Present explained results"
-      description="You receive clear results with reasons, fractions, and source references." />
+    <app-process-step [index]="1" icon="UsersRound"
+      [heading]="i18n.t('methodologyPage.calculation.captureHeading')"
+      [description]="i18n.t('methodologyPage.calculation.captureBody')" />
+    <app-process-step [index]="2" icon="UserCheck"
+      [heading]="i18n.t('methodologyPage.calculation.eligibleHeading')"
+      [description]="i18n.t('methodologyPage.calculation.eligibleBody')" />
+    <app-process-step [index]="3" icon="ShieldCheck"
+      [heading]="i18n.t('methodologyPage.calculation.hajbHeading')"
+      [description]="i18n.t('methodologyPage.calculation.hajbBody')" />
+    <app-process-step [index]="4" icon="ChartPie"
+      [heading]="i18n.t('methodologyPage.calculation.sharesHeading')"
+      [description]="i18n.t('methodologyPage.calculation.sharesBody')" />
+    <app-process-step [index]="5" icon="FileText"
+      [heading]="i18n.t('methodologyPage.calculation.presentHeading')"
+      [description]="i18n.t('methodologyPage.calculation.presentBody')" />
   </div>
 
   <div class="routing-panel">
-    <h3><app-icon name="GitBranch" [size]="18" /> Question routing</h3>
-    <p>
-      If the father is alive, sibling questions are skipped or only asked when needed (for example, to
-      determine the mother's share). This keeps the wizard short and relevant.
-    </p>
+    <h3><app-icon name="GitBranch" [size]="18" /> {{ i18n.t('methodologyPage.routingHeading') }}</h3>
+    <p>{{ i18n.t('methodologyPage.routingBody') }}</p>
   </div>
 </section>
 
 <section class="section">
-  <app-section-heading heading="3. What is included in this MVP" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.includedHeading')" [centered]="true" />
   <ul class="checklist">
-    <li><app-icon name="Check" [size]="16" /> Hanafi calculation mode</li>
-    <li><app-icon name="Check" [size]="16" /> English and Urdu UI structure</li>
-    <li><app-icon name="Check" [size]="16" /> Conditional one-question wizard</li>
-    <li><app-icon name="Check" [size]="16" /> Fixed shares and Asabah</li>
-    <li><app-icon name="Check" [size]="16" /> Blocking explanations (hajb)</li>
-    <li><app-icon name="Check" [size]="16" /> Awl and Radd</li>
-    <li><app-icon name="Check" [size]="16" /> Umariyyatayn</li>
-    <li><app-icon name="Check" [size]="16" /> Optional estate amount</li>
-    <li><app-icon name="Check" [size]="16" /> Detailed and simple result views</li>
-    <li><app-icon name="Check" [size]="16" /> PDF and print-ready report</li>
-    <li><app-icon name="Check" [size]="16" /> Core learning pages</li>
-    <li><app-icon name="Check" [size]="16" /> Common scenarios</li>
+    @for (item of includedItems(); track item) {
+      <li><app-icon name="Check" [size]="16" /> {{ item }}</li>
+    }
   </ul>
 </section>
 
 <section class="section ivory">
-  <app-section-heading heading="4. Sources and references" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.sourcesHeading')" [centered]="true" />
   <div class="grid grid-4">
-    @for (source of sources; track source.id) {
+    @for (source of sources(); track source.id) {
       <div class="source-card">
         <app-icon name="BookMarked" [size]="20" />
         <h4>{{ source.label }}</h4>
@@ -94,52 +95,52 @@
 </section>
 
 <section class="section">
-  <app-section-heading heading="5. How results are explained" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.examplesHeading')" [centered]="true" />
   <div class="grid grid-4">
     <div class="example-card">
       <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
-      <h4>Mother</h4>
+      <h4>{{ i18n.t('methodologyPage.examples.motherLabel') }}</h4>
       <p class="fraction numeric">1/6</p>
-      <p class="reason">Fixed share - the deceased left children, so the mother receives one-sixth.</p>
+      <p class="reason">{{ i18n.t('methodologyPage.examples.motherReason') }}</p>
     </div>
     <div class="example-card">
       <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
-      <h4>Wife</h4>
+      <h4>{{ i18n.t('methodologyPage.examples.wifeLabel') }}</h4>
       <p class="fraction numeric">1/8</p>
-      <p class="reason">Fixed share - the deceased left children, so the wife receives one-eighth.</p>
+      <p class="reason">{{ i18n.t('methodologyPage.examples.wifeReason') }}</p>
     </div>
     <div class="example-card">
       <span class="tag inherit">{{ i18n.t('methodologyPage.inherits') }}</span>
-      <h4>Son</h4>
-      <p class="fraction">Residue</p>
-      <p class="reason">Residuary (Asabah) - the son takes the remainder after fixed shares.</p>
+      <h4>{{ i18n.t('methodologyPage.examples.sonLabel') }}</h4>
+      <p class="fraction">{{ i18n.t('methodologyPage.examples.sonFraction') }}</p>
+      <p class="reason">{{ i18n.t('methodologyPage.examples.sonReason') }}</p>
     </div>
     <div class="example-card blocked">
       <span class="tag blocked">{{ i18n.t('methodologyPage.blocked') }}</span>
-      <h4>Blocked heir</h4>
+      <h4>{{ i18n.t('methodologyPage.examples.blockedLabel') }}</h4>
       <p class="fraction">-</p>
-      <p class="reason">Does not inherit - excluded by a closer heir (hajb).</p>
+      <p class="reason">{{ i18n.t('methodologyPage.examples.blockedReason') }}</p>
     </div>
   </div>
 </section>
 
 <section class="section scope-section">
-  <app-section-heading heading="6. Scope and clarity" [centered]="true" />
+  <app-section-heading [heading]="i18n.t('methodologyPage.scopeHeading')" [centered]="true" />
   <div class="grid grid-3">
     <div class="scope-card">
       <app-icon name="GraduationCap" [size]="24" />
-      <h4>Educational and practical</h4>
-      <p>Built to help you understand and apply inheritance rules with confidence in real-life cases.</p>
+      <h4>{{ i18n.t('methodologyPage.scope.educationalHeading') }}</h4>
+      <p>{{ i18n.t('methodologyPage.scope.educationalBody') }}</p>
     </div>
     <div class="scope-card">
       <app-icon name="FileSearch" [size]="24" />
-      <h4>Transparent assumptions</h4>
-      <p>Calculations are presented with visible reasoning, fractions, and source-based logic.</p>
+      <h4>{{ i18n.t('methodologyPage.scope.assumptionsHeading') }}</h4>
+      <p>{{ i18n.t('methodologyPage.scope.assumptionsBody') }}</p>
     </div>
     <div class="scope-card">
       <app-icon name="RefreshCw" [size]="24" />
-      <h4>Continuous review</h4>
-      <p>Rule definitions are versioned, testable, and open to ongoing scholarly review.</p>
+      <h4>{{ i18n.t('methodologyPage.scope.reviewHeading') }}</h4>
+      <p>{{ i18n.t('methodologyPage.scope.reviewBody') }}</p>
     </div>
   </div>
 </section>
@@ -147,8 +148,8 @@
 <section class="section cta">
   <app-icon name="FileText" [size]="28" />
   <div class="cta-text">
-    <h3>Ready to calculate with clarity?</h3>
-    <p>Use the guided calculator to answer only the relevant questions and see fully explained shares.</p>
+    <h3>{{ i18n.t('methodologyPage.ctaHeading') }}</h3>
+    <p>{{ i18n.t('methodologyPage.ctaBody') }}</p>
   </div>
   <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('home.finalCta') }}</app-primary-button>
 </section>

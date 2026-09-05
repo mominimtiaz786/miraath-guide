@@ -8,7 +8,7 @@ import { QuranReferenceCardComponent } from '../../../shared/components/quran-re
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
 import { GlossaryTermCardComponent } from '../../../shared/components/glossary-term-card/glossary-term-card.component';
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
-import { LessonCategory } from '../../../data/lessons/lesson.model';
+import { Lesson, LessonCategory } from '../../../data/lessons/lesson.model';
 import { LessonRepository } from '../../../data/lessons/lesson.repository';
 import { GlossaryRepository } from '../../../data/glossary/glossary.repository';
 import { LocaleUrlService } from '../../../i18n/locale-url.service';
@@ -18,6 +18,8 @@ interface LessonFilter {
   id: LessonCategory | 'all';
   labelKey: string;
 }
+
+const FEATURED_LESSON_SLUGS = ['hajb', 'kalalah', 'awl'];
 
 const FILTERS: LessonFilter[] = [
   { id: 'all', labelKey: 'learnPage.filters.all' },
@@ -54,6 +56,12 @@ export class LearnLandingPageComponent {
   protected readonly filters = FILTERS;
   protected readonly activeFilter = signal<LessonFilter['id']>('all');
   protected readonly glossaryPreview = computed(() => this.glossaryRepository.terms().slice(2, 8));
+
+  protected readonly featuredLessons = computed(() =>
+    FEATURED_LESSON_SLUGS.map((slug) => this.lessonRepository.findBySlug(slug)).filter(
+      (lesson): lesson is Lesson => lesson !== null,
+    ),
+  );
 
   protected readonly visibleLessons = computed(() => {
     const filter = this.activeFilter();
