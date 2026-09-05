@@ -1,9 +1,9 @@
 <app-page-hero
-  eyebrow="LEARN FARAID"
-  heading="Build your understanding of Islamic inheritance"
-  body="Master the principles of Faraid through structured lessons, worked examples, a clear glossary, and curated resources."
+  [eyebrow]="i18n.t('learnPage.eyebrow')"
+  [heading]="i18n.t('learnPage.heading')"
+  [body]="i18n.t('learnPage.body')"
 >
-  <p class="trust-note"><app-icon name="ShieldCheck" [size]="16" /> All content follows the Hanafi school with plain-language explanations.</p>
+  <p class="trust-note"><app-icon name="ShieldCheck" [size]="16" /> {{ i18n.t('learnPage.trust') }}</p>
 </app-page-hero>
 
 <section class="section">
@@ -19,7 +19,7 @@
   <div class="filters">
     @for (filter of filters; track filter.id) {
       <button type="button" class="filter" [class.active]="activeFilter() === filter.id" (click)="selectFilter(filter.id)">
-        {{ filter.label }}
+        {{ i18n.t(filter.labelKey) }}
       </button>
     }
   </div>
@@ -32,8 +32,8 @@
 </section>
 
 <section class="section">
-  <h2 class="centered-heading">Your learning path</h2>
-  <p class="centered-sub">Follow this roadmap for a complete and confident understanding of Faraid.</p>
+  <h2 class="centered-heading">{{ i18n.t('learnPage.pathHeading') }}</h2>
+  <p class="centered-sub">{{ i18n.t('learnPage.pathSub') }}</p>
   <div class="path">
     <app-process-step [index]="1" icon="FileText" heading="Understand the estate" description="Learn what makes up the distributable estate." />
     <app-process-step [index]="2" icon="UsersRound" heading="Learn fixed-share heirs" description="Master the Qur'anic fixed fractions." />
@@ -44,19 +44,19 @@
 </section>
 
 <section class="section ivory">
-  <h2 class="centered-heading">Featured resources</h2>
+  <h2 class="centered-heading">{{ i18n.t('learnPage.featuredHeading') }}</h2>
   <div class="resources-grid">
-    <a class="resource-card" routerLink="/learn/hajb">
+    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/hajb')">
       <span class="tag">Featured Lesson</span>
       <h3>Understanding Hajb (Blocking)</h3>
       <p class="meta"><app-icon name="Clock" [size]="14" /> 10 min read</p>
     </a>
-    <a class="resource-card" routerLink="/learn/kalalah">
+    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/kalalah')">
       <span class="tag">Featured Lesson</span>
       <h3>Kalalah: Cases and Solutions</h3>
       <p class="meta"><app-icon name="Clock" [size]="14" /> 12 min read</p>
     </a>
-    <a class="resource-card" routerLink="/learn/awl">
+    <a class="resource-card" [routerLink]="localeUrl.localize('/learn/awl')">
       <span class="tag">Featured Lesson</span>
       <h3>Awl Explained Simply</h3>
       <p class="meta"><app-icon name="Clock" [size]="14" /> 9 min read</p>
@@ -75,30 +75,30 @@
 </section>
 
 <section class="section">
-  <h2 class="centered-heading">Key terms in Faraid</h2>
+  <h2 class="centered-heading">{{ i18n.t('learnPage.termsHeading') }}</h2>
   <div class="glossary-grid">
-    @for (term of glossaryPreview; track term.term) {
+    @for (term of glossaryPreview(); track term.term) {
       <app-glossary-term-card [term]="term" />
     }
   </div>
   <div class="glossary-cta">
-    <a routerLink="/glossary" class="text-link">View full glossary <app-icon name="ArrowRight" [size]="16" /></a>
+    <a [routerLink]="localeUrl.localize('/glossary')" class="text-link">{{ i18n.t('learnPage.fullGlossary') }} <app-icon name="ArrowRight" [size]="16" /></a>
   </div>
 </section>
 
 <section class="section">
   <app-quran-reference-card
     arabic="يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ ۚ وَإِن كَانَتْ وَاحِدَةً فَلَهَا النِّصْفُ"
-    translation="Allah commands you concerning your children: to the male, a share equal to that of two females. And if there is only one daughter, she gets half."
-    reference="Surah An-Nisa (4:11)"
+    [translation]="i18n.t('quran.nisa411Long')"
+    [reference]="i18n.t('quran.nisa411Ref')"
   />
 </section>
 
 <section class="section cta">
   <app-icon name="FileText" [size]="28" />
   <div class="cta-text">
-    <h3>Ready to apply what you learned?</h3>
-    <p>Use the calculator to solve real cases step-by-step.</p>
+    <h3>{{ i18n.t('learnPage.ctaHeading') }}</h3>
+    <p>{{ i18n.t('learnPage.ctaBody') }}</p>
   </div>
-  <app-primary-button routerLink="/calculator/wizard">Start guided calculation</app-primary-button>
+  <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('home.finalCta') }}</app-primary-button>
 </section>

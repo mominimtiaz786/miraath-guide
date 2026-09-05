@@ -1,13 +1,13 @@
 <div class="results-page">
   <header class="results-header no-print">
-    <p class="status"><app-icon name="CircleCheck" [size]="18" /> Calculation complete</p>
-    <h1>Your inheritance shares</h1>
+    <p class="status"><app-icon name="CircleCheck" [size]="18" /> {{ i18n.t('results.complete') }}</p>
+    <h1>{{ i18n.t('results.heading') }}</h1>
     <div class="summary-chips">
-      <span class="chip">Hanafi methodology</span>
-      <span class="chip">{{ result().eligibleHeirs.length }} eligible heir(s)</span>
-      <span class="chip">{{ uniqueBlockedByRelationship().length }} blocked relative(s)</span>
+      <span class="chip">{{ i18n.t('results.hanafi') }}</span>
+      <span class="chip">{{ result().eligibleHeirs.length }} {{ i18n.t('results.eligible') }}</span>
+      <span class="chip">{{ uniqueBlockedByRelationship().length }} {{ i18n.t('results.blocked') }}</span>
       @if (result().estateValue !== null) {
-        <span class="chip">Estate: PKR {{ result().estateValue!.toLocaleString() }}</span>
+        <span class="chip">{{ i18n.t('results.estate') }}: PKR {{ result().estateValue!.toLocaleString() }}</span>
       }
     </div>
   </header>
@@ -17,12 +17,12 @@
   </section>
 
   <div class="tabs no-print" role="tablist">
-    <button type="button" role="tab" [class.active]="activeTab() === 'simple'" (click)="setTab('simple')">Simple explanation</button>
-    <button type="button" role="tab" [class.active]="activeTab() === 'detailed'" (click)="setTab('detailed')">Detailed calculation</button>
+    <button type="button" role="tab" [class.active]="activeTab() === 'simple'" (click)="setTab('simple')">{{ i18n.t('results.simple') }}</button>
+    <button type="button" role="tab" [class.active]="activeTab() === 'detailed'" (click)="setTab('detailed')">{{ i18n.t('results.detailed') }}</button>
   </div>
 
   <section class="heirs-section">
-    <h2>Who inherits</h2>
+    <h2>{{ i18n.t('results.whoInherits') }}</h2>
     <div class="grid">
       @for (share of result().eligibleHeirs; track share.relationship; let i = $index) {
         <app-share-card
@@ -37,7 +37,7 @@
 
   @if (result().blockedHeirs.length > 0) {
     <section class="heirs-section">
-      <h2>Who does not inherit</h2>
+      <h2>{{ i18n.t('results.whoBlocked') }}</h2>
       <div class="grid">
         @for (blocked of uniqueBlockedByRelationship(); track blocked.relationship; let i = $index) {
           <app-blocked-heir-card [explanation]="blockedExplanations()[i]" />
@@ -48,7 +48,7 @@
 
   @if (activeTab() === 'detailed') {
     <section class="detailed-section">
-      <h2>Detailed calculation steps</h2>
+      <h2>{{ i18n.t('results.detailedSteps') }}</h2>
       <ol>
         @for (step of result().detailedSteps; track step.label) {
           <li><strong>{{ step.label }}:</strong> {{ step.value }}</li>
@@ -56,7 +56,7 @@
       </ol>
       @if (result().adjustments.length > 0) {
         <div class="adjustments">
-          <h3>Adjustments applied</h3>
+          <h3>{{ i18n.t('results.adjustments') }}</h3>
           <ul>
             @for (adjustment of result().adjustments; track adjustment.description) {
               <li><span class="badge">{{ adjustment.type | uppercase }}</span> {{ adjustment.description }}</li>
@@ -74,9 +74,9 @@
     <app-download-report-button [result]="result()" />
     <app-secondary-button (click)="print()">
       <app-icon name="Printer" [size]="18" />
-      Print Report
+      {{ i18n.t('results.print') }}
     </app-secondary-button>
-    <app-secondary-button (click)="editDetails()">Edit family details</app-secondary-button>
-    <app-primary-button [showArrow]="false" (click)="startAnother()">Start another calculation</app-primary-button>
+    <app-secondary-button (click)="editDetails()">{{ i18n.t('results.edit') }}</app-secondary-button>
+    <app-primary-button [showArrow]="false" (click)="startAnother()">{{ i18n.t('results.another') }}</app-primary-button>
   </div>
 </div>

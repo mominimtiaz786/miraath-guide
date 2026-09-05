@@ -7,7 +7,9 @@ import { FamilyTreeMiniComponent } from '../../../shared/components/family-tree-
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { SeoService } from '../../../core/seo/seo.service';
-import { COMMON_CASES } from '../../../data/common-cases/common-cases.data';
+import { CommonCaseRepository } from '../../../data/common-cases/common-case.repository';
+import { LocaleUrlService } from '../../../i18n/locale-url.service';
+import { TranslationService } from '../../../i18n/translation.service';
 
 @Component({
   selector: 'app-common-case-detail-page',
@@ -20,22 +22,23 @@ import { COMMON_CASES } from '../../../data/common-cases/common-cases.data';
 export class CommonCaseDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly seo = inject(SeoService);
+  private readonly commonCases = inject(CommonCaseRepository);
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
 
   private readonly slug = toSignal(this.route.paramMap.pipe(map((params) => params.get('slug'))), {
     initialValue: null,
   });
 
-  protected readonly case = computed(() => COMMON_CASES.find((c) => c.slug === this.slug()) ?? null);
+  protected readonly case = computed(() => this.commonCases.findBySlug(this.slug()));
 
   constructor() {
     effect(() => {
       const current = this.case();
-      const title = current
-        ? `${current.title} – Islamic Inheritance Case | Miraath Guide`
-        : 'Common Case Not Found | Miraath Guide';
+      const title = current ? `${current.title} | Miraath Guide` : this.i18n.t('commonCasesPage.notFound');
       const description = current
         ? current.summary
-        : "This common case couldn't be found. Browse other Islamic inheritance scenarios on Miraath Guide.";
+        : this.i18n.t('commonCasesPage.notFound');
       this.seo.update({
         title,
         description,

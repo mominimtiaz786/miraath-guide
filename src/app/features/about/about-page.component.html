@@ -1,5 +1,5 @@
-<app-page-hero eyebrow="ABOUT" heading="A calmer way to learn and calculate Faraid"
-  body="Miraath Guide exists to make Islamic inheritance approachable - without turning a sacred, precise science into either a black box or a wall of legal text.">
+<app-page-hero [eyebrow]="i18n.t('staticPages.about.eyebrow')" [heading]="i18n.t('staticPages.about.heading')"
+  [body]="i18n.t('staticPages.about.body')">
 </app-page-hero>
 
 <div class="content">
@@ -59,7 +59,7 @@
     <p>
       Miraath Guide is built for learning and for arriving at a well-informed starting point, not for
       issuing a religious ruling (fatwa) or a legal document. See the
-      <a class="text-link-inline" routerLink="/disclaimer">Disclaimer</a> page for the full scope and
+      <a class="text-link-inline" [routerLink]="localeUrl.localize('/disclaimer')">Disclaimer</a> page for the full scope and
       limitations.
     </p>
   </section>
@@ -68,7 +68,7 @@
     <h2>Our privacy approach</h2>
     <p>
       The application runs entirely in your browser. There is no account, no server, and no database -
-      see the <a class="text-link-inline" routerLink="/privacy">Privacy</a> page for details.
+      see the <a class="text-link-inline" [routerLink]="localeUrl.localize('/privacy')">Privacy</a> page for details.
     </p>
   </section>
 
@@ -87,7 +87,7 @@
       Miraath Guide is an educational calculation aid based on the implemented Hanafi methodology.
       Complex cases, disputed facts, local law, estate ownership, debts, bequests, missing persons,
       unborn heirs, and other special circumstances should be reviewed by a qualified scholar and
-      relevant legal professional. Read the full <a class="text-link-inline" routerLink="/disclaimer">Disclaimer</a>.
+      relevant legal professional. Read the full <a class="text-link-inline" [routerLink]="localeUrl.localize('/disclaimer')">Disclaimer</a>.
     </p>
   </section>
 

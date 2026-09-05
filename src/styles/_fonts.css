@@ -7,3 +7,15 @@
 @import '@fontsource/noto-sans-arabic/700.css';
 @import '@fontsource/noto-naskh-arabic/400.css';
 @import '@fontsource/noto-naskh-arabic/700.css';
+
+html.font-latin body {
+  font-family: var(--font-sans);
+}
+
+html.font-arabic body {
+  font-family: 'Noto Sans Arabic', var(--font-sans);
+}
+
+html.font-devanagari body {
+  font-family: 'Noto Sans Devanagari', 'Nirmala UI', 'Mangal', var(--font-sans);
+}

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PageHeroComponent } from '../../shared/components/page-hero/page-hero.component';
 import { SectionHeadingComponent } from '../../shared/components/section-heading/section-heading.component';
 import { ProcessStepComponent } from '../../shared/components/process-step/process-step.component';
@@ -6,6 +6,8 @@ import { IconFeatureCardComponent } from '../../shared/components/icon-feature-c
 import { PrimaryButtonComponent } from '../../shared/components/primary-button/primary-button.component';
 import { AppIconComponent } from '../../shared/icons/app-icon.component';
 import { SOURCE_REFERENCES } from '../../data/sources/sources.data';
+import { LocaleUrlService } from '../../i18n/locale-url.service';
+import { TranslationService } from '../../i18n/translation.service';
 
 @Component({
   selector: 'app-methodology-page',
@@ -23,5 +25,7 @@ import { SOURCE_REFERENCES } from '../../data/sources/sources.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MethodologyPageComponent {
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
   protected readonly sources = Object.values(SOURCE_REFERENCES);
 }

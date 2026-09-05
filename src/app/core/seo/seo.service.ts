@@ -3,8 +3,26 @@ import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { SeoData } from './seo-data.model';
+import { AppLocale } from '../../i18n/config/locale.types';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, getLocaleDefinition } from '../../i18n/config/locale.config';
+import { LocaleService } from '../../i18n/locale.service';
+import { LocaleUrlService } from '../../i18n/locale-url.service';
+import { AR_SEO } from '../../i18n/seo/ar.seo';
+import { EN_SEO } from '../../i18n/seo/en.seo';
+import { FR_SEO } from '../../i18n/seo/fr.seo';
+import { HI_SEO } from '../../i18n/seo/hi.seo';
+import { SeoDictionary, SeoKey } from '../../i18n/seo/seo.types';
+import { UR_SEO } from '../../i18n/seo/ur.seo';
+import { SeoApplyOptions, SeoData } from './seo-data.model';
 import { DEFAULT_ROBOTS, SITE_NAME, SITE_URL } from './seo.constants';
+
+const SEO_DICTIONARIES: Record<AppLocale, SeoDictionary> = {
+  en: EN_SEO,
+  ur: UR_SEO,
+  hi: HI_SEO,
+  fr: FR_SEO,
+  ar: AR_SEO,
+};
 
 /**
  * Centralized, SSR-safe route metadata (spec: "Route-level SEO architecture").
@@ -25,32 +43,51 @@ export class SeoService {
   private readonly document = inject(DOCUMENT);
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly locale = inject(LocaleService);
+  private readonly localeUrl = inject(LocaleUrlService);
 
   constructor() {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
-        const seo = this.findRouteSeoData(this.activatedRoute);
-        if (seo) {
-          this.update(seo);
+        const options = this.findRouteSeoOptions(this.activatedRoute);
+        if (options) {
+          this.apply(options);
         }
       });
   }
 
+  apply(options: SeoApplyOptions): void {
+    const locale = this.locale.locale();
+    const localizedSeo = options.seoKey
+      ? SEO_DICTIONARIES[locale][options.seoKey as SeoKey] ?? SEO_DICTIONARIES[DEFAULT_LOCALE][options.seoKey as SeoKey]
+      : null;
+    this.update({
+      ...(localizedSeo ?? {}),
+      ...(options.data ?? {}),
+      canonicalPath: options.canonicalPath,
+    } as SeoData);
+  }
+
   update(data: SeoData): void {
+    const locale = this.locale.locale();
+    const localeDefinition = getLocaleDefinition(locale);
     this.title.setTitle(data.title);
     this.setTag('description', data.description);
     this.setTag('robots', data.robots ?? DEFAULT_ROBOTS);
 
     const ogTitle = data.ogTitle ?? data.title;
     const ogDescription = data.ogDescription ?? data.description;
-    const canonicalUrl = this.absoluteUrl(data.canonicalPath);
+    const canonicalPath = this.localeUrl.localize(data.canonicalPath, locale);
+    const canonicalUrl = this.absoluteUrl(canonicalPath);
 
     this.setProperty('og:type', data.ogType ?? 'website');
     this.setProperty('og:site_name', SITE_NAME);
     this.setProperty('og:title', ogTitle);
     this.setProperty('og:description', ogDescription);
     this.setProperty('og:url', canonicalUrl);
+    this.setProperty('og:locale', localeDefinition.ogLocale);
+    this.setAlternateOgLocales(locale);
     if (data.ogImage) {
       this.setProperty('og:image', this.absoluteUrl(data.ogImage));
       this.setTag('twitter:image', this.absoluteUrl(data.ogImage));
@@ -64,19 +101,23 @@ export class SeoService {
     this.setTag('twitter:description', data.twitterDescription ?? ogDescription);
 
     this.setCanonical(canonicalUrl);
+    this.setHreflangLinks(data.canonicalPath);
+    this.document.documentElement.lang = localeDefinition.htmlLang;
+    this.document.documentElement.dir = localeDefinition.direction;
   }
 
-  private findRouteSeoData(route: ActivatedRoute): SeoData | null {
+  private findRouteSeoOptions(route: ActivatedRoute): SeoApplyOptions | null {
     let current: ActivatedRoute | null = route;
-    let seo: SeoData | null = null;
+    let options: SeoApplyOptions | null = null;
     while (current) {
-      const routeSeo = current.snapshot.data['seo'];
-      if (routeSeo) {
-        seo = routeSeo as SeoData;
+      const seoKey = current.snapshot.data['seoKey'] as string | undefined;
+      const canonicalPath = current.snapshot.data['canonicalPath'] as string | undefined;
+      if (seoKey && canonicalPath) {
+        options = { seoKey, canonicalPath };
       }
       current = current.firstChild;
     }
-    return seo;
+    return options;
   }
 
   private absoluteUrl(path: string): string {
@@ -103,5 +144,39 @@ export class SeoService {
       this.document.head.appendChild(link);
     }
     link.setAttribute('href', url);
+  }
+
+  private setHreflangLinks(canonicalPath: string): void {
+    this.document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
+    const englishPath = this.localeUrl.localize(canonicalPath, DEFAULT_LOCALE);
+    for (const locale of Object.keys(SUPPORTED_LOCALES) as AppLocale[]) {
+      this.appendAlternate(locale, this.localeUrl.localize(canonicalPath, locale));
+    }
+    this.appendAlternate('x-default', englishPath);
+  }
+
+  private appendAlternate(hreflang: AppLocale | 'x-default', path: string): void {
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', hreflang);
+    link.setAttribute('href', this.absoluteUrl(path));
+    this.document.head.appendChild(link);
+  }
+
+  private setAlternateOgLocales(currentLocale: AppLocale): void {
+    this.document.head.querySelectorAll('meta[property="og:locale:alternate"]').forEach((node) => node.remove());
+    for (const locale of Object.keys(SUPPORTED_LOCALES) as AppLocale[]) {
+      if (locale === currentLocale) {
+        continue;
+      }
+      this.setMultiProperty('og:locale:alternate', getLocaleDefinition(locale).ogLocale);
+    }
+  }
+
+  private setMultiProperty(property: string, content: string): void {
+    const tag = this.document.createElement('meta');
+    tag.setAttribute('property', property);
+    tag.setAttribute('content', content);
+    this.document.head.appendChild(tag);
   }
 }

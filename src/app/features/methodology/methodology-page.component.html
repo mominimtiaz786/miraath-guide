@@ -1,7 +1,7 @@
 <app-page-hero
-  eyebrow="METHODOLOGY"
-  heading="How Miraath Guide calculates inheritance"
-  body="Miraath Guide follows a documented Hanafi methodology. We ask only relevant questions, identify who inherits and who is blocked, and calculate exact shares with clear explanations and sources."
+  [eyebrow]="i18n.t('staticPages.methodology.eyebrow')"
+  [heading]="i18n.t('staticPages.methodology.heading')"
+  [body]="i18n.t('staticPages.methodology.body')"
 >
   <div class="trust-chips">
     <span class="chip"><app-icon name="Scale" [size]="16" /> Hanafi methodology</span>
@@ -150,5 +150,5 @@
     <h3>Ready to calculate with clarity?</h3>
     <p>Use the guided calculator to answer only the relevant questions and see fully explained shares.</p>
   </div>
-  <app-primary-button routerLink="/calculator/wizard">Start guided calculation</app-primary-button>
+  <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('home.finalCta') }}</app-primary-button>
 </section>

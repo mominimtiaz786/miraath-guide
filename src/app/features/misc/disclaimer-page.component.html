@@ -1,4 +1,4 @@
-<app-page-hero eyebrow="DISCLAIMER" heading="Please read before you rely on a result">
+<app-page-hero [eyebrow]="i18n.t('staticPages.disclaimer.eyebrow')" [heading]="i18n.t('staticPages.disclaimer.heading')">
 </app-page-hero>
 
 <div class="content">
@@ -15,7 +15,7 @@
     <h2>This is not a fatwa</h2>
     <p>
       Miraath Guide does not issue a fatwa and is not a substitute for one. It applies a documented set
-      of Hanafi inheritance rules (see <a class="text-link-inline" routerLink="/methodology">Methodology</a>)
+      of Hanafi inheritance rules (see <a class="text-link-inline" [routerLink]="localeUrl.localize('/methodology')">Methodology</a>)
       to the family facts you enter, and shows its working. Any result should be treated as a starting
       point for a conversation with a qualified scholar, not a final legal or religious ruling.
     </p>

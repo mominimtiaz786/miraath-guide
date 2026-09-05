@@ -1,5 +1,5 @@
-<app-page-hero eyebrow="PRIVACY" heading="Your privacy, by design"
-  body="Miraath Guide runs entirely in your browser. Here is exactly what that means for your data.">
+<app-page-hero [eyebrow]="i18n.t('staticPages.privacy.eyebrow')" [heading]="i18n.t('staticPages.privacy.heading')"
+  [body]="i18n.t('staticPages.privacy.body')">
 </app-page-hero>
 
 <div class="content">
@@ -48,8 +48,8 @@
   <section>
     <h2>Questions</h2>
     <p>
-      See the <a class="text-link-inline" routerLink="/disclaimer">Disclaimer</a> page for the scope and
-      limitations of the calculations themselves, or the <a class="text-link-inline" routerLink="/about">About</a>
+      See the <a class="text-link-inline" [routerLink]="localeUrl.localize('/disclaimer')">Disclaimer</a> page for the scope and
+      limitations of the calculations themselves, or the <a class="text-link-inline" [routerLink]="localeUrl.localize('/about')">About</a>
       page for how to reach us.
     </p>
   </section>

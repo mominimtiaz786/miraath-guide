@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PageHeroComponent } from '../../shared/components/page-hero/page-hero.component';
 import { InfoBannerComponent } from '../../shared/components/info-banner/info-banner.component';
+import { LocaleUrlService } from '../../i18n/locale-url.service';
+import { TranslationService } from '../../i18n/translation.service';
 
 @Component({
   selector: 'app-disclaimer-page',
@@ -11,4 +13,7 @@ import { InfoBannerComponent } from '../../shared/components/info-banner/info-ba
   styleUrl: './misc-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisclaimerPageComponent {}
+export class DisclaimerPageComponent {
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
+}

@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LocaleUrlService } from '../../../i18n/locale-url.service';
+import { TranslationService } from '../../../i18n/translation.service';
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 
 @Component({
@@ -11,5 +13,7 @@ import { AppIconComponent } from '../../../shared/icons/app-icon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppFooterComponent {
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
   protected readonly year = new Date().getFullYear();
 }

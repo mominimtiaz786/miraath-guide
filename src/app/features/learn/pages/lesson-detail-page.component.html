@@ -1,11 +1,11 @@
 @if (lesson(); as l) {
   <div class="detail">
-    <a class="back-link" routerLink="/learn"><app-icon name="ArrowLeft" [size]="16" /> All lessons</a>
+    <a class="back-link" [routerLink]="localeUrl.localize('/learn')"><app-icon name="ArrowLeft" [size]="16" /> {{ i18n.t('learnPage.allLessons') }}</a>
 
     <header class="lesson-header">
       <div class="icon-badge"><app-icon [name]="l.icon" [size]="24" /></div>
       <div>
-        <p class="eyebrow">Lesson {{ l.number }} - {{ l.difficulty }}</p>
+        <p class="eyebrow">{{ i18n.t('learnPage.lessonLabel') }} {{ l.number }} - {{ l.difficulty }}</p>
         <h1>{{ l.title }}</h1>
         <p class="summary">{{ l.summary }}</p>
       </div>
@@ -20,20 +20,20 @@
 
     @if (l.relatedGlossaryTerms.length > 0) {
       <section class="related">
-        <h2>Related terms</h2>
+        <h2>{{ i18n.t('learnPage.relatedTerms') }}</h2>
         <div class="chips">
           @for (term of l.relatedGlossaryTerms; track term) {
-            <a class="chip" routerLink="/glossary">{{ term }}</a>
+            <a class="chip" [routerLink]="localeUrl.localize('/glossary')">{{ term }}</a>
           }
         </div>
       </section>
     }
 
     <div class="lesson-actions">
-      <app-primary-button routerLink="/calculator/wizard">Try it in the calculator</app-primary-button>
+      <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('learnPage.tryCalculator') }}</app-primary-button>
       @if (nextLesson(); as next) {
-        <a class="text-link" [routerLink]="['/learn', next.slug]">
-          Next: {{ next.title }}
+        <a class="text-link" [routerLink]="localeUrl.localize('/learn/' + next.slug)">
+          {{ i18n.t('learnPage.next') }}: {{ next.title }}
           <app-icon name="ArrowRight" [size]="16" />
         </a>
       }
@@ -41,7 +41,7 @@
   </div>
 } @else {
   <div class="not-found">
-    <p>We couldn't find that lesson.</p>
-    <a routerLink="/learn" class="text-link">Back to Learn Faraid</a>
+    <p>{{ i18n.t('learnPage.notFound') }}</p>
+    <a [routerLink]="localeUrl.localize('/learn')" class="text-link">{{ i18n.t('learnPage.backToLearn') }}</a>
   </div>
 }

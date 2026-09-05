@@ -1,11 +1,11 @@
 <div class="wizard-shell">
   <header class="wizard-header">
-    <a routerLink="/" class="logo">
+    <a [routerLink]="localeUrl.localize('/')" class="logo">
       <app-icon name="BookOpenCheck" [size]="20" />
       <span>Miraath Guide</span>
     </a>
     <button type="button" class="exit-btn" (click)="exit()">
-      Exit
+      {{ i18n.t('wizard.exit') }}
       <app-icon name="X" [size]="16" />
     </button>
   </header>
@@ -19,16 +19,16 @@
       [whyWeAsk]="content().whyWeAsk ?? null"
       [canContinue]="store.canGoNext()"
       [showBack]="true"
-      [continueLabel]="store.isLastStep() ? 'Review' : 'Continue'"
+      [continueLabel]="store.isLastStep() ? i18n.t('common.review') : i18n.t('common.continue')"
       (back)="back()"
       (continue)="continue()"
     >
       @switch (content().kind) {
         @case ('choice') {
           @if (stepId() === 'deceasedGender') {
-            <app-yes-no-choice [options]="genderOptions" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
+            <app-yes-no-choice [options]="genderOptions()" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
           } @else {
-            <app-yes-no-choice [options]="yesNoOptions" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
+            <app-yes-no-choice [options]="yesNoOptions()" [value]="$any(currentValue())" (valueChange)="onChoiceChange($event)" />
           }
         }
         @case ('count') {
@@ -48,8 +48,8 @@
               step="1000"
               [value]="$any(currentValue()) ?? ''"
               (input)="onEstateChange($any($event.target).value)"
-              placeholder="e.g. 5,000,000"
-              aria-label="Distributable estate value in PKR"
+              [placeholder]="i18n.t('wizard.estatePlaceholder')"
+              [attr.aria-label]="i18n.t('wizard.estateAria')"
             />
           </div>
         }
@@ -58,7 +58,7 @@
 
     <p class="tip">
       <app-icon name="Lightbulb" [size]="16" />
-      We will only ask about relatives who may affect the inheritance. You can edit your answers before viewing the results.
+      {{ i18n.t('wizard.tip') }}
     </p>
   </main>
 </div>

@@ -1,9 +1,9 @@
-<app-page-hero eyebrow="GLOSSARY" heading="Faraid glossary"
-  body="Key terms used throughout Miraath Guide, with their Roman Urdu equivalents where helpful.">
+<app-page-hero [eyebrow]="i18n.t('glossaryPage.eyebrow')" [heading]="i18n.t('glossaryPage.heading')"
+  [body]="i18n.t('glossaryPage.body')">
 </app-page-hero>
 
 <div class="grid">
-  @for (term of terms; track term.term) {
+  @for (term of terms(); track term.term) {
     <app-glossary-term-card [term]="term" />
   }
 </div>

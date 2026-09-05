@@ -1,9 +1,9 @@
 @if (case(); as c) {
   <div class="detail">
-    <a class="back-link" routerLink="/common-cases"><app-icon name="ArrowLeft" [size]="16" /> All common cases</a>
+    <a class="back-link" [routerLink]="localeUrl.localize('/common-cases')"><app-icon name="ArrowLeft" [size]="16" /> {{ i18n.t('commonCasesPage.allCases') }}</a>
 
     <header class="case-header">
-      <span class="badge">Case {{ c.number }}</span>
+      <span class="badge">{{ i18n.t('commonCasesPage.caseLabel') }} {{ c.number }}</span>
       <h1>{{ c.title }}</h1>
       <p class="scenario">{{ c.scenario }}</p>
     </header>
@@ -14,7 +14,7 @@
 
     <section class="two-col">
       <div class="col">
-        <h2><app-icon name="UserCheck" [size]="18" /> Eligible heirs</h2>
+        <h2><app-icon name="UserCheck" [size]="18" /> {{ i18n.t('commonCasesPage.eligibleHeirs') }}</h2>
         <ul class="fact-list">
           @for (heir of c.eligibleHeirs; track heir.label) {
             <li>
@@ -25,9 +25,9 @@
         </ul>
       </div>
       <div class="col">
-        <h2><app-icon name="UserX" [size]="18" /> Blocked heirs</h2>
+        <h2><app-icon name="UserX" [size]="18" /> {{ i18n.t('commonCasesPage.blockedHeirs') }}</h2>
         @if (c.blockedHeirs.length === 0) {
-          <p class="muted">No relatives are blocked in this case.</p>
+          <p class="muted">{{ i18n.t('commonCasesPage.noBlocked') }}</p>
         } @else {
           <ul class="fact-list">
             @for (heir of c.blockedHeirs; track heir.relationship) {
@@ -42,7 +42,7 @@
     </section>
 
     <section>
-      <h2><app-icon name="ChartPie" [size]="18" /> Calculation steps</h2>
+      <h2><app-icon name="ChartPie" [size]="18" /> {{ i18n.t('commonCasesPage.calculationSteps') }}</h2>
       <ol class="steps-list">
         @for (step of c.calculationSteps; track step) {
           <li>{{ step }}</li>
@@ -51,8 +51,8 @@
     </section>
 
     <section class="estate-section">
-      <h2><app-icon name="WalletCards" [size]="18" /> Example monetary distribution</h2>
-      <p class="muted">Estate value used for this example: PKR {{ c.exampleEstate | number: '1.0-0' }}</p>
+      <h2><app-icon name="WalletCards" [size]="18" /> {{ i18n.t('commonCasesPage.exampleMoney') }}</h2>
+      <p class="muted">{{ i18n.t('commonCasesPage.estateUsed') }}: PKR {{ c.exampleEstate | number: '1.0-0' }}</p>
       <div class="money-grid">
         @for (share of c.keyShares; track share.label) {
           <div class="money-card">
@@ -64,12 +64,12 @@
     </section>
 
     <section>
-      <h2><app-icon name="FileText" [size]="18" /> Rule explanation</h2>
+      <h2><app-icon name="FileText" [size]="18" /> {{ i18n.t('commonCasesPage.ruleExplanation') }}</h2>
       <p class="explanation">{{ c.ruleExplanation }}</p>
     </section>
 
     <section>
-      <h2>Related concepts</h2>
+      <h2>{{ i18n.t('commonCasesPage.relatedConcepts') }}</h2>
       <div class="chips">
         @for (concept of c.relatedConcepts; track concept) {
           <span class="chip">{{ concept }}</span>
@@ -78,12 +78,12 @@
     </section>
 
     <div class="cta">
-      <app-primary-button routerLink="/calculator/wizard">Try this scenario in the calculator</app-primary-button>
+      <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('commonCasesPage.tryScenario') }}</app-primary-button>
     </div>
   </div>
 } @else {
   <div class="not-found">
-    <p>We couldn't find that case.</p>
-    <a routerLink="/common-cases" class="text-link">Back to common cases</a>
+    <p>{{ i18n.t('commonCasesPage.notFound') }}</p>
+    <a [routerLink]="localeUrl.localize('/common-cases')" class="text-link">{{ i18n.t('commonCasesPage.backToCases') }}</a>
   </div>
 }

@@ -15,12 +15,12 @@
     @if (perPersonMoney(); as perPersonAmount) {
       <div style="gap: var(--var-space-2);">
         <div class="figures per-person-line">
-          <span class="per-person-label">Total {{explanation().relationship}}:</span>
+          <span class="per-person-label">{{ i18n.t('results.total') }} {{explanation().relationship}}:</span>
           <span class="per-person-money">{{ share().count }}</span>
         </div>
 
         <div class="figures per-person-line">
-          <span class="per-person-label">Each inherits:</span>
+          <span class="per-person-label">{{ i18n.t('results.eachInherits') }}:</span>
           <span class="per-person-money">PKR {{ perPersonAmount | number: '1.2-2' }}</span>
         </div>
       </div>

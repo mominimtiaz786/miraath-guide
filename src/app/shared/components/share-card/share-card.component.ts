@@ -1,7 +1,8 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ExplanationEntry } from '../../../features/calculator/models/calculation-result.model';
 import { EligibleHeirShare, ShareType } from '../../../features/calculator/models/heir.model';
+import { TranslationService } from '../../../i18n/translation.service';
 import { SourceReferenceComponent } from '../source-reference/source-reference.component';
 
 const SHARE_TYPE_LABELS: Record<ShareType, string> = {
@@ -24,8 +25,9 @@ export class ShareCardComponent {
   readonly explanation = input.required<ExplanationEntry>();
   readonly estateValue = input<number | null>(null);
   readonly detailed = input<boolean>(false);
+  protected readonly i18n = inject(TranslationService);
 
-  protected readonly shareTypeLabel = computed(() => SHARE_TYPE_LABELS[this.share().shareType]);
+  protected readonly shareTypeLabel = computed(() => this.i18n.t(`shareTypes.${this.share().shareType}`) || SHARE_TYPE_LABELS[this.share().shareType]);
   protected readonly percentage = computed(() => this.share().poolShare.toPercentage(2));
   protected readonly moneyAmount = computed(() => {
     const estate = this.estateValue();
