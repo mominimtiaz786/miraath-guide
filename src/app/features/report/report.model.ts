@@ -1,3 +1,5 @@
+import { AppLocale, LocaleDirection } from '../../i18n/config/locale.types';
+
 export interface ReportHeirLine {
   relationship: string;
   fraction: string;
@@ -13,6 +15,8 @@ export interface ReportBlockedLine {
 }
 
 export interface ReportModel {
+  locale: AppLocale;
+  direction: LocaleDirection;
   generatedDate: string;
   methodology: string;
   familySummary: string[];

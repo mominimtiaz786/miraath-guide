@@ -1,5 +1,5 @@
 import { Fraction } from '../../../shared/utils/fraction';
-import { AdjustmentRecord } from '../models/calculation-result.model';
+import { AdjustmentDraft } from '../models/calculation-result.model';
 import { HeirRelationship } from '../models/heir.model';
 import { FixedShareDraft } from './fixed-share-engine';
 
@@ -7,7 +7,7 @@ const SPOUSE_RELATIONSHIPS: HeirRelationship[] = ['husband', 'wife'];
 
 export interface AwlResult {
   shares: FixedShareDraft[];
-  adjustment: AdjustmentRecord | null;
+  adjustment: AdjustmentDraft | null;
 }
 
 /** Implements spec section 13B.4 (Awl). Only call when the fixed-share total exceeds 1. */
@@ -25,7 +25,8 @@ export function applyAwl(shares: FixedShareDraft[]): AwlResult {
     shares: scaled,
     adjustment: {
       type: 'awl',
-      description: `Fixed shares exceeded the estate, so every share was scaled down proportionally (Awl from ${commonDenominator} to ${sumOverCommonDenominator}).`,
+      descriptionKey: 'adjustment.awl',
+      descriptionParams: { from: commonDenominator, to: sumOverCommonDenominator },
       fromDenominator: commonDenominator,
       toDenominator: sumOverCommonDenominator,
     },
@@ -34,15 +35,15 @@ export function applyAwl(shares: FixedShareDraft[]): AwlResult {
 
 export interface RaddResult {
   shares: FixedShareDraft[];
-  adjustment: AdjustmentRecord | null;
+  adjustment: AdjustmentDraft | null;
   unassignedRemainder: Fraction;
-  unassignedRemainderNote: string | null;
+  unassignedRemainderNoteKey: string | null;
 }
 
 /** Implements spec section 13B.4 (Radd). Only call when no residuary tier claimed the residue. */
 export function applyRadd(shares: FixedShareDraft[], residue: Fraction): RaddResult {
   if (residue.isZero()) {
-    return { shares, adjustment: null, unassignedRemainder: Fraction.zero(), unassignedRemainderNote: null };
+    return { shares, adjustment: null, unassignedRemainder: Fraction.zero(), unassignedRemainderNoteKey: null };
   }
 
   const nonSpouseShares = shares.filter((s) => !SPOUSE_RELATIONSHIPS.includes(s.relationship));
@@ -53,8 +54,7 @@ export function applyRadd(shares: FixedShareDraft[], residue: Fraction): RaddRes
       shares,
       adjustment: null,
       unassignedRemainder: residue,
-      unassignedRemainderNote:
-        'The spouse is the only heir in this case. The surplus is not distributed under this MVP; it would pass to distant kindred (dhawil-arham) or Bayt al-Mal.',
+      unassignedRemainderNoteKey: 'adjustment.spouseOnlySurplus',
     };
   }
 
@@ -71,10 +71,9 @@ export function applyRadd(shares: FixedShareDraft[], residue: Fraction): RaddRes
     shares: updated,
     adjustment: {
       type: 'radd',
-      description:
-        'No residuary heir absorbed the remaining estate, so the surplus was returned proportionally to the fixed-share heirs (excluding the spouse).',
+      descriptionKey: 'adjustment.radd',
     },
     unassignedRemainder: Fraction.zero(),
-    unassignedRemainderNote: null,
+    unassignedRemainderNoteKey: null,
   };
 }

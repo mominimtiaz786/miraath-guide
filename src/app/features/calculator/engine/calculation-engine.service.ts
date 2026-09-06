@@ -1,14 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Fraction } from '../../../shared/utils/fraction';
 import { CalculatorAnswers } from '../models/calculator-answers.model';
-import { AdjustmentRecord, CalculationResult, DetailedCalculationStep } from '../models/calculation-result.model';
+import { AdjustmentDraft, AdjustmentRecord, CalculationResult, DetailedCalculationStep } from '../models/calculation-result.model';
 import { BlockedHeirGroup, EligibleHeirShare, HeirRelationship, ShareType } from '../models/heir.model';
-import { heirLabel } from '../models/heir-labels';
+import { HeirLabelService } from '../models/heir-labels';
 import { applyAwl, applyRadd } from './adjustment-engine';
 import { computeResiduaryChain } from './asabah-engine';
 import { computeRoutingBlockedCategories, computeSpecificBlockedCases } from './blocking-engine';
 import { deriveFacts } from './derive-facts';
 import { ExplanationEngine } from './explanations/explanation-engine';
+import { TranslationService } from '../../../i18n/translation.service';
 import { FixedShareDraft, computeFixedShares } from './fixed-share-engine';
 
 function shareTypeForReasonCode(reasonCode: string): ShareType {
@@ -28,6 +29,14 @@ function shareTypeForReasonCode(reasonCode: string): ShareType {
 @Injectable({ providedIn: 'root' })
 export class CalculationEngineService {
   private readonly explanationEngine = inject(ExplanationEngine);
+  private readonly i18n = inject(TranslationService);
+  private readonly heirLabels = inject(HeirLabelService);
+
+  /** Resolves an engine-emitted AdjustmentDraft into display text for the active locale. */
+  private localizeAdjustment(draft: AdjustmentDraft): AdjustmentRecord {
+    const { descriptionKey, descriptionParams, ...rest } = draft;
+    return { ...rest, description: this.i18n.t(descriptionKey, descriptionParams ?? {}) };
+  }
 
   calculate(answers: CalculatorAnswers): CalculationResult {
     const facts = deriveFacts(answers);
@@ -36,8 +45,11 @@ export class CalculationEngineService {
     const adjustments: AdjustmentRecord[] = [];
 
     detailedSteps.push({
-      label: 'Fixed shares assigned',
-      value: fixedResult.shares.map((s) => `${heirLabel(s.relationship, s.count)}: ${s.poolShare.toDisplayString()}`).join(', ') || 'None',
+      label: this.i18n.t('calcSteps.fixedAssigned'),
+      value:
+        fixedResult.shares
+          .map((s) => `${this.heirLabels.label(s.relationship, s.count)}: ${s.poolShare.toDisplayString()}`)
+          .join(', ') || this.i18n.t('calcSteps.none'),
     });
 
     let workingShares: FixedShareDraft[] = fixedResult.shares;
@@ -46,29 +58,33 @@ export class CalculationEngineService {
     let unassignedRemainderNote: string | null = null;
 
     if (fixedResult.umariyyatayn) {
-      adjustments.push({
-        type: 'umariyyatayn',
-        description: "Umariyyatayn applied: the mother's third is calculated on the remainder after the spouse's share, not the whole estate.",
-      });
-      detailedSteps.push({ label: 'Umariyyatayn', value: 'Applied - see mother and father reasons.' });
+      adjustments.push(this.localizeAdjustment({ type: 'umariyyatayn', descriptionKey: 'adjustment.umariyyatayn' }));
+      detailedSteps.push({ label: this.i18n.t('calcSteps.umariyyatayn'), value: this.i18n.t('calcSteps.umariyyataynApplied') });
     } else {
       const fixedTotal = Fraction.sum(workingShares.map((s) => s.poolShare));
-      detailedSteps.push({ label: 'Total fixed shares', value: fixedTotal.toDisplayString() });
+      detailedSteps.push({ label: this.i18n.t('calcSteps.totalFixed'), value: fixedTotal.toDisplayString() });
 
       if (fixedTotal.greaterThan(Fraction.one())) {
         const awl = applyAwl(workingShares);
         workingShares = awl.shares;
         if (awl.adjustment) {
-          adjustments.push(awl.adjustment);
-          detailedSteps.push({ label: 'Awl adjustment', value: awl.adjustment.description });
+          const record = this.localizeAdjustment(awl.adjustment);
+          adjustments.push(record);
+          detailedSteps.push({ label: this.i18n.t('calcSteps.awl'), value: record.description });
         }
       } else {
         residue = Fraction.one().subtract(fixedTotal);
-        detailedSteps.push({ label: 'Residue after fixed shares', value: residue.toDisplayString() });
+        detailedSteps.push({ label: this.i18n.t('calcSteps.residue'), value: residue.toDisplayString() });
 
         const asabah = computeResiduaryChain(answers, facts, residue);
         if (asabah.tier !== null) {
-          detailedSteps.push({ label: 'Residuary (Asabah) tier', value: `Tier ${asabah.tier}: ${asabah.tierLabel}` });
+          detailedSteps.push({
+            label: this.i18n.t('calcSteps.asabahTier'),
+            value: this.i18n.t('calcSteps.tierValue', {
+              tier: asabah.tier,
+              label: asabah.tierLabelKey ? this.i18n.t(asabah.tierLabelKey) : '',
+            }),
+          });
           for (const allocation of asabah.allocations) {
             const existingIndex = workingShares.findIndex((s) => s.relationship === allocation.relationship);
             if (existingIndex >= 0) {
@@ -92,12 +108,13 @@ export class CalculationEngineService {
           const radd = applyRadd(workingShares, residue);
           workingShares = radd.shares;
           unassignedRemainder = radd.unassignedRemainder;
-          unassignedRemainderNote = radd.unassignedRemainderNote;
+          unassignedRemainderNote = radd.unassignedRemainderNoteKey ? this.i18n.t(radd.unassignedRemainderNoteKey) : null;
           if (radd.adjustment) {
-            adjustments.push(radd.adjustment);
-            detailedSteps.push({ label: 'Radd adjustment', value: radd.adjustment.description });
+            const record = this.localizeAdjustment(radd.adjustment);
+            adjustments.push(record);
+            detailedSteps.push({ label: this.i18n.t('calcSteps.radd'), value: record.description });
           } else if (unassignedRemainderNote) {
-            detailedSteps.push({ label: 'Unassigned remainder', value: unassignedRemainderNote });
+            detailedSteps.push({ label: this.i18n.t('calcSteps.unassigned'), value: unassignedRemainderNote });
           }
         }
       }

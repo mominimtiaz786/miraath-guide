@@ -5,6 +5,16 @@ import { BlockedHeirGroup, EligibleHeirShare } from './heir.model';
 
 export type AdjustmentType = 'awl' | 'radd' | 'umariyyatayn';
 
+/** What the pure engines emit: a translation key, resolved to text by CalculationEngineService. */
+export interface AdjustmentDraft {
+  type: AdjustmentType;
+  descriptionKey: string;
+  descriptionParams?: Record<string, string | number>;
+  /** Denominator before / after, for Awl display (e.g. 6 -> 8). */
+  fromDenominator?: number;
+  toDenominator?: number;
+}
+
 export interface AdjustmentRecord {
   type: AdjustmentType;
   description: string;
