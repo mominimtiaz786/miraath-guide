@@ -136,6 +136,7 @@ export const EN_TRANSLATIONS = {
     more: 'And many more...',
   },
   wizard: {
+    whyWeAskLabel: 'Why we ask this?',
     exit: 'Exit',
     tip: 'We will only ask about relatives who may affect the inheritance. You can edit your answers before viewing the results.',
     estatePlaceholder: 'e.g. 5,000,000',

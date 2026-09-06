@@ -216,6 +216,159 @@ export const FR_TRANSLATIONS = {
     notFound: "Cette leçon est introuvable.",
     backToLearn: 'Retour à Apprendre les Faraid',
   },
+  wizard: {
+    ...EN_TRANSLATIONS.wizard,
+    deceasedGender: {
+      question: 'Quel était le sexe du défunt ?',
+      helper: 'Cela nous aide à identifier les parts coraniques applicables.',
+      whyWeAsk: 'Certaines parts diffèrent selon que le défunt est un homme ou une femme - par exemple la fraction du conjoint survivant.',
+    },
+    husbandAlive: {
+      question: 'Le mari est-il encore en vie ?',
+      helper: 'Seul le mari peut être le conjoint survivant ici, puisque le défunt est une femme.',
+      whyWeAsk: 'Un mari vivant reçoit toujours une part fixe - 1/2 ou 1/4 selon les descendants.',
+    },
+    wivesCount: {
+      question: 'Combien d’épouses survivent au défunt ?',
+      helper: 'Saisissez 0 s’il n’y a aucune épouse survivante. Jusqu’à quatre épouses se partagent une même fraction.',
+      whyWeAsk: 'Une épouse survivante (ou plusieurs) reçoit toujours une part fixe de 1/4 ou 1/8, partagée également s’il y en a plusieurs.',
+    },
+    hasDescendants: {
+      question: 'Y a-t-il des enfants ou des descendants d’un fils en vie ?',
+      helper: 'Incluez les fils, les filles et les propres enfants d’un fils.',
+      whyWeAsk: 'Cette seule réponse détermine s’il faut poser plusieurs autres questions sur les enfants.',
+    },
+    fatherAlive: {
+      question: 'Le père du défunt est-il encore en vie ?',
+      whyWeAsk: 'Un père vivant hérite toujours et exclut entièrement le grand-père paternel ainsi que tous les frères et sœurs.',
+    },
+    motherAlive: {
+      question: 'La mère du défunt est-elle encore en vie ?',
+      whyWeAsk: 'Une mère vivante hérite toujours et exclut entièrement toutes les grands-mères.',
+    },
+    estateValue: {
+      question: 'Quelle est la valeur de la succession à partager ? (facultatif)',
+      helper: 'Saisissez la succession nette après frais valides, dettes et legs - ou ignorez cette étape et ne voyez que les fractions.',
+      whyWeAsk: 'Cela nous permet d’afficher des montants en PKR à côté de chaque fraction et pourcentage. Cela n’affecte jamais les parts elles-mêmes.',
+    },
+    paternalGrandfatherAlive: {
+      question: 'Le grand-père paternel du défunt est-il vivant ?',
+      helper: 'Nous ne posons cette question que parce que le père n’est plus en vie.',
+      whyWeAsk: 'Lorsque le père est décédé, le grand-père paternel peut prendre sa place dans plusieurs règles de partage.',
+    },
+    grandmothersCount: {
+      question: 'Combien de grands-mères admissibles survivent ?',
+      helper: 'Ne comptez que les grands-mères dont la ligne n’est pas exclue par un parent plus proche - généralement la mère de la mère et la mère du père.',
+      whyWeAsk: 'Nous ne posons cette question que parce que la mère n’est plus en vie - les grands-mères admissibles se partagent son 1/6.',
+    },
+    sonsCount: {
+      question: 'Combien de fils survivent au défunt ?',
+    },
+    daughtersCount: {
+      question: 'Combien de filles survivent au défunt ?',
+    },
+    paternalGrandsonsCount: {
+      question: 'Combien de fils du fils (petits-fils par un fils) survivent ?',
+      helper: 'Nous ne posons cette question que parce qu’aucun fils ne survit.',
+    },
+    paternalGranddaughtersCount: {
+      question: 'Combien de filles du fils (petites-filles par un fils) survivent ?',
+    },
+    siblingsForMotherShareCount: {
+      question: 'Combien de frères et sœurs, tous types confondus (germains, consanguins ou utérins), survivent ?',
+      helper: 'Ce nombre ne sert qu’à déterminer la part de la mère - ces frères et sœurs ne recevront eux-mêmes aucune part, puisque le père les exclut.',
+      whyWeAsk: 'Deux frères et sœurs ou plus réduisent la part de la mère de 1/3 à 1/6, même si eux-mêmes ne peuvent hériter tant que le père est vivant.',
+    },
+    fullBrothersCount: {
+      question: 'Combien de frères germains (mêmes père et mère) survivent ?',
+    },
+    fullSistersCount: {
+      question: 'Combien de sœurs germaines (mêmes père et mère) survivent ?',
+    },
+    maternalSiblingsCount: {
+      question: 'Combien de frères et sœurs utérins (même mère, père différent) survivent ?',
+      helper: 'Les frères et sœurs utérins se partagent à parts égales - comptez-les ensemble.',
+    },
+    paternalHalfBrothersCount: {
+      question: 'Combien de demi-frères consanguins (même père, mère différente) survivent ?',
+    },
+    paternalHalfSistersCount: {
+      question: 'Combien de demi-sœurs consanguines (même père, mère différente) survivent ?',
+    },
+    fullNephewsCount: {
+      question: 'Combien de fils d’un frère germain survivent ?',
+    },
+    halfNephewsCount: {
+      question: 'Combien de fils d’un demi-frère consanguin survivent ?',
+      helper: 'Nous ne posons cette question que parce qu’aucun fils d’un frère germain ne survit.',
+    },
+    fullNephewsSonsCount: {
+      question: 'Combien de fils du fils d’un frère germain survivent ?',
+    },
+    halfNephewsSonsCount: {
+      question: 'Combien de fils du fils d’un demi-frère consanguin survivent ?',
+    },
+    fullUnclesCount: {
+      question: 'Combien d’oncles paternels germains (frères germains du père) survivent ?',
+    },
+    halfUnclesCount: {
+      question: 'Combien de demi-oncles paternels (demi-frères consanguins du père) survivent ?',
+    },
+    fullCousinsCount: {
+      question: 'Combien de fils d’un oncle paternel germain survivent ?',
+    },
+    halfCousinsCount: {
+      question: 'Combien de fils d’un demi-oncle paternel survivent ?',
+    },
+    whyWeAskLabel: 'Pourquoi cette question ?',
+  },
+  reviewPage: {
+    ...EN_TRANSLATIONS.reviewPage,
+    eyebrow: 'RÉCAPITULATIF',
+    heading: 'Vérifiez les informations sur la famille',
+    body: 'Vérifiez tout ce qui suit avant que nous calculions les parts. Vous pouvez modifier chaque section.',
+    sections: {
+      deceased: 'Défunt',
+      spouse: 'Conjoint',
+      parents: 'Parents et grands-parents',
+      children: 'Enfants et descendants',
+      siblings: 'Fratrie',
+      extended: 'Famille élargie',
+      estate: 'Succession',
+    },
+    labels: {
+      gender: 'Sexe',
+      husbandAlive: 'Mari vivant',
+      wivesSurviving: 'Épouses survivantes',
+      fatherAlive: 'Père vivant',
+      paternalGrandfatherAlive: 'Grand-père paternel vivant',
+      motherAlive: 'Mère vivante',
+      eligibleGrandmothers: 'Grands-mères admissibles',
+      childrenOrDescendants: 'Enfants ou descendants',
+      none: 'Aucun',
+      sons: 'Fils',
+      daughters: 'Filles',
+      sonsSons: 'Fils du fils',
+      sonsDaughters: 'Filles du fils',
+      siblingsMother: 'Fratrie (pour la part de la mère uniquement)',
+      fullBrothers: 'Frères germains',
+      fullSisters: 'Sœurs germaines',
+      maternalSiblings: 'Frères et sœurs utérins',
+      paternalHalfBrothers: 'Demi-frères consanguins',
+      paternalHalfSisters: 'Demi-sœurs consanguines',
+      fullNephews: 'Fils des frères germains',
+      halfNephews: 'Fils des demi-frères consanguins',
+      fullNephewsSons: 'Fils des neveux germains',
+      halfNephewsSons: 'Fils des demi-neveux',
+      fullUncles: 'Oncles paternels germains',
+      halfUncles: 'Demi-oncles paternels',
+      fullCousins: 'Cousins paternels germains',
+      halfCousins: 'Demi-cousins paternels',
+      distributableEstate: 'Succession à partager',
+    },
+    skippedHeading: 'Proches non demandés car ils ne pouvaient pas influer sur ce cas',
+    calculate: 'Calculer les parts',
+  },
   commonCasesPage: {
     ...EN_TRANSLATIONS.commonCasesPage,
     browse: 'Parcourir par catégorie',

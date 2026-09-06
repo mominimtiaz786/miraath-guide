@@ -142,6 +142,76 @@ export const UR_TRANSLATIONS = {
   },
   wizard: {
     ...EN_TRANSLATIONS.wizard,
+    paternalGrandfatherAlive: {
+      question: 'کیا متوفی کے دادا زندہ ہیں؟',
+      helper: 'ہم یہ اس لیے پوچھ رہے ہیں کیونکہ والد زندہ نہیں ہیں۔',
+      whyWeAsk: 'والد کے انتقال کے بعد دادا کئی احکام میں ان کی جگہ لے لیتے ہیں۔',
+    },
+    grandmothersCount: {
+      question: 'کتنی اہل دادیاں/نانیاں زندہ ہیں؟',
+      helper: 'صرف وہ گنیں جن کی جہت کسی قریب تر رشتہ دار سے محجوب نہ ہو - عموماً نانی اور دادی۔',
+      whyWeAsk: 'ہم یہ اس لیے پوچھ رہے ہیں کیونکہ والدہ زندہ نہیں ہیں - اہل دادیاں/نانیاں ان کا 1/6 آپس میں تقسیم کرتی ہیں۔',
+    },
+    sonsCount: {
+      question: 'متوفی کے کتنے بیٹے زندہ ہیں؟',
+    },
+    daughtersCount: {
+      question: 'متوفی کی کتنی بیٹیاں زندہ ہیں؟',
+    },
+    paternalGrandsonsCount: {
+      question: 'کتنے پوتے (بیٹے کے بیٹے) زندہ ہیں؟',
+      helper: 'ہم یہ اس لیے پوچھ رہے ہیں کیونکہ کوئی زندہ بیٹا نہیں ہے۔',
+    },
+    paternalGranddaughtersCount: {
+      question: 'کتنی پوتیاں (بیٹے کی بیٹیاں) زندہ ہیں؟',
+    },
+    siblingsForMotherShareCount: {
+      question: 'کسی بھی قسم کے کتنے بہن بھائی زندہ ہیں (حقیقی، علاتی یا اخیافی)؟',
+      helper: 'یہ تعداد صرف والدہ کا حصہ متعین کرنے کے لیے ہے - یہ بہن بھائی خود کوئی حصہ نہیں پائیں گے، کیونکہ والد انہیں محروم کر دیتے ہیں۔',
+      whyWeAsk: 'دو یا زیادہ بہن بھائی والدہ کا حصہ 1/3 سے کم کر کے 1/6 کر دیتے ہیں، اگرچہ والد کی موجودگی میں وہ خود وارث نہیں بنتے۔',
+    },
+    fullBrothersCount: {
+      question: 'کتنے حقیقی بھائی (ایک ہی والدین سے) زندہ ہیں؟',
+    },
+    fullSistersCount: {
+      question: 'کتنی حقیقی بہنیں (ایک ہی والدین سے) زندہ ہیں؟',
+    },
+    maternalSiblingsCount: {
+      question: 'کتنے اخیافی بہن بھائی (ایک ہی والدہ، مختلف والد) زندہ ہیں؟',
+      helper: 'اخیافی بھائی اور بہنیں برابر حصہ پاتے ہیں - انہیں ایک ساتھ گنیں۔',
+    },
+    paternalHalfBrothersCount: {
+      question: 'کتنے علاتی بھائی (ایک ہی والد، مختلف والدہ) زندہ ہیں؟',
+    },
+    paternalHalfSistersCount: {
+      question: 'کتنی علاتی بہنیں (ایک ہی والد، مختلف والدہ) زندہ ہیں؟',
+    },
+    fullNephewsCount: {
+      question: 'حقیقی بھائی کے کتنے بیٹے زندہ ہیں؟',
+    },
+    halfNephewsCount: {
+      question: 'علاتی بھائی کے کتنے بیٹے زندہ ہیں؟',
+      helper: 'ہم یہ اس لیے پوچھ رہے ہیں کیونکہ حقیقی بھائی کا کوئی زندہ بیٹا نہیں ہے۔',
+    },
+    fullNephewsSonsCount: {
+      question: 'حقیقی بھائی کے بیٹے کے کتنے بیٹے زندہ ہیں؟',
+    },
+    halfNephewsSonsCount: {
+      question: 'علاتی بھائی کے بیٹے کے کتنے بیٹے زندہ ہیں؟',
+    },
+    fullUnclesCount: {
+      question: 'کتنے حقیقی چچا (والد کے حقیقی بھائی) زندہ ہیں؟',
+    },
+    halfUnclesCount: {
+      question: 'کتنے علاتی چچا (والد کے علاتی بھائی) زندہ ہیں؟',
+    },
+    fullCousinsCount: {
+      question: 'حقیقی چچا کے کتنے بیٹے زندہ ہیں؟',
+    },
+    halfCousinsCount: {
+      question: 'علاتی چچا کے کتنے بیٹے زندہ ہیں؟',
+    },
+    whyWeAskLabel: 'ہم یہ کیوں پوچھتے ہیں؟',
     exit: 'باہر نکلیں',
     tip: 'ہم صرف انہی رشتہ داروں کے بارے میں پوچھیں گے جو وراثت پر اثر ڈال سکتے ہیں۔ نتائج سے پہلے آپ جوابات بدل سکتے ہیں۔',
     estatePlaceholder: 'مثلاً 5,000,000',
@@ -176,6 +246,45 @@ export const UR_TRANSLATIONS = {
   },
   reviewPage: {
     ...EN_TRANSLATIONS.reviewPage,
+    sections: {
+      deceased: 'متوفی',
+      spouse: 'شریکِ حیات',
+      parents: 'والدین اور دادا دادی',
+      children: 'اولاد اور اولاد کی اولاد',
+      siblings: 'بہن بھائی',
+      extended: 'دیگر رشتہ دار',
+      estate: 'ترکہ',
+    },
+    labels: {
+      gender: 'جنس',
+      husbandAlive: 'شوہر زندہ ہیں',
+      wivesSurviving: 'زندہ بیویاں',
+      fatherAlive: 'والد زندہ ہیں',
+      paternalGrandfatherAlive: 'دادا زندہ ہیں',
+      motherAlive: 'والدہ زندہ ہیں',
+      eligibleGrandmothers: 'اہل دادیاں/نانیاں',
+      childrenOrDescendants: 'اولاد یا اولاد کی اولاد',
+      none: 'کوئی نہیں',
+      sons: 'بیٹے',
+      daughters: 'بیٹیاں',
+      sonsSons: 'پوتے',
+      sonsDaughters: 'پوتیاں',
+      siblingsMother: 'بہن بھائی (صرف والدہ کے حصے کے لیے)',
+      fullBrothers: 'حقیقی بھائی',
+      fullSisters: 'حقیقی بہنیں',
+      maternalSiblings: 'اخیافی بہن بھائی',
+      paternalHalfBrothers: 'علاتی بھائی',
+      paternalHalfSisters: 'علاتی بہنیں',
+      fullNephews: 'حقیقی بھائیوں کے بیٹے',
+      halfNephews: 'علاتی بھائیوں کے بیٹے',
+      fullNephewsSons: 'حقیقی بھتیجوں کے بیٹے',
+      halfNephewsSons: 'علاتی بھتیجوں کے بیٹے',
+      fullUncles: 'حقیقی چچا',
+      halfUncles: 'علاتی چچا',
+      fullCousins: 'حقیقی چچا کے بیٹے',
+      halfCousins: 'علاتی چچا کے بیٹے',
+      distributableEstate: 'قابلِ تقسیم ترکہ',
+    },
     eyebrow: 'جائزہ',
     heading: 'اپنی خاندانی معلومات کا جائزہ لیں',
     body: 'حصے نکالنے سے پہلے نیچے دی گئی معلومات چیک کریں۔ آپ کسی بھی حصے میں ترمیم کر سکتے ہیں۔',
