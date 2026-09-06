@@ -1,5 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { AppStorageService } from '../../../core/platform/app-storage.service';
 import { CalculationEngineService } from '../engine/calculation-engine.service';
 import { deriveFacts } from '../engine/derive-facts';
 import { CalculatorAnswers, createEmptyAnswers } from '../models/calculator-answers.model';
@@ -7,7 +7,7 @@ import { CalculationResult } from '../models/calculation-result.model';
 import { WizardStepId } from '../models/wizard-step.model';
 import { QuestionRouterService } from '../routing/question-router.service';
 
-const SESSION_STORAGE_KEY = 'mirath-guide.wizard-answers';
+const STORAGE_KEY = 'wizard-answers';
 
 /**
  * Application-level calculator state (spec section 24). All mutation goes
@@ -17,7 +17,9 @@ const SESSION_STORAGE_KEY = 'mirath-guide.wizard-answers';
 export class CalculatorStore {
   private readonly router = inject(QuestionRouterService);
   private readonly engine = inject(CalculationEngineService);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  // Declared before `initialState` on purpose: field initializers run in
+  // source order, and `readPersistedState()` needs the store to exist.
+  private readonly storage = inject(AppStorageService);
 
   private readonly initialState = this.readPersistedState();
   private readonly answers_ = signal<CalculatorAnswers>(this.initialState.answers);
@@ -105,14 +107,7 @@ export class CalculatorStore {
     this.currentStepId_.set(this.router.getFirstStep(empty));
     this.result_.set(null);
     this.calculationErrors_.set([]);
-    if (!this.isBrowser) {
-      return;
-    }
-    try {
-      sessionStorage.removeItem(SESSION_STORAGE_KEY);
-    } catch {
-      // sessionStorage may be unavailable - in-memory state is already cleared.
-    }
+    this.storage.remove(STORAGE_KEY);
   }
 
   /** Preloads the wizard with a common case's answers (spec section 24 example). */
@@ -125,26 +120,12 @@ export class CalculatorStore {
   }
 
   private persist(): void {
-    if (!this.isBrowser) {
-      return;
-    }
-    try {
-      sessionStorage.setItem(
-        SESSION_STORAGE_KEY,
-        JSON.stringify({ answers: this.answers_(), stepId: this.currentStepId_() }),
-      );
-    } catch {
-      // sessionStorage may be unavailable (private browsing) - progress simply won't survive a reload.
-    }
+    this.storage.write(STORAGE_KEY, JSON.stringify({ answers: this.answers_(), stepId: this.currentStepId_() }));
   }
 
   private readPersistedState(): { answers: CalculatorAnswers; stepId: WizardStepId } {
-    if (!this.isBrowser) {
-      const answers = createEmptyAnswers();
-      return { answers, stepId: this.router.getFirstStep(answers) };
-    }
     try {
-      const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      const raw = this.storage.read(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as { answers: CalculatorAnswers; stepId: WizardStepId };
         const answers = { ...createEmptyAnswers(), ...parsed.answers };

@@ -30,6 +30,11 @@ export const UR_TRANSLATIONS = {
     label: 'زبان',
     current: 'موجودہ زبان',
   },
+  languageGate: {
+    heading: 'اپنی زبان منتخب کریں',
+    subheading: 'آپ اسے کسی بھی وقت مینو سے تبدیل کر سکتے ہیں۔',
+    confirm: 'جاری رکھیں',
+  },
   nav: {
     ...EN_TRANSLATIONS.nav,
     primary: 'مرکزی',
@@ -309,6 +314,9 @@ export const UR_TRANSLATIONS = {
     edit: 'خاندانی معلومات بدلیں',
     another: 'نیا حساب شروع کریں',
     download: 'PDF رپورٹ ڈاؤن لوڈ کریں',
+    share: 'PDF رپورٹ شیئر کریں',
+    shareTitle: 'میراث گائیڈ وراثت رپورٹ',
+    shareFailed: 'رپورٹ شیئر نہیں ہو سکی۔ براہِ کرم دوبارہ کوشش کریں۔',
     total: 'کل',
     eachInherits: 'ہر ایک کا حصہ',
     doesNotInherit: 'اس کیس میں وارث نہیں',

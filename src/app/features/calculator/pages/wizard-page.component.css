@@ -1,5 +1,7 @@
 .wizard-shell {
-  min-height: 100vh;
+  /* dvh, not vh: mobile browsers and WebViews shrink the viewport when the
+     on-screen keyboard opens, and 100vh would push the continue button under it. */
+  min-height: 100dvh;
   background: var(--color-bg-ivory);
   display: flex;
   flex-direction: column;
@@ -9,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) var(--space-6);
+  /* The wizard hides the site chrome, so it owns its own status bar clearance. */
+  padding: calc(var(--space-4) + var(--safe-area-top)) var(--space-6) var(--space-4);
 }
 
 .logo {
@@ -48,7 +51,7 @@
   max-width: var(--wizard-width);
   margin: 0 auto;
   width: 100%;
-  padding: var(--space-6) var(--space-6) var(--space-16);
+  padding: var(--space-6) var(--space-6) calc(var(--space-16) + var(--safe-area-bottom));
   display: flex;
   flex-direction: column;
   gap: var(--space-4);

@@ -12,6 +12,15 @@
     </div>
   </header>
 
+  <!-- Above the numbers, not below them: this is the point at which someone is
+       most likely to treat the output as a ruling rather than as a study aid. -->
+  <app-info-banner icon="TriangleAlert" tone="gold" class="disclaimer">
+    <p>
+      {{ i18n.t('footer.disclaimerNote') }}
+      <a class="text-link-inline" [routerLink]="localeUrl.localize('/disclaimer')">{{ i18n.t('nav.disclaimer') }}</a>
+    </p>
+  </app-info-banner>
+
   <section class="chart-section">
     <app-calculation-chart [segments]="chartSegments()" />
   </section>
@@ -72,10 +81,12 @@
 
   <div class="actions no-print">
     <app-download-report-button [result]="result()" />
-    <app-secondary-button (click)="print()">
-      <app-icon name="Printer" [size]="18" />
-      {{ i18n.t('results.print') }}
-    </app-secondary-button>
+    @if (canPrint) {
+      <app-secondary-button (click)="print()">
+        <app-icon name="Printer" [size]="18" />
+        {{ i18n.t('results.print') }}
+      </app-secondary-button>
+    }
     <app-secondary-button (click)="editDetails()">{{ i18n.t('results.edit') }}</app-secondary-button>
     <app-primary-button [showArrow]="false" (click)="startAnother()">{{ i18n.t('results.another') }}</app-primary-button>
   </div>

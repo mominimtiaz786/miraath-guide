@@ -1,12 +1,14 @@
-import { UpperCasePipe, isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { UpperCasePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { PlatformService } from '../../../core/platform/platform.service';
 import { ShareCardComponent } from '../../../shared/components/share-card/share-card.component';
 import { BlockedHeirCardComponent } from '../../../shared/components/blocked-heir-card/blocked-heir-card.component';
 import { CalculationChartComponent, ChartSegment } from '../../../shared/components/calculation-chart/calculation-chart.component';
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from '../../../shared/components/secondary-button/secondary-button.component';
 import { DownloadReportButtonComponent } from '../../../shared/components/download-report-button/download-report-button.component';
+import { InfoBannerComponent } from '../../../shared/components/info-banner/info-banner.component';
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { CalculatorStore } from '../state/calculator-store.service';
 import { ExplanationEngine } from '../engine/explanations/explanation-engine';
@@ -27,7 +29,9 @@ type ResultTab = 'simple' | 'detailed';
     PrimaryButtonComponent,
     SecondaryButtonComponent,
     DownloadReportButtonComponent,
+    InfoBannerComponent,
     AppIconComponent,
+    RouterLink,
   ],
   templateUrl: './results-page.component.html',
   styleUrl: './results-page.component.css',
@@ -38,13 +42,34 @@ export class ResultsPageComponent {
   private readonly explanationEngine = inject(ExplanationEngine);
   private readonly router = inject(Router);
   protected readonly i18n = inject(TranslationService);
-  private readonly localeUrl = inject(LocaleUrlService);
+  protected readonly localeUrl = inject(LocaleUrlService);
   private readonly heirLabels = inject(HeirLabelService);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly platform = inject(PlatformService);
+
+  /**
+   * `window.print()` has no counterpart in a WebView - there is no print
+   * dialog to open and the call is a no-op. Native users reach the same
+   * outcome through the share sheet (AirPrint / Android print service), so
+   * the button is hidden rather than left there doing nothing.
+   */
+  protected readonly canPrint = this.platform.isBrowser && !this.platform.isNative;
 
   protected readonly activeTab = signal<ResultTab>('simple');
 
-  protected readonly result = computed(() => this.store.result() ?? this.store.calculate());
+  /**
+   * Guarantees a result exists before the template reads one. The wizard's
+   * normal path arrives here with a result already stored (the review page
+   * calls `calculate()` before navigating), but a reload, a restored session,
+   * or a native cold start into saved progress does not.
+   *
+   * Resolved in a field initializer rather than inside the computed below,
+   * because `calculate()` writes signals and Angular rejects a signal write
+   * inside a reactive computation (NG0600) - which used to blank this page
+   * whenever it was opened directly.
+   */
+  private readonly ensuredResult = this.store.result() ?? this.store.calculate();
+
+  protected readonly result = computed(() => this.store.result() ?? this.ensuredResult);
 
   protected readonly eligibleExplanations = computed(() => this.explanationEngine.buildEligibleExplanations(this.result().eligibleHeirs));
   protected readonly blockedExplanations = computed(() => this.explanationEngine.buildBlockedExplanations(this.result().blockedHeirs));
@@ -70,7 +95,7 @@ export class ResultsPageComponent {
   }
 
   print(): void {
-    if (this.isBrowser) {
+    if (this.canPrint) {
       window.print();
     }
   }

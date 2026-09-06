@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mirath Guide brand palette (see src/styles/_tokens.css). styles.xml
+     references these, so this file is required for the project to compile. -->
+<resources>
+    <color name="colorPrimary">#17483F</color>
+    <color name="colorPrimaryDark">#17483F</color>
+    <color name="colorAccent">#C39A52</color>
+    <!-- Matches SplashScreen.backgroundColor in capacitor.config.ts, so the
+         launch screen and the native splash never disagree by a frame. -->
+    <color name="splashBackground">#17483F</color>
+</resources>

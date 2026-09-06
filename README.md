@@ -38,8 +38,14 @@ npm test              # ng test - Karma + Jasmine, headless Chrome by default in
 npx ng test --watch=false --browsers=ChromeHeadless   # single run, CI-style
 npx ng lint            # @angular-eslint
 npm run build           # production build -> dist/mirath-guide
-npx ng build --configuration development  # unminified build, faster iteration
+npx ng build mirath-guide --configuration development  # unminified build, faster iteration
 ```
+
+The workspace holds two Angular projects, so every `ng` command needs one named
+explicitly (Angular removed `defaultProject` in v17):
+
+- `mirath-guide` - the web build, with SSR, prerendering and SEO. The default for `npm start`/`npm run build`.
+- `mirath-guide-app` - the static build packaged into the iOS/Android apps. See below.
 
 ## Production build
 
@@ -48,6 +54,142 @@ writing the initial bundle is ~423 kB raw / ~103 kB gzipped; every feature page 
 common cases, learn, methodology, results, etc.) and the PDF/report machinery are separate lazy
 chunks loaded on demand, so the PDF library (`jspdf`, with its optional `html2canvas` dependency)
 never loads until someone actually opens `/calculator/results`.
+
+## Mobile app (iOS / Android)
+
+The same Angular codebase ships as a native app through [Capacitor](https://capacitorjs.com).
+There is no Ionic UI layer: the app keeps its own design system, RTL typography and components
+verbatim, and Capacitor supplies only the native runtime.
+
+```bash
+npm run build:app     # static build -> dist/mirath-guide-app/browser
+npm run sync:app      # build, then copy into android/ and ios/
+npm run android       # sync, then open Android Studio
+npm run ios           # sync, then open Xcode (macOS only)
+npm run start:app     # serve the app build in a browser, for layout work
+npm run gen:assets    # regenerate launcher icons and splash screens
+```
+
+### Android build toolchain
+
+AGP 8.7.2 / Gradle 8.11.1 need **JDK 17+** (Ubuntu 20.04 still ships 11) and an Android SDK with
+API 35. Both live under your home directory - nothing is installed system-wide, nothing needs
+`sudo`, and nothing is on your `PATH` until you source the env script, so it behaves like a
+per-shell environment rather than a global install:
+
+```bash
+npm run apk               # Angular build -> cap sync -> gradle, in one step
+npm run apk -- --install  # ...and push it to a connected phone or emulator
+```
+
+That drops `miraath-guide-debug.apk` in the repo root, ready to copy onto a phone (it is
+debug-signed, so Android will ask you to allow installs from that source). The script sources the
+toolchain itself, so it works from a plain shell. Run it after *any* change - Angular code,
+`capacitor.config.ts`, a plugin, or the native projects; the `cap sync` step is what stops the web
+bundle inside `android/` going stale. Incremental rebuilds take ~15s.
+
+Only touched native Android code (`MainActivity`, `res/`)? `cd android && ./gradlew assembleDebug`
+is enough. The equivalent long form of the above is:
+
+```bash
+source scripts/android-env.sh          # JAVA_HOME, ANDROID_HOME, PATH
+npm run sync:app
+cd android && ./gradlew assembleDebug  # -> app/build/outputs/apk/debug/app-debug.apk
+```
+
+| | Path | Notes |
+|---|---|---|
+| JDK | `~/.local/opt/jdk-21` | Eclipse Temurin 21 (LTS), checksum-verified against the Adoptium API |
+| SDK | `~/Android/Sdk` | the standard location, so Android Studio picks it up unchanged |
+
+Packages installed: `platform-tools`, `platforms;android-35`, `build-tools;35.0.0`. Setting this
+up accepted the Android SDK licences non-interactively - `sdkmanager --licenses` will show you
+what was agreed to.
+
+iOS needs macOS, Xcode and CocoaPods, none of which exist on Linux.
+
+### How the app build differs from the web build
+
+| | `mirath-guide` (web) | `mirath-guide-app` (native) |
+|---|---|---|
+| Entry document | `src/index.html` | `src/index.app.html` |
+| Rendering | SSR + prerender, `outputMode: server` | static, client-rendered |
+| Environment | `environments/environment.ts` | `environment.app.ts` (swapped via `fileReplacements`) |
+| Analytics | Google Analytics tag | none - a third-party request that fails offline and would pull the listing into store data disclosures |
+| SEO | canonical, hreflang, Open Graph, JSON-LD | skipped (`environment.enableSeo`); a WebView has no crawler |
+| `robots.txt` / `sitemap.xml` | shipped | excluded from assets |
+| Viewport | standard | `viewport-fit=cover`, so `env(safe-area-inset-*)` reports real values |
+
+### What changes at runtime on native
+
+All of it funnels through `core/platform/`, and every branch is a no-op on the web.
+
+- **`PlatformService`** - reads Capacitor's injected `window.Capacitor` global rather than
+  importing `@capacitor/core`, so the web bundle contains no Capacitor code at all.
+- **`NativeBridgeService`** - the only place plugins are loaded, always via dynamic `import()`
+  behind an `isNative` check. The web build never downloads a plugin chunk.
+- **`AppStorageService`** - a WebView's `sessionStorage` dies with the app process, which would
+  throw away a half-finished wizard just for backgrounding the app. On native both scopes use
+  `localStorage`, mirrored write-behind into Capacitor `Preferences` so state also survives the
+  storage eviction iOS performs on unused apps. The API stays synchronous because
+  `CalculatorStore` and `LocaleService` both read persisted state while building initial signals.
+- **`NativeShellService`** - status bar theming, the splash hand-off after first paint, the
+  Android hardware back button (unwind history, exit only from the root), and the redirect into
+  the stored language on launch.
+- **`ReportDeliveryService`** - `jsPDF.save()` is a browser download and silently does nothing in
+  a WebView. On native the PDF is written to the app cache directory and handed to the OS share
+  sheet instead (which is also the route to AirPrint / Android printing, so the Print button is
+  hidden there). The Android `FileProvider` and its `cache-path` entry are what make the file URI
+  shareable.
+- **`LanguageGateComponent`** - on the web the URL answers "which language" (`/ur/learn` *is* the
+  Urdu page). An app launch has no such signal, so a first-run picker asks once, pre-selected from
+  the device language, and `LocalePreferenceService` persists the answer.
+
+Safe areas are exposed as `--safe-area-*` tokens in `_tokens.css` and resolve to `0px` on the web.
+Horizontal insets are applied once on `main#main-content`; the header, footer and the chrome-less
+wizard handle their own vertical clearance.
+
+**Android handles system bars natively, not in CSS.** Android 15 (targetSdk 35) forces every app
+edge-to-edge and ignores both `StatusBar.setOverlaysWebView(false)` and `setBackgroundColor` - yet
+its WebView still reports `env(safe-area-inset-*)` as `0px` (measured on device). The page
+therefore has no way to reserve the strip itself, and the sticky header ends up under the clock.
+`MainActivity` pads the content view from the real window insets instead, and paints that padding
+brand green. iOS keeps the CSS route, where `env()` reports honestly.
+
+### Two URL shapes, deliberately
+
+`LocaleUrlService` exposes both, and they must not be confused:
+
+- `localize()` - what the Router parses. A locale root is **`/ur`**, no trailing slash.
+- `canonical()` - what crawlers see. A locale root is **`/ur/`**, matching the sitemap and every
+  canonical tag already indexed.
+
+Angular's `UrlSerializer` reads `/ur/` as a trailing *empty* segment, which matches no route and
+silently lands on the 404 page - no error, no warning. Using the canonical form for navigation
+broke the header logo, the language switcher and the app's first-run language picker in every
+non-English locale. `locale-url.service.spec.ts` pins both shapes down.
+
+### Icons and splash screens
+
+`assets/*.svg` are the source art; `npm run gen:assets` rasterises them into every slot the two
+native projects reference (iOS marketing icon and splash imageset, Android launcher + round +
+adaptive-foreground mipmaps across five densities, and portrait/landscape splash drawables).
+The mark is Lucide's `book-open-check` - the same glyph as the site header - in ivory with a gold
+check on brand green. Edit the SVGs, never the generated PNGs.
+
+This replaces `@capacitor/assets`, which pins a `sharp` version that has no prebuilt binary for
+current Node and so cannot install.
+
+### Still to do before submitting to the stores
+
+- Signing: an Android upload keystore, and an Apple distribution certificate + provisioning profile.
+- Store listings, screenshots, and a data-safety / privacy-nutrition declaration - the app
+  collects nothing and makes no network requests, which makes that form short.
+- Test on iOS. Nothing on that side has been compiled or run - it needs macOS, Xcode and
+  CocoaPods. Android has been built and exercised on an Android 15 emulator: first-run language
+  picker, locale persistence through Capacitor `Preferences`, RTL rendering, state restored from
+  `localStorage` on cold start, PDF generation with the embedded Arabic font, the OS share sheet,
+  and the hardware back button.
 
 ## Architecture overview
 

@@ -24,6 +24,11 @@ export const AR_TRANSLATIONS = {
     learnMore: 'تعرّف على المنهجية',
   },
   language: { label: 'اللغة', current: 'اللغة الحالية' },
+  languageGate: {
+    heading: 'اختر لغتك',
+    subheading: 'يمكنك تغييرها في أي وقت من القائمة.',
+    confirm: 'متابعة',
+  },
   nav: {
     ...EN_TRANSLATIONS.nav,
     primary: 'التنقل الرئيسي',
@@ -118,6 +123,9 @@ export const AR_TRANSLATIONS = {
     edit: 'تعديل بيانات الأسرة',
     another: 'بدء حساب جديد',
     download: 'تنزيل تقرير PDF',
+    share: 'مشاركة تقرير PDF',
+    shareTitle: 'تقرير الميراث من دليل الميراث',
+    shareFailed: 'تعذّرت مشاركة التقرير. يُرجى المحاولة مرة أخرى.',
     eachInherits: 'نصيب كل واحد',
     doesNotInherit: 'لا يرث في هذه الحالة',
   },

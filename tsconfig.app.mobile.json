@@ -1,0 +1,17 @@
+/* TypeScript config for the Capacitor (native app) build.
+   Same sources as tsconfig.app.json minus the SSR entry points - the packaged
+   app has no Node server, so main.server.ts and server.ts must not be compiled
+   into it (they pull in express and node: builtins). */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app-mobile",
+    "types": []
+  },
+  "files": [
+    "src/main.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

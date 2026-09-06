@@ -13,6 +13,7 @@ import { FR_SEO } from '../../i18n/seo/fr.seo';
 import { HI_SEO } from '../../i18n/seo/hi.seo';
 import { SeoDictionary, SeoKey } from '../../i18n/seo/seo.types';
 import { UR_SEO } from '../../i18n/seo/ur.seo';
+import { environment } from '../../../environments/environment';
 import { SeoApplyOptions, SeoData } from './seo-data.model';
 import { DEFAULT_ROBOTS, SITE_NAME, SITE_URL } from './seo.constants';
 
@@ -73,12 +74,24 @@ export class SeoService {
     const locale = this.locale.locale();
     const localeDefinition = getLocaleDefinition(locale);
     this.title.setTitle(data.title);
+    this.document.documentElement.lang = localeDefinition.htmlLang;
+    this.document.documentElement.dir = localeDefinition.direction;
+
+    // Everything below this line exists for crawlers and link unfurlers:
+    // description/robots meta, Open Graph, Twitter cards, canonical and
+    // hreflang. A WebView has no such audience, so the app build skips the
+    // work. The SEO dictionaries themselves are still reachable from this
+    // class and stay in the bundle; the flag buys correctness, not bytes.
+    if (!environment.enableSeo) {
+      return;
+    }
+
     this.setTag('description', data.description);
     this.setTag('robots', data.robots ?? DEFAULT_ROBOTS);
 
     const ogTitle = data.ogTitle ?? data.title;
     const ogDescription = data.ogDescription ?? data.description;
-    const canonicalPath = this.localeUrl.localize(data.canonicalPath, locale);
+    const canonicalPath = this.localeUrl.canonical(data.canonicalPath, locale);
     const canonicalUrl = this.absoluteUrl(canonicalPath);
 
     this.setProperty('og:type', data.ogType ?? 'website');
@@ -102,8 +115,6 @@ export class SeoService {
 
     this.setCanonical(canonicalUrl);
     this.setHreflangLinks(data.canonicalPath);
-    this.document.documentElement.lang = localeDefinition.htmlLang;
-    this.document.documentElement.dir = localeDefinition.direction;
   }
 
   private findRouteSeoOptions(route: ActivatedRoute): SeoApplyOptions | null {
@@ -148,9 +159,9 @@ export class SeoService {
 
   private setHreflangLinks(canonicalPath: string): void {
     this.document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
-    const englishPath = this.localeUrl.localize(canonicalPath, DEFAULT_LOCALE);
+    const englishPath = this.localeUrl.canonical(canonicalPath, DEFAULT_LOCALE);
     for (const locale of Object.keys(SUPPORTED_LOCALES) as AppLocale[]) {
-      this.appendAlternate(locale, this.localeUrl.localize(canonicalPath, locale));
+      this.appendAlternate(locale, this.localeUrl.canonical(canonicalPath, locale));
     }
     this.appendAlternate('x-default', englishPath);
   }

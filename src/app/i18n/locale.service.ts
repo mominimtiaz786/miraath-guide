@@ -1,20 +1,18 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, effect, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { AppLocale } from './config/locale.types';
 import { SUPPORTED_LOCALES, getLocaleDefinition } from './config/locale.config';
+import { LocalePreferenceService } from './locale-preference.service';
 import { LocaleUrlService } from './locale-url.service';
-
-const STORAGE_KEY = 'mirath-guide.locale';
 
 @Injectable({ providedIn: 'root' })
 export class LocaleService {
   private readonly document = inject(DOCUMENT);
-  private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   private readonly localeUrl = inject(LocaleUrlService);
-  private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly preference = inject(LocalePreferenceService);
   private readonly locale_ = signal<AppLocale>(this.localeUrl.resolveLocale(this.router.url));
 
   readonly locale = this.locale_.asReadonly();
@@ -23,30 +21,23 @@ export class LocaleService {
   constructor() {
     this.applyDocumentLocale(this.locale_());
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event) => {
-      const nextLocale = this.localeUrl.resolveLocale(event.urlAfterRedirects);
-      this.locale_.set(nextLocale);
-      this.rememberLocale(nextLocale);
+      this.locale_.set(this.localeUrl.resolveLocale(event.urlAfterRedirects));
     });
     effect(() => this.applyDocumentLocale(this.locale_()));
   }
 
+  /**
+   * Records a *deliberate* language choice. Navigation alone deliberately
+   * does not persist anything: on native, `hasExplicitChoice()` is what
+   * decides whether the first-run picker appears, and every launch lands on
+   * `/` (English) before the user has said anything at all.
+   */
   setLocalePreference(locale: AppLocale): void {
-    this.rememberLocale(locale);
+    this.preference.remember(locale);
   }
 
   supportedLocales() {
     return Object.values(SUPPORTED_LOCALES);
-  }
-
-  private rememberLocale(locale: AppLocale): void {
-    if (!this.isBrowser) {
-      return;
-    }
-    try {
-      sessionStorage.setItem(STORAGE_KEY, locale);
-    } catch {
-      // Storage is only a convenience; URL resolution remains authoritative.
-    }
   }
 
   private applyDocumentLocale(locale: AppLocale): void {

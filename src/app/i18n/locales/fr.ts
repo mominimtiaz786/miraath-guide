@@ -24,6 +24,11 @@ export const FR_TRANSLATIONS = {
     learnMore: 'Voir la méthode',
   },
   language: { label: 'Langue', current: 'Langue actuelle' },
+  languageGate: {
+    heading: 'Choisissez votre langue',
+    subheading: 'Vous pouvez la modifier à tout moment depuis le menu.',
+    confirm: 'Continuer',
+  },
   nav: {
     ...EN_TRANSLATIONS.nav,
     primary: 'Principal',
@@ -119,6 +124,9 @@ export const FR_TRANSLATIONS = {
     edit: 'Modifier les détails familiaux',
     another: 'Commencer un autre calcul',
     download: 'Télécharger le rapport PDF',
+    share: 'Partager le rapport PDF',
+    shareTitle: 'Rapport de succession Miraath Guide',
+    shareFailed: 'Impossible de partager le rapport. Veuillez réessayer.',
     eachInherits: 'Chacun hérite',
     doesNotInherit: "N'hérite pas dans ce cas",
   },

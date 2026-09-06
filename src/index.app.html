@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+    The packaged app's entry document. Deliberately NOT src/index.html:
+    - no Google Analytics tag. It is a third-party network request that fails
+      offline (the whole point of the app build), and shipping it would drag
+      the listing into App Store / Play data-collection disclosures.
+    - no robots/canonical metadata. There is no crawler inside a WebView.
+    - viewport-fit=cover, so env(safe-area-inset-*) reports real values and
+      the layout can paint under the notch and home indicator.
+  -->
+  <meta charset="utf-8">
+  <title>Miraath Guide</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#17483f">
+  <!-- Long-press callouts and tap-to-zoom read as bugs in a native shell. -->
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

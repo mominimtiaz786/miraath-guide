@@ -62,6 +62,35 @@ svg {
   font-variant-numeric: tabular-nums;
 }
 
+/* In landscape on a notched phone the cutout eats into one side of the page.
+   Zero on the web, where the safe-area tokens resolve to 0px. */
+main#main-content {
+  padding-inline: var(--safe-area-left) var(--safe-area-right);
+}
+
+/* A WebView is a native surface, not a document: text selection on chrome and
+   the tap-highlight flash both read as bugs there. Inputs and prose keep it. */
+html.native-shell {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html.native-shell body {
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior-y: none;
+}
+
+html.native-shell input,
+html.native-shell textarea,
+html.native-shell p,
+html.native-shell li,
+html.native-shell h1,
+html.native-shell h2,
+html.native-shell h3 {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 .text-link-inline {
   color: var(--color-primary);
   font-weight: 600;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adaptive-icon background. Brand green, not Capacitor's placeholder white:
+     the foreground glyph is drawn in ivory and would be invisible on white. -->
+<resources>
+    <color name="ic_launcher_background">#17483F</color>
+</resources>

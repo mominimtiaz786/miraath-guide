@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 /**
  * SSR-safe JSON-LD injection. Uses `textContent` (never `innerHTML`) so
@@ -12,6 +13,10 @@ export class StructuredDataService {
   private readonly document = inject(DOCUMENT);
 
   set(id: string, data: Record<string, unknown>): void {
+    // JSON-LD is only ever read by a crawler; the app build ships none of it.
+    if (!environment.enableSeo) {
+      return;
+    }
     let script = this.document.head.querySelector<HTMLScriptElement>(
       `script[type="application/ld+json"][data-seo-id="${id}"]`,
     );

@@ -44,7 +44,9 @@
             "scripts": [],
             "server": "src/main.server.ts",
             "security": {
-              "allowedHosts": ["miraath-guide.islamictools.app"]
+              "allowedHosts": [
+                "miraath-guide.islamictools.app"
+              ]
             },
             "outputMode": "server",
             "prerender": true,
@@ -119,6 +121,90 @@
               "src/**/*.html"
             ]
           }
+        }
+      }
+    },
+    "mirath-guide-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "style": "css"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/mirath-guide-app",
+            "index": {
+              "input": "src/index.app.html",
+              "output": "index.html"
+            },
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.mobile.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public",
+                "ignore": [
+                  "robots.txt",
+                  "sitemap*.xml"
+                ]
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.app.ts"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "700kB",
+                  "maximumError": "1.5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "mirath-guide-app:build:production"
+            },
+            "development": {
+              "buildTarget": "mirath-guide-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }

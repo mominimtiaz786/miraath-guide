@@ -27,6 +27,11 @@ export const EN_TRANSLATIONS = {
     label: 'Language',
     current: 'Current language',
   },
+  languageGate: {
+    heading: 'Choose your language',
+    subheading: 'You can change this at any time from the menu.',
+    confirm: 'Continue',
+  },
   nav: {
     primary: 'Primary',
     primaryMobile: 'Primary mobile',
@@ -279,6 +284,9 @@ export const EN_TRANSLATIONS = {
     edit: 'Edit family details',
     another: 'Start another calculation',
     download: 'Download PDF Report',
+    share: 'Share PDF Report',
+    shareTitle: 'Miraath Guide inheritance report',
+    shareFailed: 'Could not share the report. Please try again.',
     total: 'Total',
     eachInherits: 'Each inherits',
     doesNotInherit: 'Does not inherit in this case',

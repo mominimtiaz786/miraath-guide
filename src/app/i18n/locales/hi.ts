@@ -24,6 +24,11 @@ export const HI_TRANSLATIONS = {
     learnMore: 'तरीका जानें',
   },
   language: { label: 'भाषा', current: 'वर्तमान भाषा' },
+  languageGate: {
+    heading: 'अपनी भाषा चुनें',
+    subheading: 'आप इसे कभी भी मेन्यू से बदल सकते हैं।',
+    confirm: 'जारी रखें',
+  },
   nav: {
     ...EN_TRANSLATIONS.nav,
     primary: 'मुख्य',
@@ -118,6 +123,9 @@ export const HI_TRANSLATIONS = {
     edit: 'परिवार विवरण बदलें',
     another: 'नई गणना शुरू करें',
     download: 'PDF रिपोर्ट डाउनलोड करें',
+    share: 'PDF रिपोर्ट साझा करें',
+    shareTitle: 'मीरास गाइड विरासत रिपोर्ट',
+    shareFailed: 'रिपोर्ट साझा नहीं की जा सकी। कृपया पुनः प्रयास करें।',
     eachInherits: 'हर व्यक्ति पाता है',
     doesNotInherit: 'इस मामले में विरासत नहीं पाता',
   },

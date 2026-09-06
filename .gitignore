@@ -42,3 +42,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Built APK dropped at the repo root by scripts/build-apk.sh
+/miraath-guide-debug.apk

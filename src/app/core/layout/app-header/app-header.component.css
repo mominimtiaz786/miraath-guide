@@ -4,12 +4,17 @@
   z-index: 100;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+  /* On iOS the WebView runs under the status bar, so the header's own
+     background has to fill that strip - otherwise the page scrolls visibly
+     behind the clock. Zero on the web and on Android. */
+  padding-top: var(--safe-area-top);
 }
 
 .inner {
   max-width: var(--page-max-width);
   margin: 0 auto;
-  padding: var(--space-3) var(--space-6);
+  padding: var(--space-3) calc(var(--space-6) + var(--safe-area-right)) var(--space-3)
+    calc(var(--space-6) + var(--safe-area-left));
   display: flex;
   align-items: center;
   gap: var(--space-8);
