@@ -83,7 +83,7 @@ export interface ReviewItem {
         margin: 0;
         font-weight: 600;
         color: var(--color-text);
-        text-align: right;
+        text-align: end;
       }
       .empty {
         margin: 0;
