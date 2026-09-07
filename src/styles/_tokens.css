@@ -43,7 +43,11 @@
 
   /* Typography */
   --font-latin: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-urdu: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
+  --font-urdu-body: 'Noto Naskh Arabic', 'Noto Sans Arabic', 'Nafees Web Naskh', system-ui, sans-serif;
+  --font-urdu-heading: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', 'Jameel Noori Nastaleeq', serif;
+  --font-urdu-ui: 'Noto Sans Arabic', 'Noto Naskh Arabic', system-ui, sans-serif;
+  --font-arabic-body: 'Noto Naskh Arabic', 'Noto Sans Arabic', system-ui, sans-serif;
+  --font-arabic-heading: 'Noto Kufi Arabic', 'Noto Naskh Arabic', system-ui, sans-serif;
   --font-quranic: 'Noto Naskh Arabic', 'Noto Sans Arabic', serif;
 
   --fs-hero: 52px;

@@ -1,32 +1,32 @@
 <header class="site-header">
   <div class="inner">
-    <a class="brand" routerLink="/" (click)="closeMenu()">
+    <a class="brand" [routerLink]="localeUrl.localize('/')" (click)="closeMenu()">
       <span class="brand-icon" aria-hidden="true">
         <app-icon name="BookOpenCheck" [size]="22" />
       </span>
       <span class="brand-text">
         <span class="wordmark">Miraath Guide</span>
-        <span class="tagline">Understand. Calculate. Share fairly.</span>
+        <span class="tagline">{{ i18n.t('brand.tagline') }}</span>
       </span>
     </a>
 
-    <nav class="nav-desktop" aria-label="Primary">
+    <nav class="nav-desktop" [attr.aria-label]="i18n.t('nav.primary')">
       @for (link of navLinks; track link.path) {
         <a
-          [routerLink]="link.path"
+          [routerLink]="localeUrl.localize(link.path)"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
           ariaCurrentWhenActive="page"
         >
-          {{ link.label }}
+          {{ i18n.t(link.labelKey) }}
         </a>
       }
     </nav>
 
     <div class="actions">
       <app-language-switcher class="lang-switcher" />
-      <app-primary-button routerLink="/calculator/wizard" [showArrow]="false" class="start-btn">
-        Start Calculation
+      <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')" [showArrow]="false" class="start-btn">
+        {{ i18n.t('nav.startCalculation') }}
       </app-primary-button>
       <button
         type="button"
@@ -34,7 +34,7 @@
         (click)="toggleMenu()"
         [attr.aria-expanded]="menuOpen()"
         aria-controls="mobile-nav"
-        aria-label="Toggle menu"
+        [attr.aria-label]="i18n.t('nav.toggle')"
       >
         <app-icon [name]="menuOpen() ? 'X' : 'Menu'" [size]="22" />
       </button>
@@ -42,13 +42,13 @@
   </div>
 
   @if (menuOpen()) {
-    <nav id="mobile-nav" class="nav-mobile" aria-label="Primary mobile">
+    <nav id="mobile-nav" class="nav-mobile" [attr.aria-label]="i18n.t('nav.primaryMobile')">
       @for (link of navLinks; track link.path) {
-        <a [routerLink]="link.path" routerLinkActive="active" (click)="closeMenu()">{{ link.label }}</a>
+        <a [routerLink]="localeUrl.localize(link.path)" routerLinkActive="active" (click)="closeMenu()">{{ i18n.t(link.labelKey) }}</a>
       }
       <app-language-switcher />
-      <app-primary-button routerLink="/calculator/wizard" [fullWidth]="true" (click)="closeMenu()">
-        Start Calculation
+      <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')" [fullWidth]="true" (click)="closeMenu()">
+        {{ i18n.t('nav.startCalculation') }}
       </app-primary-button>
     </nav>
   }

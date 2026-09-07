@@ -1,4 +1,6 @@
 import { HeirRelationship } from './heir.model';
+import { Injectable, inject } from '@angular/core';
+import { TranslationService } from '../../../i18n/translation.service';
 
 export interface HeirLabel {
   singular: string;
@@ -34,4 +36,14 @@ export const HEIR_LABELS: Record<HeirRelationship, HeirLabel> = {
 export function heirLabel(relationship: HeirRelationship, count: number): string {
   const entry = HEIR_LABELS[relationship];
   return count === 1 ? entry.singular : entry.plural;
+}
+
+@Injectable({ providedIn: 'root' })
+export class HeirLabelService {
+  private readonly i18n = inject(TranslationService);
+
+  label(relationship: HeirRelationship, count: number): string {
+    const form = count === 1 ? 'singular' : 'plural';
+    return this.i18n.t(`heir.${relationship}.${form}`);
+  }
 }

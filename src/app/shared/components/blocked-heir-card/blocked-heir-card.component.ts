@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ExplanationEntry } from '../../../features/calculator/models/calculation-result.model';
+import { TranslationService } from '../../../i18n/translation.service';
 import { AppIconComponent } from '../../icons/app-icon.component';
 
 @Component({
@@ -11,7 +12,7 @@ import { AppIconComponent } from '../../icons/app-icon.component';
       <div class="icon-badge"><app-icon name="UserX" [size]="18" /></div>
       <div class="text">
         <h3>{{ explanation().relationship }}</h3>
-        <p class="status">Does not inherit in this case</p>
+        <p class="status">{{ i18n.t('results.doesNotInherit') }}</p>
         <p class="reason">{{ explanation().simple }}</p>
       </div>
     </article>
@@ -61,4 +62,5 @@ import { AppIconComponent } from '../../icons/app-icon.component';
 })
 export class BlockedHeirCardComponent {
   readonly explanation = input.required<ExplanationEntry>();
+  protected readonly i18n = inject(TranslationService);
 }

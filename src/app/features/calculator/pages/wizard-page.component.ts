@@ -8,16 +8,8 @@ import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { CalculatorAnswers, DeceasedGender } from '../models/calculator-answers.model';
 import { WIZARD_QUESTION_CONTENT } from '../engine/questions/wizard-question-content';
 import { CalculatorStore } from '../state/calculator-store.service';
-
-const GENDER_OPTIONS: ChoiceOption<DeceasedGender>[] = [
-  { value: 'male', label: 'Male', icon: 'PersonStanding' },
-  { value: 'female', label: 'Female', icon: 'PersonStanding' },
-];
-
-const YES_NO_OPTIONS: ChoiceOption<boolean>[] = [
-  { value: true, label: 'Yes', icon: 'Check' },
-  { value: false, label: 'No', icon: 'X' },
-];
+import { LocaleUrlService } from '../../../i18n/locale-url.service';
+import { TranslationService } from '../../../i18n/translation.service';
 
 @Component({
   selector: 'app-wizard-page',
@@ -37,13 +29,30 @@ const YES_NO_OPTIONS: ChoiceOption<boolean>[] = [
 export class WizardPageComponent {
   protected readonly store = inject(CalculatorStore);
   private readonly router = inject(Router);
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
 
-  protected readonly genderOptions = GENDER_OPTIONS;
-  protected readonly yesNoOptions = YES_NO_OPTIONS;
+  protected readonly genderOptions = computed<ChoiceOption<DeceasedGender>[]>(() => [
+    { value: 'male', label: this.i18n.t('common.male'), icon: 'PersonStanding' },
+    { value: 'female', label: this.i18n.t('common.female'), icon: 'PersonStanding' },
+  ]);
+  protected readonly yesNoOptions = computed<ChoiceOption<boolean>[]>(() => [
+    { value: true, label: this.i18n.t('common.yes'), icon: 'Check' },
+    { value: false, label: this.i18n.t('common.no'), icon: 'X' },
+  ]);
 
   protected readonly stepId = this.store.currentStepId;
   protected readonly answers = this.store.answers;
-  protected readonly content = computed(() => WIZARD_QUESTION_CONTENT[this.stepId()]);
+  protected readonly content = computed(() => {
+    const base = WIZARD_QUESTION_CONTENT[this.stepId()];
+    const key = `wizard.${this.stepId()}`;
+    return {
+      ...base,
+      question: this.i18n.t(`${key}.question`),
+      helper: this.i18n.has(`${key}.helper`, this.i18n.locale()) ? this.i18n.t(`${key}.helper`) : base.helper,
+      whyWeAsk: this.i18n.has(`${key}.whyWeAsk`, this.i18n.locale()) ? this.i18n.t(`${key}.whyWeAsk`) : base.whyWeAsk,
+    };
+  });
 
   protected readonly answerKey = computed(() => this.stepId() as unknown as keyof CalculatorAnswers);
 
@@ -67,18 +76,18 @@ export class WizardPageComponent {
   continue(): void {
     const outcome = this.store.goNext();
     if (outcome === 'review') {
-      this.router.navigateByUrl('/calculator/review');
+      this.router.navigateByUrl(this.localeUrl.localize('/calculator/review'));
     }
   }
 
   back(): void {
     const moved = this.store.goBack();
     if (!moved) {
-      this.router.navigateByUrl('/calculator');
+      this.router.navigateByUrl(this.localeUrl.localize('/calculator'));
     }
   }
 
   exit(): void {
-    this.router.navigateByUrl('/calculator');
+    this.router.navigateByUrl(this.localeUrl.localize('/calculator'));
   }
 }

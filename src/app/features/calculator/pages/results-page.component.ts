@@ -10,7 +10,9 @@ import { DownloadReportButtonComponent } from '../../../shared/components/downlo
 import { AppIconComponent } from '../../../shared/icons/app-icon.component';
 import { CalculatorStore } from '../state/calculator-store.service';
 import { ExplanationEngine } from '../engine/explanations/explanation-engine';
-import { heirLabel } from '../models/heir-labels';
+import { HeirLabelService } from '../models/heir-labels';
+import { LocaleUrlService } from '../../../i18n/locale-url.service';
+import { TranslationService } from '../../../i18n/translation.service';
 
 type ResultTab = 'simple' | 'detailed';
 
@@ -35,6 +37,9 @@ export class ResultsPageComponent {
   protected readonly store = inject(CalculatorStore);
   private readonly explanationEngine = inject(ExplanationEngine);
   private readonly router = inject(Router);
+  protected readonly i18n = inject(TranslationService);
+  private readonly localeUrl = inject(LocaleUrlService);
+  private readonly heirLabels = inject(HeirLabelService);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   protected readonly activeTab = signal<ResultTab>('simple');
@@ -46,7 +51,7 @@ export class ResultsPageComponent {
 
   protected readonly chartSegments = computed<ChartSegment[]>(() =>
     this.result().finalShares.map((share) => ({
-      label: heirLabel(share.relationship, share.count),
+      label: this.heirLabels.label(share.relationship, share.count),
       fraction: share.poolShare,
     })),
   );
@@ -72,10 +77,10 @@ export class ResultsPageComponent {
 
   startAnother(): void {
     this.store.resetCalculation();
-    this.router.navigateByUrl('/calculator');
+    this.router.navigateByUrl(this.localeUrl.localize('/calculator'));
   }
 
   editDetails(): void {
-    this.router.navigateByUrl('/calculator/review');
+    this.router.navigateByUrl(this.localeUrl.localize('/calculator/review'));
   }
 }

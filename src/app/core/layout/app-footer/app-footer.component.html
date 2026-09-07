@@ -5,35 +5,35 @@
         <span class="brand-icon" aria-hidden="true"><app-icon name="BookOpenCheck" [size]="20" /></span>
         <span class="wordmark">Miraath Guide</span>
       </div>
-      <p>A trusted guide to Islamic inheritance. Clear. Accurate. Guided.</p>
+      <p>{{ i18n.t('footer.summary') }}</p>
     </div>
 
-    <nav class="col" aria-label="Quick links">
-      <h3>Quick Links</h3>
-      <a routerLink="/calculator">Calculator</a>
-      <a routerLink="/common-cases">Common Cases</a>
-      <a routerLink="/learn">Learn Faraid</a>
-      <a routerLink="/methodology">Methodology</a>
-      <a routerLink="/about">About</a>
+    <nav class="col" [attr.aria-label]="i18n.t('nav.quickLinks')">
+      <h3>{{ i18n.t('nav.quickLinks') }}</h3>
+      <a [routerLink]="localeUrl.localize('/calculator')">{{ i18n.t('nav.calculator') }}</a>
+      <a [routerLink]="localeUrl.localize('/common-cases')">{{ i18n.t('nav.commonCases') }}</a>
+      <a [routerLink]="localeUrl.localize('/learn')">{{ i18n.t('nav.learn') }}</a>
+      <a [routerLink]="localeUrl.localize('/methodology')">{{ i18n.t('nav.methodology') }}</a>
+      <a [routerLink]="localeUrl.localize('/about')">{{ i18n.t('nav.about') }}</a>
     </nav>
 
-    <nav class="col" aria-label="Resources">
-      <h3>Resources</h3>
-      <a routerLink="/glossary">Glossary</a>
-      <a routerLink="/methodology">Methodology</a>
-      <a routerLink="/privacy">Privacy Policy</a>
-      <a routerLink="/disclaimer">Disclaimer</a>
+    <nav class="col" [attr.aria-label]="i18n.t('nav.resources')">
+      <h3>{{ i18n.t('nav.resources') }}</h3>
+      <a [routerLink]="localeUrl.localize('/glossary')">{{ i18n.t('nav.glossary') }}</a>
+      <a [routerLink]="localeUrl.localize('/methodology')">{{ i18n.t('nav.methodology') }}</a>
+      <a [routerLink]="localeUrl.localize('/privacy')">{{ i18n.t('nav.privacy') }}</a>
+      <a [routerLink]="localeUrl.localize('/disclaimer')">{{ i18n.t('nav.disclaimer') }}</a>
     </nav>
 
     <div class="col quote-col">
       <h3>Qur'an 4:11</h3>
       <p class="arabic" lang="ar" dir="rtl">يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ</p>
-      <p class="translation">Allah commands you concerning your children: to the male, a share equal to that of two females.</p>
+      <p class="translation">{{ i18n.t('footer.quranTranslation') }}</p>
     </div>
   </div>
 
   <div class="bottom">
-    <p>&copy; {{ year }} Miraath Guide. All rights reserved.</p>
-    <p class="disclaimer-note">Educational tool - not a substitute for a qualified scholar or legal professional.</p>
+    <p>&copy; {{ year }} Miraath Guide. {{ i18n.t('footer.copyright') }}</p>
+    <p class="disclaimer-note">{{ i18n.t('footer.disclaimerNote') }}</p>
   </div>
 </footer>

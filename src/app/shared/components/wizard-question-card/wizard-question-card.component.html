@@ -12,7 +12,7 @@
     <div class="why-panel">
       <app-icon name="Info" [size]="18" />
       <div>
-        <p class="why-title">Why we ask this?</p>
+        <p class="why-title">{{ i18n.t('wizard.whyWeAskLabel') }}</p>
         <p class="why-body">{{ whyWeAsk() }}</p>
       </div>
     </div>
@@ -23,13 +23,13 @@
   @if (showBack()) {
     <button type="button" class="btn btn-secondary" (click)="back.emit()">
       <app-icon name="ArrowLeft" [size]="18" />
-      Back
+      {{ i18n.t('common.back') }}
     </button>
   } @else {
     <span></span>
   }
   <button type="button" class="btn btn-primary" [disabled]="!canContinue()" (click)="continue.emit()">
-    {{ continueLabel() }}
+    {{ continueLabel() ?? i18n.t('common.continue') }}
     <app-icon name="ArrowRight" [size]="18" color="var(--color-on-primary)" />
   </button>
 </div>

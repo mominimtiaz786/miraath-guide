@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { TranslationService } from '../../../i18n/translation.service';
 import { Fraction } from '../../utils/fraction';
 
 export interface ChartSegment {
@@ -37,6 +38,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 60;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculationChartComponent {
+  protected readonly i18n = inject(TranslationService);
   readonly segments = input.required<ChartSegment[]>();
 
   protected readonly circumference = CIRCUMFERENCE;

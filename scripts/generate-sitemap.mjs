@@ -9,50 +9,43 @@ const workspaceRoot = resolve(__dirname, '..');
 const sitemapPath = resolve(workspaceRoot, 'public/sitemap.xml');
 const siteUrl = 'https://miraath-guide.islamictools.app';
 
-/**
- * Builds `{ path, lastmod }` entries for every slug in a data file, under the
- * given route prefix. Mirrors the prerendered `getPrerenderParams()` sources in
- * src/app/app.routes.server.ts so the sitemap stays in sync with what is built.
- */
-const buildSlugUrls = (relativeDataPath, routePrefix) => {
-  const dataFilePath = resolve(workspaceRoot, relativeDataPath);
-  const dataFile = readFileSync(dataFilePath, 'utf8');
-  const slugs = [...dataFile.matchAll(/slug:\s*'([^']+)'/g)].map((match) => match[1]);
+const locales = [
+  { code: 'en', prefix: '' },
+  { code: 'ur', prefix: '/ur' },
+  { code: 'hi', prefix: '/hi' },
+  { code: 'fr', prefix: '/fr' },
+  { code: 'ar', prefix: '/ar' },
+];
 
-  // Attempt to extract an optional last-modified date from each entry.
-  // Supports properties named `updatedAt` or `lastModified` (string dates).
-  const dateRegex = /{[\s\S]*?slug:\s*'([^']+)'[\s\S]*?(?:updatedAt|lastModified)\s*:\s*'([^']+)'[\s\S]*?}/gs;
-  const slugDateMap = new Map();
-  for (const m of dataFile.matchAll(dateRegex)) {
-    const slug = m[1];
-    const rawDate = m[2];
-    // Normalize to YYYY-MM-DD when possible; otherwise ignore.
-    const d = new Date(rawDate);
-    if (!Number.isNaN(d.getTime())) {
-      slugDateMap.set(slug, d.toISOString().split('T')[0]);
-    }
-  }
+const localizePath = (path, locale) => {
+  if (locale.code === 'en') return path;
+  return path === '/' ? `${locale.prefix}/` : `${locale.prefix}${path}`;
+};
 
-  let fileLastModifiedDate = null;
+const lastModifiedForFile = (relativeDataPath) => {
   try {
     const rawGitDate = execSync(`git log -1 --format=%cI -- ${relativeDataPath}`, {
       cwd: workspaceRoot,
       encoding: 'utf8',
     }).trim();
-    if (rawGitDate) {
-      fileLastModifiedDate = new Date(rawGitDate).toISOString().split('T')[0];
-    }
+    return rawGitDate ? new Date(rawGitDate).toISOString().split('T')[0] : null;
   } catch {
-    // If git is unavailable or the file is untracked, ignore fallback.
+    return null;
   }
+};
 
+const buildSlugFamilies = (relativeDataPath, routePrefix) => {
+  const dataFilePath = resolve(workspaceRoot, relativeDataPath);
+  const dataFile = readFileSync(dataFilePath, 'utf8');
+  const slugs = [...dataFile.matchAll(/slug:\s*'([^']+)'/g)].map((match) => match[1]);
+  const fileLastmod = lastModifiedForFile(relativeDataPath);
   return slugs.map((slug) => ({
     path: `${routePrefix}/${slug}`,
-    lastmod: slugDateMap.get(slug) ?? fileLastModifiedDate,
+    lastmod: fileLastmod,
   }));
 };
 
-const staticUrls = [
+const staticFamilies = [
   '/',
   '/calculator',
   '/common-cases',
@@ -62,25 +55,13 @@ const staticUrls = [
   '/glossary',
   '/privacy',
   '/disclaimer',
+].map((path) => ({ path, lastmod: null }));
+
+const families = [
+  ...staticFamilies,
+  ...buildSlugFamilies('src/app/data/lessons/lessons.data.ts', '/learn'),
+  ...buildSlugFamilies('src/app/data/common-cases/common-cases.data.ts', '/common-cases'),
 ];
-
-const lessonUrls = buildSlugUrls('src/app/data/lessons/lessons.data.ts', '/learn');
-const commonCaseUrls = buildSlugUrls(
-  'src/app/data/common-cases/common-cases.data.ts',
-  '/common-cases'
-);
-
-// Merge static urls (without lastmod) and detail urls (with optional lastmod), preserving uniqueness
-const urlMap = new Map();
-for (const p of staticUrls) {
-  urlMap.set(p, { path: p, lastmod: null });
-}
-for (const entry of [...lessonUrls, ...commonCaseUrls]) {
-  if (!urlMap.has(entry.path)) {
-    urlMap.set(entry.path, entry);
-  }
-}
-const uniqueUrls = Array.from(urlMap.values());
 
 const escapeXml = (value) =>
   value
@@ -90,13 +71,34 @@ const escapeXml = (value) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${uniqueUrls
+const alternateTags = (familyPath) =>
+  [
+    ...locales.map((locale) => ({
+      hreflang: locale.code,
+      href: `${siteUrl}${localizePath(familyPath, locale)}`,
+    })),
+    { hreflang: 'x-default', href: `${siteUrl}${localizePath(familyPath, locales[0])}` },
+  ]
+    .map(
+      (alt) =>
+        `    <xhtml:link rel="alternate" hreflang="${escapeXml(alt.hreflang)}" href="${escapeXml(alt.href)}" />`,
+    )
+    .join('\n');
+
+const entries = families.flatMap((family) =>
+  locales.map((locale) => ({
+    familyPath: family.path,
+    loc: `${siteUrl}${localizePath(family.path, locale)}`,
+    lastmod: family.lastmod,
+  })),
+);
+
+const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${entries
   .map((entry) => {
-    const loc = escapeXml(`${siteUrl}${entry.path}`);
     const lastmodTag = entry.lastmod ? `\n    <lastmod>${escapeXml(entry.lastmod)}</lastmod>` : '';
-    return `  <url>\n    <loc>${loc}</loc>${lastmodTag}\n  </url>`;
+    return `  <url>\n    <loc>${escapeXml(entry.loc)}</loc>${lastmodTag}\n${alternateTags(entry.familyPath)}\n  </url>`;
   })
   .join('\n')}\n</urlset>\n`;
 
 writeFileSync(sitemapPath, xml, 'utf8');
-console.log(`Wrote ${uniqueUrls.length} sitemap URLs to ${sitemapPath}`);
+console.log(`Wrote ${entries.length} localized sitemap URLs to ${sitemapPath}`);

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { TranslationService } from '../../../i18n/translation.service';
 import { AppIconComponent } from '../../icons/app-icon.component';
 
 export interface ReviewItem {
@@ -16,11 +17,11 @@ export interface ReviewItem {
         <h3>{{ title() }}</h3>
         <button type="button" class="edit-btn" (click)="edit.emit()">
           <app-icon name="ArrowLeft" [size]="14" />
-          Edit
+          {{ i18n.t('common.edit') }}
         </button>
       </header>
       @if (items().length === 0) {
-        <p class="empty">Not applicable in this case.</p>
+        <p class="empty">{{ i18n.t('common.notApplicable') }}</p>
       } @else {
         <dl>
           @for (item of items(); track item.label) {
@@ -82,7 +83,7 @@ export interface ReviewItem {
         margin: 0;
         font-weight: 600;
         color: var(--color-text);
-        text-align: right;
+        text-align: end;
       }
       .empty {
         margin: 0;
@@ -98,4 +99,5 @@ export class ReviewSectionComponent {
   readonly title = input.required<string>();
   readonly items = input.required<ReviewItem[]>();
   readonly edit = output<void>();
+  protected readonly i18n = inject(TranslationService);
 }

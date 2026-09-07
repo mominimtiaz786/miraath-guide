@@ -1,22 +1,24 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { PrimaryButtonComponent } from '../../shared/components/primary-button/primary-button.component';
 import { AppIconComponent } from '../../shared/icons/app-icon.component';
+import { LocaleUrlService } from '../../i18n/locale-url.service';
+import { TranslationService } from '../../i18n/translation.service';
 
 @Component({
   selector: 'app-not-found-page',
   standalone: true,
-  imports: [PrimaryButtonComponent, AppIconComponent],
+  imports: [PrimaryButtonComponent, AppIconComponent, RouterLink],
   template: `
     <section class="wrap">
       <span class="icon-badge"><app-icon name="TriangleAlert" [size]="28" /></span>
       <p class="eyebrow">404</p>
-      <h1>We couldn't find that page</h1>
+      <h1>{{ i18n.t('notFound.heading') }}</h1>
       <p>
-        The page you're looking for may have moved or no longer exists. Head back home or start a guided
-        calculation.
+        {{ i18n.t('notFound.body') }}
       </p>
       <div class="actions">
-        <app-primary-button routerLink="/">Go to homepage</app-primary-button>
+        <app-primary-button [routerLink]="localeUrl.localize('/')">{{ i18n.t('notFound.cta') }}</app-primary-button>
       </div>
     </section>
   `,
@@ -56,4 +58,7 @@ import { AppIconComponent } from '../../shared/icons/app-icon.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFoundPageComponent {}
+export class NotFoundPageComponent {
+  protected readonly i18n = inject(TranslationService);
+  protected readonly localeUrl = inject(LocaleUrlService);
+}

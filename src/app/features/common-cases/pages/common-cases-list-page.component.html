@@ -1,17 +1,17 @@
 <app-page-hero
-  eyebrow="COMMON CASES"
-  heading="Understand inheritance through real-life examples"
-  body="Explore common family situations and see how shares are determined. Each case includes eligible heirs, blocked relatives, exact shares, and clear explanations."
+  [eyebrow]="i18n.t('commonCasesPage.eyebrow')"
+  [heading]="i18n.t('commonCasesPage.heading')"
+  [body]="i18n.t('commonCasesPage.body')"
 >
   <app-info-banner icon="Info" tone="green">
-    <p><strong>Shares are calculated according to the Hanafi school.</strong></p>
-    <p>Examples are educational and not case-specific legal advice.</p>
+    <p><strong>{{ i18n.t('commonCasesPage.bannerStrong') }}</strong></p>
+    <p>{{ i18n.t('commonCasesPage.bannerBody') }}</p>
   </app-info-banner>
 </app-page-hero>
 
 <section class="tabs-section">
-  <h2 class="tabs-heading">Browse by category</h2>
-  <div class="tabs" role="tablist" aria-label="Case categories">
+  <h2 class="tabs-heading">{{ i18n.t('commonCasesPage.browse') }}</h2>
+  <div class="tabs" role="tablist" [attr.aria-label]="i18n.t('commonCasesPage.tabsAria')">
     @for (tab of tabs; track tab.id) {
       <button
         type="button"
@@ -22,7 +22,7 @@
         (click)="selectTab(tab.id)"
       >
         <app-icon [name]="tab.icon" [size]="16" />
-        {{ tab.label }}
+        {{ i18n.t(tab.labelKey) }}
       </button>
     }
   </div>
@@ -37,18 +37,17 @@
 <section class="cta">
   <app-icon name="BookOpen" [size]="24" />
   <div class="cta-text">
-    <h3>Want to see these examples in action?</h3>
-    <p>Try any of the above cases in the calculator and see the complete breakdown.</p>
+    <h3>{{ i18n.t('commonCasesPage.ctaHeading') }}</h3>
+    <p>{{ i18n.t('commonCasesPage.ctaBody') }}</p>
   </div>
-  <app-primary-button routerLink="/calculator/wizard">Start Calculation</app-primary-button>
+  <app-primary-button [routerLink]="localeUrl.localize('/calculator/wizard')">{{ i18n.t('nav.startCalculation') }}</app-primary-button>
 </section>
 
 <section class="learning-outcomes">
-  <h2>What you will learn from each case</h2>
+  <h2>{{ i18n.t('commonCasesPage.outcomes') }}</h2>
   <div class="grid grid-4">
-    <app-icon-feature-card icon="UserCheck" heading="Who inherits" description="See eligible heirs and why they inherit." />
-    <app-icon-feature-card icon="UserX" heading="Who does not inherit" description="Understand blocking rules with clear reasons." />
-    <app-icon-feature-card icon="ChartPie" heading="Exact shares" description="View precise fractions and amounts." />
-    <app-icon-feature-card icon="FileText" heading="Simple explanation" description="Learn the fiqh rule behind each share." />
+    @for (item of outcomeCards(); track item[0]) {
+      <app-icon-feature-card icon="UserCheck" [heading]="item[0]" [description]="item[1]" />
+    }
   </div>
 </section>

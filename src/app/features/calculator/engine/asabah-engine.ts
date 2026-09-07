@@ -13,7 +13,7 @@ export interface AsabahAllocation {
 
 export interface AsabahResult {
   tier: number | null;
-  tierLabel: string | null;
+  tierLabelKey: string | null;
   allocations: AsabahAllocation[];
 }
 
@@ -36,7 +36,7 @@ export function computeResiduaryChain(
   facts: DerivedFacts,
   residue: Fraction,
 ): AsabahResult {
-  const none: AsabahResult = { tier: null, tierLabel: null, allocations: [] };
+  const none: AsabahResult = { tier: null, tierLabelKey: null, allocations: [] };
   if (residue.isZero() || residue.lessThan(Fraction.zero())) {
     return none;
   }
@@ -55,7 +55,7 @@ export function computeResiduaryChain(
         reasonCode: 'daughter.residuaryWithSons',
       });
     }
-    return { tier: 1, tierLabel: 'Sons (with daughters)', allocations };
+    return { tier: 1, tierLabelKey: 'asabahTier.sons', allocations };
   }
 
   // Tier 2: son's sons (son's daughters join at 2:1)
@@ -81,21 +81,21 @@ export function computeResiduaryChain(
         reasonCode: 'sonsDaughter.residuaryWithSonsSons',
       });
     }
-    return { tier: 2, tierLabel: "Son's sons (with son's daughters)", allocations };
+    return { tier: 2, tierLabelKey: 'asabahTier.sonsSons', allocations };
   }
 
   // Tier 3: father, else paternal grandfather
   if (facts.fatherFigureType === 'father') {
     return {
       tier: 3,
-      tierLabel: 'Father',
+      tierLabelKey: 'asabahTier.father',
       allocations: [{ relationship: 'father', count: 1, poolShare: residue, reasonCode: 'father.residue' }],
     };
   }
   if (facts.fatherFigureType === 'grandfather') {
     return {
       tier: 3,
-      tierLabel: 'Paternal grandfather',
+      tierLabelKey: 'asabahTier.paternalGrandfather',
       allocations: [
         { relationship: 'paternalGrandfather', count: 1, poolShare: residue, reasonCode: 'grandfather.residue' },
       ],
@@ -124,14 +124,14 @@ export function computeResiduaryChain(
         reasonCode: 'fullSister.residuaryWithBrothers',
       });
     }
-    return { tier: 4, tierLabel: 'Full brothers (with full sisters)', allocations };
+    return { tier: 4, tierLabelKey: 'asabahTier.fullBrothers', allocations };
   }
 
   // Tier 4b: full sisters alone, asabah ma'a al-ghayr (blocks everything below, including half-brothers)
   if (answers.fullSistersCount > 0 && facts.femaleDescendant) {
     return {
       tier: 4.5,
-      tierLabel: "Full sisters (asabah ma'a al-ghayr)",
+      tierLabelKey: 'asabahTier.fullSistersMaaGhayr',
       allocations: [
         {
           relationship: 'fullSister',
@@ -166,26 +166,26 @@ export function computeResiduaryChain(
         reasonCode: 'paternalHalfSister.residuaryWithHalfBrothers',
       });
     }
-    return { tier: 5, tierLabel: 'Paternal half-brothers (with paternal half-sisters)', allocations };
+    return { tier: 5, tierLabelKey: 'asabahTier.paternalHalfBrothers', allocations };
   }
 
   // Tiers 6-13: males only, first non-empty count wins the entire residue.
-  const maleOnlyTiers: { tier: number; label: string; count: number; relationship: HeirRelationship; reasonCode: string }[] = [
-    { tier: 6, label: "Full brothers' sons (full nephews)", count: answers.fullNephewsCount, relationship: 'fullNephew', reasonCode: 'fullNephew.residuary' },
-    { tier: 7, label: "Paternal half-brothers' sons (half nephews)", count: answers.halfNephewsCount, relationship: 'halfNephew', reasonCode: 'halfNephew.residuary' },
-    { tier: 8, label: "Full nephews' sons", count: answers.fullNephewsSonsCount, relationship: 'fullNephewsSon', reasonCode: 'fullNephewsSon.residuary' },
-    { tier: 9, label: "Half nephews' sons", count: answers.halfNephewsSonsCount, relationship: 'halfNephewsSon', reasonCode: 'halfNephewsSon.residuary' },
-    { tier: 10, label: 'Full paternal uncles', count: answers.fullUnclesCount, relationship: 'fullUncle', reasonCode: 'fullUncle.residuary' },
-    { tier: 11, label: 'Paternal half-uncles', count: answers.halfUnclesCount, relationship: 'halfUncle', reasonCode: 'halfUncle.residuary' },
-    { tier: 12, label: 'Full paternal cousins', count: answers.fullCousinsCount, relationship: 'fullCousin', reasonCode: 'fullCousin.residuary' },
-    { tier: 13, label: 'Paternal half-cousins', count: answers.halfCousinsCount, relationship: 'halfCousin', reasonCode: 'halfCousin.residuary' },
+  const maleOnlyTiers: { tier: number; labelKey: string; count: number; relationship: HeirRelationship; reasonCode: string }[] = [
+    { tier: 6, labelKey: 'asabahTier.fullNephews', count: answers.fullNephewsCount, relationship: 'fullNephew', reasonCode: 'fullNephew.residuary' },
+    { tier: 7, labelKey: 'asabahTier.halfNephews', count: answers.halfNephewsCount, relationship: 'halfNephew', reasonCode: 'halfNephew.residuary' },
+    { tier: 8, labelKey: 'asabahTier.fullNephewsSons', count: answers.fullNephewsSonsCount, relationship: 'fullNephewsSon', reasonCode: 'fullNephewsSon.residuary' },
+    { tier: 9, labelKey: 'asabahTier.halfNephewsSons', count: answers.halfNephewsSonsCount, relationship: 'halfNephewsSon', reasonCode: 'halfNephewsSon.residuary' },
+    { tier: 10, labelKey: 'asabahTier.fullUncles', count: answers.fullUnclesCount, relationship: 'fullUncle', reasonCode: 'fullUncle.residuary' },
+    { tier: 11, labelKey: 'asabahTier.halfUncles', count: answers.halfUnclesCount, relationship: 'halfUncle', reasonCode: 'halfUncle.residuary' },
+    { tier: 12, labelKey: 'asabahTier.fullCousins', count: answers.fullCousinsCount, relationship: 'fullCousin', reasonCode: 'fullCousin.residuary' },
+    { tier: 13, labelKey: 'asabahTier.halfCousins', count: answers.halfCousinsCount, relationship: 'halfCousin', reasonCode: 'halfCousin.residuary' },
   ];
 
   for (const candidate of maleOnlyTiers) {
     if (candidate.count > 0) {
       return {
         tier: candidate.tier,
-        tierLabel: candidate.label,
+        tierLabelKey: candidate.labelKey,
         allocations: [
           { relationship: candidate.relationship, count: candidate.count, poolShare: residue, reasonCode: candidate.reasonCode },
         ],

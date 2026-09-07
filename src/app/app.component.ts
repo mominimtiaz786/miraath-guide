@@ -5,6 +5,8 @@ import { filter, map, startWith } from 'rxjs';
 import { AppFooterComponent } from './core/layout/app-footer/app-footer.component';
 import { AppHeaderComponent } from './core/layout/app-header/app-header.component';
 import { SeoService } from './core/seo/seo.service';
+import { LocaleService } from './i18n/locale.service';
+import { LocaleUrlService } from './i18n/locale-url.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,8 @@ import { SeoService } from './core/seo/seo.service';
 })
 export class AppComponent {
   private readonly router = inject(Router);
+  private readonly localeUrl = inject(LocaleUrlService);
+  private readonly locale = inject(LocaleService);
   // Injected purely to trigger its constructor, which subscribes to router
   // navigation and keeps title/meta/canonical tags in sync (spec section 6).
   private readonly seo = inject(SeoService);
@@ -25,8 +29,8 @@ export class AppComponent {
   private readonly isWizardRoute = toSignal(
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event) => event.urlAfterRedirects.startsWith('/calculator/wizard')),
-      startWith(this.router.url.startsWith('/calculator/wizard')),
+      map((event) => this.localeUrl.stripLocale(event.urlAfterRedirects).startsWith('/calculator/wizard')),
+      startWith(this.localeUrl.stripLocale(this.router.url).startsWith('/calculator/wizard')),
     ),
     { initialValue: false },
   );

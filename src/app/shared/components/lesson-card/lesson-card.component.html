@@ -7,8 +7,8 @@
   <p class="summary">{{ lesson().summary }}</p>
   <div class="footer">
     <span class="difficulty">{{ lesson().difficulty }}</span>
-    <a class="text-link" [routerLink]="['/learn', lesson().slug]">
-      Start lesson
+    <a class="text-link" [routerLink]="localeUrl.localize('/learn/' + lesson().slug)">
+      {{ i18n.t('card.startLesson') }}
       <app-icon name="ArrowRight" [size]="16" />
     </a>
   </div>
