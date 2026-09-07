@@ -70,6 +70,7 @@ import { TranslationService } from '../../../i18n/translation.service';
         inset-block-start: calc(100% + 6px);
         inset-inline-end: 0;
         z-index: 30;
+        max-width: calc(100vw - (var(--space-6) * 2));
         min-width: 180px;
         display: grid;
         gap: 2px;
@@ -99,6 +100,10 @@ import { TranslationService } from '../../../i18n/translation.service';
         color: var(--color-text-secondary);
         font-size: 11px;
         font-weight: 600;
+      }
+      :host-context(.nav-mobile) .menu {
+        inset-inline-start: 0;
+        inset-inline-end: auto;
       }
     `,
   ],
