@@ -9,6 +9,7 @@ export const UR_TRANSLATIONS = {
   },
   common: {
     ...EN_TRANSLATIONS.common,
+    skipToContent: 'مرکزی مواد پر جائیں',
     start: 'شروع کریں',
     continue: 'جاری رکھیں',
     back: 'واپس',
@@ -142,6 +143,16 @@ export const UR_TRANSLATIONS = {
   },
   wizard: {
     ...EN_TRANSLATIONS.wizard,
+    progressAria: 'وزرڈ کی پیش رفت',
+    sections: {
+      deceased: 'متوفی کے بارے میں',
+      immediateFamily: 'قریبی خاندان',
+      childrenDescendants: 'اولاد اور اولاد کی اولاد',
+      siblings: 'بہن بھائی',
+      extendedFamily: 'دیگر رشتہ دار',
+      estate: 'ترکہ',
+      review: 'نظرثانی',
+    },
     paternalGrandfatherAlive: {
       question: 'کیا متوفی کے دادا زندہ ہیں؟',
       helper: 'ہم یہ اس لیے پوچھ رہے ہیں کیونکہ والد زندہ نہیں ہیں۔',

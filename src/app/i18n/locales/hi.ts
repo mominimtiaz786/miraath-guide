@@ -6,6 +6,7 @@ export const HI_TRANSLATIONS = {
   brand: { name: 'Miraath Guide', tagline: 'समझें। गणना करें। न्याय से बांटें।' },
   common: {
     ...EN_TRANSLATIONS.common,
+    skipToContent: 'मुख्य सामग्री पर जाएँ',
     start: 'शुरू करें',
     continue: 'जारी रखें',
     back: 'वापस',
@@ -104,6 +105,9 @@ export const HI_TRANSLATIONS = {
   },
   results: {
     ...EN_TRANSLATIONS.results,
+    detailedSteps: 'विस्तृत गणना के चरण',
+    adjustments: 'लागू किए गए समायोजन',
+    total: 'कुल',
     complete: 'गणना पूरी हुई',
     heading: 'आपके विरासत हिस्से',
     hanafi: 'हनफ़ी कार्यप्रणाली',
@@ -123,7 +127,7 @@ export const HI_TRANSLATIONS = {
   },
   shareTypes: {
     fixed: 'निश्चित हिस्सा',
-    residuary: 'Residuary (Asabah)',
+    residuary: 'शेषभागी (असबा)',
     'fixed-plus-residue': 'निश्चित हिस्सा + शेष',
     radd: 'निश्चित हिस्सा (Radd समायोजित)',
   },
@@ -146,7 +150,7 @@ export const HI_TRANSLATIONS = {
     tierValue: 'स्तर {{tier}}: {{label}}',
     awl: 'Awl समायोजन',
     radd: 'Radd समायोजन',
-    umariyyatayn: 'Umariyyatayn',
+    umariyyatayn: 'उमरिय्यतैन',
     umariyyataynApplied: 'लागू - माता और पिता के कारण देखें।',
     unassigned: 'अनावंटित शेष',
   },
@@ -172,7 +176,7 @@ export const HI_TRANSLATIONS = {
     ...EN_TRANSLATIONS.adjustment,
     awl: 'निर्धारित हिस्से संपत्ति से अधिक हो गए, इसलिए हर हिस्सा समान अनुपात में घटाया गया (Awl {{from}} से {{to}} तक)।',
     radd: 'कोई शेषभागी वारिस बची हुई संपत्ति नहीं ले सका, इसलिए अधिशेष निर्धारित-हिस्सा वारिसों को उनके अनुपात में लौटा दिया गया (जीवनसाथी को छोड़कर)।',
-    umariyyatayn: 'Umariyyatayn लागू: माता का एक-तिहाई पूरी संपत्ति से नहीं, बल्कि जीवनसाथी का हिस्सा निकलने के बाद शेष से लिया जाता है।',
+    umariyyatayn: 'उमरिय्यतैन लागू: माता का एक-तिहाई पूरी संपत्ति से नहीं, बल्कि जीवनसाथी का हिस्सा निकलने के बाद शेष से लिया जाता है।',
     spouseOnlySurplus:
       'इस मामले में जीवनसाथी ही एकमात्र वारिस हैं। इस MVP में अधिशेष वितरित नहीं किया जाता; यह दूर के रिश्तेदारों (dhawil-arham) या Bayt al-Mal को जाता।',
   },
@@ -262,6 +266,20 @@ export const HI_TRANSLATIONS = {
   },
   wizard: {
     ...EN_TRANSLATIONS.wizard,
+    exit: 'बाहर निकलें',
+    tip: 'हम केवल उन्हीं रिश्तेदारों के बारे में पूछेंगे जो विरासत को प्रभावित कर सकते हैं। परिणाम देखने से पहले आप अपने उत्तर बदल सकते हैं।',
+    estatePlaceholder: 'जैसे 5,000,000',
+    estateAria: 'वितरण योग्य संपत्ति का मूल्य (PKR)',
+    progressAria: 'विज़ार्ड की प्रगति',
+    sections: {
+      deceased: 'मृतक के बारे में',
+      immediateFamily: 'निकट परिवार',
+      childrenDescendants: 'संतान और वंशज',
+      siblings: 'भाई-बहन',
+      extendedFamily: 'अन्य रिश्तेदार',
+      estate: 'संपत्ति',
+      review: 'समीक्षा',
+    },
     deceasedGender: {
       question: 'मृतक का लिंग क्या था?',
       helper: 'इससे हमें लागू होने वाले क़ुरआनी हिस्से पहचानने में मदद मिलती है।',

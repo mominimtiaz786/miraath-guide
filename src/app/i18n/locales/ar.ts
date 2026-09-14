@@ -6,6 +6,7 @@ export const AR_TRANSLATIONS = {
   brand: { name: 'Miraath Guide', tagline: 'افهم. احسب. اقسم بعدل.' },
   common: {
     ...EN_TRANSLATIONS.common,
+    skipToContent: 'تخطَّ إلى المحتوى الرئيسي',
     start: 'ابدأ',
     continue: 'متابعة',
     back: 'رجوع',
@@ -104,6 +105,9 @@ export const AR_TRANSLATIONS = {
   },
   results: {
     ...EN_TRANSLATIONS.results,
+    detailedSteps: 'خطوات الحساب التفصيلية',
+    adjustments: 'التعديلات المطبقة',
+    total: 'المجموع',
     complete: 'اكتمل الحساب',
     heading: 'أنصبة الميراث',
     hanafi: 'المنهج الحنفي',
@@ -262,6 +266,20 @@ export const AR_TRANSLATIONS = {
   },
   wizard: {
     ...EN_TRANSLATIONS.wizard,
+    exit: 'خروج',
+    tip: 'لن نسأل إلا عن الأقارب الذين قد يؤثرون في الميراث. ويمكنك تعديل إجاباتك قبل عرض النتائج.',
+    estatePlaceholder: 'مثال: 5,000,000',
+    estateAria: 'قيمة التركة القابلة للقسمة بالروبية الباكستانية',
+    progressAria: 'مراحل الحساب',
+    sections: {
+      deceased: 'عن المتوفى',
+      immediateFamily: 'الأسرة المباشرة',
+      childrenDescendants: 'الأولاد والفروع',
+      siblings: 'الإخوة',
+      extendedFamily: 'الأقارب الآخرون',
+      estate: 'التركة',
+      review: 'مراجعة',
+    },
     deceasedGender: {
       question: 'ما جنس المتوفى؟',
       helper: 'يساعدنا هذا على تحديد الفروض القرآنية المنطبقة.',

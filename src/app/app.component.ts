@@ -6,6 +6,7 @@ import { AppFooterComponent } from './core/layout/app-footer/app-footer.componen
 import { AppHeaderComponent } from './core/layout/app-header/app-header.component';
 import { SeoService } from './core/seo/seo.service';
 import { LocaleService } from './i18n/locale.service';
+import { TranslationService } from './i18n/translation.service';
 import { LocaleUrlService } from './i18n/locale-url.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class AppComponent {
   private readonly router = inject(Router);
   private readonly localeUrl = inject(LocaleUrlService);
   private readonly locale = inject(LocaleService);
+  protected readonly i18n = inject(TranslationService);
   // Injected purely to trigger its constructor, which subscribes to router
   // navigation and keeps title/meta/canonical tags in sync (spec section 6).
   private readonly seo = inject(SeoService);

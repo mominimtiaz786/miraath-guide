@@ -6,6 +6,7 @@ export const FR_TRANSLATIONS = {
   brand: { name: 'Miraath Guide', tagline: 'Comprendre. Calculer. Partager équitablement.' },
   common: {
     ...EN_TRANSLATIONS.common,
+    skipToContent: 'Aller au contenu principal',
     start: 'Commencer',
     continue: 'Continuer',
     back: 'Retour',
@@ -105,6 +106,9 @@ export const FR_TRANSLATIONS = {
   },
   results: {
     ...EN_TRANSLATIONS.results,
+    detailedSteps: 'Étapes détaillées du calcul',
+    adjustments: 'Ajustements appliqués',
+    total: 'Total',
     complete: 'Calcul terminé',
     heading: "Vos parts d'héritage",
     hanafi: 'Méthode hanafite',
@@ -263,6 +267,20 @@ export const FR_TRANSLATIONS = {
   },
   wizard: {
     ...EN_TRANSLATIONS.wizard,
+    exit: 'Quitter',
+    tip: 'Nous ne poserons des questions que sur les proches susceptibles d’influer sur la succession. Vous pourrez modifier vos réponses avant de voir les résultats.',
+    estatePlaceholder: 'ex. 5 000 000',
+    estateAria: 'Valeur de la succession à partager, en PKR',
+    progressAria: 'Progression de l’assistant',
+    sections: {
+      deceased: 'Le défunt',
+      immediateFamily: 'Famille proche',
+      childrenDescendants: 'Enfants et descendants',
+      siblings: 'Fratrie',
+      extendedFamily: 'Famille élargie',
+      estate: 'Succession',
+      review: 'Révision',
+    },
     deceasedGender: {
       question: 'Quel était le sexe du défunt ?',
       helper: 'Cela nous aide à identifier les parts coraniques applicables.',

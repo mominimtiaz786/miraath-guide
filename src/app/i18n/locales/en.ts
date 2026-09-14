@@ -6,6 +6,7 @@ export const EN_TRANSLATIONS = {
     tagline: 'Understand. Calculate. Share fairly.',
   },
   common: {
+    skipToContent: 'Skip to main content',
     start: 'Start',
     continue: 'Continue',
     back: 'Back',
@@ -141,6 +142,16 @@ export const EN_TRANSLATIONS = {
     tip: 'We will only ask about relatives who may affect the inheritance. You can edit your answers before viewing the results.',
     estatePlaceholder: 'e.g. 5,000,000',
     estateAria: 'Distributable estate value in PKR',
+    progressAria: 'Wizard progress',
+    sections: {
+      deceased: 'About the Deceased',
+      immediateFamily: 'Immediate Family',
+      childrenDescendants: 'Children & Descendants',
+      siblings: 'Siblings',
+      extendedFamily: 'Extended Family',
+      estate: 'Estate',
+      review: 'Review',
+    },
     deceasedGender: {
       question: 'What was the gender of the deceased?',
       helper: 'This helps us identify the applicable Quranic shares.',

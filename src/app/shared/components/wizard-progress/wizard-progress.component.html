@@ -1,4 +1,4 @@
-<nav class="wizard-progress" aria-label="Wizard progress">
+<nav class="wizard-progress" [attr.aria-label]="i18n.t('wizard.progressAria')">
   <ol class="sections">
     @for (section of sections; track section) {
       @if (section !== 'review') {
@@ -10,7 +10,7 @@
               <app-icon [name]="sectionIcons[section]" [size]="14" />
             }
           </span>
-          <span class="section-label">{{ sectionLabels[section] }}</span>
+          <span class="section-label">{{ sectionLabel(section) }}</span>
         </li>
       }
     }
@@ -18,5 +18,5 @@
   <div class="bar-track">
     <div class="bar-fill" [style.width.%]="percent()"></div>
   </div>
-  <p class="current-section-label">{{ sectionLabels[currentSection()] }}</p>
+  <p class="current-section-label">{{ sectionLabel(currentSection()) }}</p>
 </nav>

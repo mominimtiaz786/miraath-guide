@@ -36,16 +36,6 @@ export type WizardStepId =
   | 'halfCousinsCount'
   | 'estateValue';
 
-export const WIZARD_SECTION_LABELS: Record<WizardSection, string> = {
-  deceased: 'About the Deceased',
-  immediateFamily: 'Immediate Family',
-  childrenDescendants: 'Children & Descendants',
-  siblings: 'Siblings',
-  extendedFamily: 'Extended Family',
-  estate: 'Estate',
-  review: 'Review',
-};
-
 export const WIZARD_SECTION_ORDER: WizardSection[] = [
   'deceased',
   'immediateFamily',
