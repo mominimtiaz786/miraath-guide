@@ -40,6 +40,7 @@ export const FR_TRANSLATIONS = {
     privacy: 'Confidentialité',
     disclaimer: 'Avertissement',
     resources: 'Ressources',
+    inheritanceGuide: 'Guide gratuit sur l’héritage',
     quickLinks: 'Liens rapides',
     startCalculation: 'Commencer le calcul',
   },
@@ -254,6 +255,9 @@ export const FR_TRANSLATIONS = {
       videoRaddTitle: 'Le Radd en pratique (exemples)',
       readMinutes: '{{minutes}} min de lecture',
       comingSoon: 'Bientôt disponible - espace réservé',
+      workbookTag: 'Cahier gratuit',
+      workbookTitle: 'Kit de démarrage pour l’héritage familial',
+      workbookMeta: 'PDF gratuit en anglais · 7 exemples détaillés · 9 fiches',
     },
     allLessons: 'Toutes les leçons',
     lessonLabel: 'Leçon',
@@ -486,7 +490,7 @@ export const FR_TRANSLATIONS = {
     privacy: {
       eyebrow: 'CONFIDENTIALITÉ',
       heading: 'Votre confidentialité, dès la conception',
-      body: 'Miraath Guide fonctionne entièrement dans votre navigateur. Voici ce que cela signifie pour vos données.',
+      body: 'Le calculateur Miraath Guide fonctionne entièrement dans votre navigateur. Voici ce que cela signifie pour vos données, et ce qui se passe si vous vous inscrivez aux nouvelles sur nos ressources.',
     },
     disclaimer: {
       eyebrow: 'AVERTISSEMENT',
@@ -630,7 +634,7 @@ export const FR_TRANSLATIONS = {
     educationalAfter: 'pour la portée complète et les limites.',
     privacyHeading: 'Notre approche de la confidentialité',
     privacyBefore:
-      'L’application fonctionne entièrement dans votre navigateur. Il n’y a ni compte, ni serveur, ni base de données - voyez la page',
+      'Le calculateur fonctionne entièrement dans votre navigateur. Il n’y a pas de compte, et vos détails familiaux et résultats ne sont jamais envoyés à un serveur ni à une base de données - voyez la page',
     privacyAfter: 'pour les détails.',
     reviewStrong: 'Révision savante - espace réservé.',
     reviewBody:
@@ -667,6 +671,113 @@ export const FR_TRANSLATIONS = {
       'Seule l’école hanafite est modélisée dans cette version.',
     ],
   },
+  inheritanceGuide: {
+    eyebrow: 'CAHIER FAMILIAL GRATUIT',
+    heading: 'Kit de démarrage pour l’héritage familial',
+    tagline: 'Comprendre les droits. Organiser les faits. Avancer plus clairement.',
+    body: 'Un cahier pratique pour aider votre famille à recenser la succession, comprendre des exemples détaillés, préparer des questions utiles et organiser la prochaine discussion.',
+    downloadCta: 'Télécharger le cahier gratuit',
+    viewPdf: 'Voir le PDF',
+    opensNewTab: '(s’ouvre dans un nouvel onglet)',
+    downloadNote: 'PDF gratuit · Édition en anglais · Sans inscription',
+    factsLabel: 'Le cahier en bref',
+    facts: {
+      pages: '36 pages',
+      examples: '7 exemples détaillés',
+      worksheets: '9 fiches pratiques',
+    },
+    coverAlt: 'Couverture du Family Inheritance Starter Kit de Miraath Guide, un cahier familial pratique de 36 pages',
+    insideEyebrow: 'CONTENU DU CAHIER',
+    insideHeading: 'Une aide concrète pour une tâche familiale difficile',
+    insideSub: 'Une édition pédagogique en anglais simple, avec des exemples selon l’école sunnite hanafite et des notes de préparation adaptées au Pakistan.',
+    inside: [
+      [
+        'Mettre de l’ordre dans les faits',
+        'Distinguez ce que possédait le défunt de ce qui appartient à d’autres, et consignez les dettes, le mahr impayé, tout testament et les faits encore manquants.',
+      ],
+      [
+        'Comprendre des exemples détaillés',
+        'Suivez sept exemples complets avec des hypothèses familiales explicites, des fractions et des montants exacts - y compris des cas d’awl et de radd.',
+      ],
+      [
+        'Préparer la discussion sur la maison familiale',
+        'Comparez la vente, le rachat par un héritier, la copropriété ou le partage, et les questions à régler avant de choisir.',
+      ],
+      [
+        'Utiliser des fiches pratiques',
+        'Neuf fiches à remplir réunissent faits familiaux, biens, obligations et notes de vérification dans un même dossier de travail.',
+      ],
+      [
+        'Clarifier la discussion familiale',
+        'Utilisez un ordre du jour de réunion de 45 minutes, un plan d’organisation sur sept jours et un suivi des questions sur lesquelles la famille n’est pas encore d’accord.',
+      ],
+      [
+        'Préparer un examen qualifié',
+        'Présentez des faits organisés et vos questions ouvertes à un savant spécialiste des successions ou à un avocat local pour un avis propre à votre cas.',
+      ],
+    ],
+    howHeading: 'Comment l’utiliser',
+    steps: [
+      [
+        'Téléchargez et lisez les premières consignes',
+        'Les pages 3 à 5 expliquent la portée du kit, les premières démarches et l’ordre dans lequel la succession est établie.',
+      ],
+      [
+        'Remplissez les fiches en privé',
+        'Complétez la fiche de synthèse, le registre des proches et les fiches sur la succession sur votre appareil ou sur papier. Gardez les copies remplies privées.',
+      ],
+      [
+        'Examinez les questions ouvertes, puis calculez',
+        'Lorsque les faits pertinents sont clairs, utilisez le calculateur Miraath Guide et soumettez le résultat et vos questions ouvertes à un examen qualifié.',
+      ],
+    ],
+    signup: {
+      heading: 'Recevez les prochains guides et des leçons pratiques sur l’héritage',
+      body: 'Laissez votre e-mail si vous souhaitez recevoir de temps en temps des ressources et des nouvelles de Miraath Guide. Vous pouvez télécharger ce cahier sans vous inscrire.',
+      emailLabel: 'Adresse e-mail',
+      consentLabel: 'J’accepte de recevoir de temps en temps des ressources et des nouvelles de Miraath Guide.',
+      submit: 'Me tenir informé',
+      submitting: 'Enregistrement…',
+      privacyBefore: 'Nous utilisons votre e-mail uniquement pour ces envois. Voir notre',
+      privacyAfter: '.',
+      success: 'Merci. Votre intérêt a bien été enregistré. Vous pouvez télécharger le cahier ci-dessous.',
+      failure: 'Nous n’avons pas pu enregistrer votre e-mail pour le moment. Veuillez réessayer plus tard. Le cahier reste disponible au téléchargement.',
+      rateLimited: 'Trop de tentatives depuis cette connexion. Veuillez patienter quelques minutes avant de réessayer. Le cahier reste disponible au téléchargement.',
+      errors: {
+        emailRequired: 'Saisissez votre adresse e-mail.',
+        emailInvalid: 'Saisissez une adresse e-mail valide, par exemple name@example.com.',
+        consentRequired: 'Cochez la case pour accepter les envois. Vous pouvez aussi simplement télécharger le cahier sans vous inscrire.',
+      },
+    },
+    faqHeading: 'Questions',
+    faq: [
+      [
+        'Le cahier est-il gratuit ?',
+        'Oui. Le PDF est gratuit à télécharger et à utiliser. Aucun paiement, compte ni identifiant.',
+      ],
+      [
+        'Dois-je donner mon adresse e-mail ?',
+        'Non. Le téléchargement fonctionne sans inscription. Le formulaire d’e-mail sert uniquement à ceux qui veulent recevoir de temps en temps des ressources et des nouvelles de Miraath Guide.',
+      ],
+      [
+        'En quelle langue est le PDF ?',
+        'Le cahier n’existe pour l’instant qu’en anglais. Cette page est traduite, mais chaque version linguistique renvoie au même PDF en anglais.',
+      ],
+      [
+        'Remplace-t-il un conseil adapté à ma situation ?',
+        'Non. C’est un cahier pédagogique de préparation, et non une fatwa, une décision de justice, un avis juridique ou un titre de propriété ; aucun savant ni avocat nommé n’a examiné cette édition de manière indépendante. Ses exemples suivent les règles sunnites hanafites pour des faits entièrement précisés. Demandez à un savant qualifié en successions et à un avocat local d’examiner la situation réelle de votre famille.',
+      ],
+      [
+        'Puis-je remplir les fiches en privé ?',
+        'Oui. Vous pouvez saisir vos réponses dans le PDF sur votre appareil ou l’imprimer et écrire à la main. Le PDF n’a pas de bouton d’envoi et ne transmet vos saisies nulle part. Gardez les copies remplies privées.',
+      ],
+    ],
+    scopeStrong: 'Édition pédagogique.',
+    scopeBody: 'Le cahier vous aide à vous préparer et à vous organiser. Ses exemples ne valent que pour leurs hypothèses explicites, et les notes relatives au Pakistan sont des conseils de préparation, pas un avis juridique. En savoir plus :',
+    finalHeading: 'Commencez par les faits que vous connaissez déjà',
+    finalBody: 'Téléchargez le cahier, remplissez la fiche de synthèse et notez la principale incertitude que votre famille doit encore lever.',
+    calculatorLink: 'Prêt à calculer ? Ouvrir le calculateur d’héritage',
+  },
   privacyPage: {
     ...EN_TRANSLATIONS.privacyPage,
     cards: {
@@ -678,7 +789,7 @@ export const FR_TRANSLATIONS = {
         'Chaque réponse donnée dans l’assistant reste uniquement dans la mémoire et le stockage de session de votre navigateur.',
       noUploadHeading: 'Aucune donnée de calcul envoyée',
       noUploadBody:
-        'Détails familiaux, valeurs de succession et résultats ne sont jamais envoyés à un serveur - il n’existe aucun backend pour les recevoir.',
+        'Détails familiaux, valeurs de succession et résultats ne sont jamais envoyés à un serveur - aucun composant serveur du calculateur ne les reçoit.',
       clearingHeading: 'Effacer supprime tout',
       clearingBody:
         'Actualiser la page, fermer l’onglet ou utiliser « Effacer le calcul » supprime immédiatement vos données de session.',
@@ -687,7 +798,7 @@ export const FR_TRANSLATIONS = {
     notDo: [
       'Nous ne chargeons pas de scripts externes inutiles.',
       'Nous ne stockons pas à distance vos détails familiaux, valeurs de succession ou résultats.',
-      'Nous n’exigeons - ni ne demandons - votre nom, votre e-mail ou la moindre information de compte.',
+      'Le calculateur ne demande jamais votre nom, votre e-mail ni la moindre information de compte.',
     ],
     storedHeading: 'Ce qui est stocké, et où',
     storedSessionBefore: 'Pendant que vous utilisez l’assistant guidé, vos réponses en cours sont conservées dans le',
@@ -697,6 +808,14 @@ export const FR_TRANSLATIONS = {
       'Les polices sont hébergées avec l’application plutôt que chargées depuis un service tiers : ouvrir la page ne contacte donc aucun fournisseur de polices externe.',
     storedAnalytics:
       'Nous utilisons Google Analytics pour comprendre comment les utilisateurs interagissent avec le site. Google Analytics collecte des informations telles que votre adresse IP, les pages consultées et le temps passé sur le site. Ces données sont régies par la politique de confidentialité de Google et par nos pratiques de conservation.',
+    signupHeading: 'Nouvelles facultatives sur nos ressources',
+    signupItems: [
+      'La page du guide gratuit sur l’héritage propose un formulaire facultatif pour recevoir de temps en temps des ressources et des nouvelles de Miraath Guide. Le cahier se télécharge sans lui.',
+      'Si vous vous inscrivez, nous enregistrons votre adresse e-mail, le fait que vous avez coché la case de consentement et à quel moment, la page et la langue depuis lesquelles vous vous êtes inscrit, ainsi que les balises de campagne du lien suivi (comme utm_source), le cas échéant.',
+      'Ces informations sont envoyées au serveur de l’exploitant du site, qui les conserve, et servent uniquement à ces ressources et nouvelles. Elles ne sont jamais associées aux réponses du calculateur, qui restent sur votre appareil, et votre e-mail n’est jamais envoyé à Google Analytics.',
+    ],
+    signupRemovalBefore: 'Vous pouvez demander la suppression de votre adresse e-mail à tout moment via le moyen de contact indiqué sur notre page',
+    signupRemovalAfter: '.',
     questionsHeading: 'Questions',
     questionsBefore: 'Consultez la page',
     questionsMiddle: 'pour la portée et les limites des calculs eux-mêmes, ou la page',

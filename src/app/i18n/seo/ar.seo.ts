@@ -15,6 +15,12 @@ export const AR_SEO: SeoDictionary = {
   methodology: { title: 'منهجية حساب المواريث الإسلامية | Miraath Guide', description: 'راجع المنهجية والافتراضات والقواعد والحدود التعليمية المستخدمة في Miraath Guide.' },
   about: { title: 'عن Miraath Guide | حاسبة المواريث الإسلامية', description: 'تعرّف على Miraath Guide، أداة تعليمية تجعل فهم الفرائض أوضح وأسهل.' },
   glossary: { title: 'مصطلحات الفرائض | Miraath Guide', description: 'مصطلحات المواريث مثل الحجب والكلالة والعول والرد وغيرها من مفاهيم علم الفرائض.' },
+  inheritanceGuide: {
+    title: 'حقيبة البداية المجانية في ميراث الأسرة (PDF بالإنجليزية) | Miraath Guide',
+    description:
+      'حمّل دليل العمل المجاني من Miraath Guide لميراث الأسرة: أمثلة على المذهب الحنفي وقوائم تحقق للتركة وأوراق عمل تطبيقية للاستعداد لخطوتك التالية. الملف بالإنجليزية.',
+    ogImage: '/images/inheritance-guide/starter-kit-cover.jpg',
+  },
   privacy: { title: 'سياسة الخصوصية | Miraath Guide', description: 'اعرف كيف يتعامل Miraath Guide مع بياناتك: لا حسابات ولا رفع لبيانات الحساب.' },
   disclaimer: { title: 'إخلاء المسؤولية | Miraath Guide', description: 'حدود مهمة يجب قراءتها قبل الاعتماد على نتيجة حساب في Miraath Guide.' },
   notFound: { title: 'الصفحة غير موجودة | Miraath Guide', description: 'الصفحة التي تبحث عنها ربما نُقلت أو لم تعد موجودة.', robots: 'noindex, follow' },

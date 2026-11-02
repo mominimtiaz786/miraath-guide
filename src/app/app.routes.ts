@@ -76,6 +76,14 @@ const publicRoutes: Routes = [
     data: { seoKey: 'glossary', canonicalPath: '/glossary' },
   },
   {
+    path: 'inheritance-guide',
+    loadComponent: () =>
+      import('./features/inheritance-guide/inheritance-guide-page.component').then(
+        (m) => m.InheritanceGuidePageComponent,
+      ),
+    data: { seoKey: 'inheritanceGuide', canonicalPath: '/inheritance-guide' },
+  },
+  {
     path: 'privacy',
     loadComponent: () => import('./features/misc/privacy-page.component').then((m) => m.PrivacyPageComponent),
     data: { seoKey: 'privacy', canonicalPath: '/privacy' },

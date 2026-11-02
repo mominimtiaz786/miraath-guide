@@ -4,11 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:leads": "ng serve --proxy-config proxy.conf.json",
+    "api:leads": "node scripts/leads-api.mjs",
     "build": "node scripts/generate-sitemap.mjs && ng build && node scripts/postprocess-prerender.mjs",
     "watch": "node scripts/generate-sitemap.mjs && ng build --watch --configuration development",
     "test": "ng test",
+    "test:leads": "node scripts/test-leads-api.mjs",
     "lint": "ng lint",
-    "serve:ssr:mirath-guide": "NG_ALLOWED_HOSTS=localhost node dist/mirath-guide/server/server.mjs"
+    "serve:ssr:mirath-guide": "NG_ALLOWED_HOSTS=localhost node dist/mirath-guide/server/server.mjs",
+    "serve:ssr:leads": "LEADS_STORAGE_DRIVER=json LEADS_JSON_PATH=./var/miraath-guide/leads.json NG_ALLOWED_HOSTS=localhost node dist/mirath-guide/server/server.mjs"
   },
   "private": true,
   "dependencies": {

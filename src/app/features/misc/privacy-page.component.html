@@ -40,6 +40,20 @@
   </section>
 
   <section>
+    <h2>{{ i18n.t('privacyPage.signupHeading') }}</h2>
+    <ul>
+      @for (item of signupItems(); track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+    <p>
+      {{ i18n.t('privacyPage.signupRemovalBefore') }}
+      <a class="text-link-inline" [routerLink]="localeUrl.localize('/about')">{{ i18n.t('privacyPage.aboutLink') }}</a>
+      {{ i18n.t('privacyPage.signupRemovalAfter') }}
+    </p>
+  </section>
+
+  <section>
     <h2>{{ i18n.t('privacyPage.questionsHeading') }}</h2>
     <p>
       {{ i18n.t('privacyPage.questionsBefore') }}

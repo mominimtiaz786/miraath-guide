@@ -26,7 +26,7 @@ import { AppIconName } from '../../icons/icon-registry';
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-2);
-        text-align: left;
+        text-align: start;
       }
       .badge {
         width: 44px;

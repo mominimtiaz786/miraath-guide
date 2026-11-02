@@ -19,6 +19,7 @@
 
     <nav class="col" [attr.aria-label]="i18n.t('nav.resources')">
       <h3>{{ i18n.t('nav.resources') }}</h3>
+      <a [routerLink]="localeUrl.localize('/inheritance-guide')">{{ i18n.t('nav.inheritanceGuide') }}</a>
       <a [routerLink]="localeUrl.localize('/glossary')">{{ i18n.t('nav.glossary') }}</a>
       <a [routerLink]="localeUrl.localize('/methodology')">{{ i18n.t('nav.methodology') }}</a>
       <a [routerLink]="localeUrl.localize('/privacy')">{{ i18n.t('nav.privacy') }}</a>

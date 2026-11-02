@@ -11,6 +11,9 @@ import { readFileSync } from 'node:fs';
 import { LESSONS } from './app/data/lessons/lessons.data';
 import { COMMON_CASES } from './app/data/common-cases/common-cases.data';
 import { PREFIXED_LOCALE_CODES } from './app/i18n/config/locale.config';
+import { createLeadsApi } from './server/leads/leads-api';
+import { describeLeadsConfig, readLeadsConfig } from './server/leads/leads-config';
+import { JsonLeadRepository } from './server/leads/json-lead-repository';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -23,16 +26,39 @@ const app = express();
 const angularNodeAppEngine = new AngularNodeAppEngine();
 
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Optional resource-updates signup (POST /api/leads). Mounted before static
+ * files and the Angular handler so API errors are always JSON. Storage is
+ * off unless LEADS_STORAGE_DRIVER=json; see docs/lead-signup.md. Reading the
+ * config touches no files, so build/prerender never creates lead data.
  */
+const leadsConfig = readLeadsConfig({ forbiddenRoots: [browserDistFolder, serverDistFolder] });
+leadsConfig.problems.forEach((problem) => console.warn(`[leads] ${problem}`));
+if (leadsConfig.driver !== 'none') {
+  console.log(describeLeadsConfig(leadsConfig));
+}
+if (leadsConfig.trustProxy !== undefined) {
+  app.set('trust proxy', leadsConfig.trustProxy);
+}
+app.use(
+  '/api',
+  createLeadsApi({
+    config: leadsConfig,
+    repository: leadsConfig.driver === 'json' ? new JsonLeadRepository(leadsConfig.jsonPath) : null,
+  }),
+);
+
+/**
+ * Downloadable resources keep their filename across editions, so they get a
+ * short cache lifetime instead of the year-long one used for hashed bundles.
+ */
+app.use(
+  '/downloads',
+  express.static(resolve(browserDistFolder, 'downloads'), {
+    maxAge: '1h',
+    index: false,
+    redirect: false,
+  }),
+);
 
 /**
  * Serve static files from /browser. `index: false` and `redirect: false` so
@@ -96,6 +122,9 @@ if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] || 4200;
   app.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
+    if (leadsConfig.driver === 'none') {
+      console.log(describeLeadsConfig(leadsConfig));
+    }
   });
 }
 

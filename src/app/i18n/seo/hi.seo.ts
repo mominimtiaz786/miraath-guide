@@ -15,6 +15,12 @@ export const HI_SEO: SeoDictionary = {
   methodology: { title: 'इस्लामी विरासत गणना पद्धति | Miraath Guide', description: 'Miraath Guide की हनफ़ी कार्यप्रणाली, मान्यताओं और शैक्षिक सीमाओं को समझें।' },
   about: { title: 'Miraath Guide के बारे में | इस्लामी विरासत कैलकुलेटर', description: 'Faraid को स्पष्ट और शांत ढंग से समझाने वाले शैक्षिक कैलकुलेटर के बारे में जानें।' },
   glossary: { title: 'Faraid शब्दावली | Miraath Guide', description: 'Hajb, Kalalah, Awl, Radd और इस्लामी विरासत की अन्य प्रमुख अवधारणाएँ।' },
+  inheritanceGuide: {
+    title: 'मुफ़्त पारिवारिक विरासत स्टार्टर किट (अंग्रेज़ी PDF) | Miraath Guide',
+    description:
+      'Miraath Guide की मुफ़्त पारिवारिक विरासत वर्कबुक डाउनलोड करें: हनफ़ी उदाहरण, संपत्ति चेकलिस्ट और व्यावहारिक वर्कशीट, ताकि आप अगले कदम की तैयारी कर सकें। PDF अंग्रेज़ी में है।',
+    ogImage: '/images/inheritance-guide/starter-kit-cover.jpg',
+  },
   privacy: { title: 'गोपनीयता नीति | Miraath Guide', description: 'जानें Miraath Guide आपका डेटा कैसे संभालता है: कोई खाता नहीं और गणना ब्राउज़र में रहती है।' },
   disclaimer: { title: 'अस्वीकरण | Miraath Guide', description: 'Miraath Guide के परिणाम पर निर्भर करने से पहले महत्वपूर्ण सीमाएँ पढ़ें।' },
   notFound: { title: 'पृष्ठ नहीं मिला | Miraath Guide', description: 'आप जिस पृष्ठ को खोज रहे हैं वह मौजूद नहीं है।', robots: 'noindex, follow' },

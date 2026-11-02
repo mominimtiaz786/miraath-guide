@@ -11,6 +11,7 @@ const staticPrerenderPaths = [
   'methodology',
   'about',
   'glossary',
+  'inheritance-guide',
   'privacy',
   'disclaimer',
   '404',

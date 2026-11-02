@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "leads": [
+    {
+      "id": "00000000-0000-4000-8000-000000000000",
+      "email": "reader@example.com",
+      "resourceId": "family-inheritance-starter-kit",
+      "resourceVersion": "1.0",
+      "source": "inheritance-guide",
+      "locale": "en",
+      "createdAt": "2026-11-02T10:00:00.000Z",
+      "updatedAt": "2026-11-02T10:00:00.000Z",
+      "consent": {
+        "updates": true,
+        "textVersion": "inheritance-guide-updates-v1",
+        "capturedAt": "2026-11-02T10:00:00.000Z"
+      },
+      "attribution": {
+        "utm_source": "instagram",
+        "utm_medium": "dm",
+        "utm_campaign": "inheritance_starter_kit"
+      }
+    }
+  ]
+}
