@@ -1,0 +1,233 @@
+<section class="hero">
+  <app-islamic-pattern class="pattern" position="top-right" />
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ i18n.t('inheritanceGuide.eyebrow') }}</p>
+      <h1>{{ i18n.t('inheritanceGuide.heading') }}</h1>
+      <p class="tagline">{{ i18n.t('inheritanceGuide.tagline') }}</p>
+      <p class="body-lg">{{ i18n.t('inheritanceGuide.body') }}</p>
+
+      <div class="hero-actions">
+        <a
+          class="btn btn-primary"
+          [href]="pdfUrl"
+          [attr.download]="pdfFilename"
+          type="application/pdf"
+          (click)="trackPdf('hero', 'download')"
+        >
+          <app-icon name="Download" [size]="18" color="var(--color-on-primary)" />
+          {{ i18n.t('inheritanceGuide.downloadCta') }}
+        </a>
+        <a
+          class="text-link view-link"
+          [href]="pdfUrl"
+          target="_blank"
+          rel="noopener"
+          type="application/pdf"
+          (click)="trackPdf('hero', 'view')"
+        >
+          {{ i18n.t('inheritanceGuide.viewPdf') }}
+          <app-icon name="ExternalLink" [size]="16" />
+          <span class="visually-hidden">{{ i18n.t('inheritanceGuide.opensNewTab') }}</span>
+        </a>
+      </div>
+      <p class="download-note">{{ i18n.t('inheritanceGuide.downloadNote') }}</p>
+
+      <ul class="facts" [attr.aria-label]="i18n.t('inheritanceGuide.factsLabel')">
+        <li class="chip"><app-icon name="FileText" [size]="16" /> {{ i18n.t('inheritanceGuide.facts.pages') }}</li>
+        <li class="chip"><app-icon name="BookOpenCheck" [size]="16" /> {{ i18n.t('inheritanceGuide.facts.examples') }}</li>
+        <li class="chip"><app-icon name="ClipboardList" [size]="16" /> {{ i18n.t('inheritanceGuide.facts.worksheets') }}</li>
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <img
+        class="cover"
+        src="/images/inheritance-guide/starter-kit-cover-480.webp"
+        srcset="/images/inheritance-guide/starter-kit-cover-480.webp 480w, /images/inheritance-guide/starter-kit-cover-960.webp 960w"
+        sizes="(min-width: 1000px) 380px, (min-width: 640px) 360px, 80vw"
+        width="480"
+        height="679"
+        fetchpriority="high"
+        [alt]="i18n.t('inheritanceGuide.coverAlt')"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <app-section-heading
+    [eyebrow]="i18n.t('inheritanceGuide.insideEyebrow')"
+    [heading]="i18n.t('inheritanceGuide.insideHeading')"
+    [subheading]="i18n.t('inheritanceGuide.insideSub')"
+    [centered]="true"
+  />
+  <div class="grid grid-3">
+    @for (item of insideItems(); track item[0]; let i = $index) {
+      <app-icon-feature-card [icon]="insideIcons[i]" [heading]="item[0]" [description]="item[1]" />
+    }
+  </div>
+</section>
+
+<section class="section ivory">
+  <app-section-heading [heading]="i18n.t('inheritanceGuide.howHeading')" [centered]="true" />
+  <ol class="grid grid-3 steps">
+    @for (step of steps(); track step[0]; let i = $index) {
+      <li><app-process-step [index]="i + 1" [icon]="stepIcons[i]" [heading]="step[0]" [description]="step[1]" /></li>
+    }
+  </ol>
+</section>
+
+<section class="section signup-section" aria-labelledby="signup-heading">
+  <div class="signup-card">
+    <div class="signup-intro">
+      <span class="signup-icon" aria-hidden="true"><app-icon name="Mail" [size]="24" /></span>
+      <h2 id="signup-heading">{{ i18n.t('inheritanceGuide.signup.heading') }}</h2>
+      <p>{{ i18n.t('inheritanceGuide.signup.body') }}</p>
+    </div>
+
+    @if (status() !== 'saved') {
+      <form class="signup-form" method="post" action="/api/leads" novalidate (submit)="submit($event)">
+        <div class="field">
+          <label for="signup-email">{{ i18n.t('inheritanceGuide.signup.emailLabel') }}</label>
+          <input
+            #emailInput
+            id="signup-email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            autocapitalize="off"
+            spellcheck="false"
+            dir="ltr"
+            required
+            [attr.maxlength]="emailMaxLength"
+            [attr.aria-invalid]="emailError() ? 'true' : null"
+            [attr.aria-describedby]="emailError() ? 'signup-email-error' : null"
+            (input)="onEmailInput($any($event.target).value)"
+          />
+          @if (emailError(); as error) {
+            <p class="field-error" id="signup-email-error">
+              <app-icon name="CircleAlert" [size]="16" /> {{ i18n.t('inheritanceGuide.signup.errors.' + error) }}
+            </p>
+          }
+        </div>
+
+        <!-- Honeypot: hidden from people and assistive technology. -->
+        <div class="hp" aria-hidden="true">
+          <label for="signup-website">Website</label>
+          <input
+            id="signup-website"
+            name="website"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            (input)="honeypot.set($any($event.target).value)"
+          />
+        </div>
+
+        <div class="field consent-field">
+          <div class="consent">
+            <input
+              #consentInput
+              id="signup-consent"
+              name="consent"
+              type="checkbox"
+              [checked]="consent()"
+              [attr.aria-invalid]="consentError() ? 'true' : null"
+              [attr.aria-describedby]="consentError() ? 'signup-consent-error' : null"
+              (change)="onConsentChange($any($event.target).checked)"
+            />
+            <label for="signup-consent">{{ i18n.t('inheritanceGuide.signup.consentLabel') }}</label>
+          </div>
+          @if (consentError(); as error) {
+            <p class="field-error" id="signup-consent-error">
+              <app-icon name="CircleAlert" [size]="16" /> {{ i18n.t('inheritanceGuide.signup.errors.' + error) }}
+            </p>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button
+            class="btn btn-secondary"
+            type="submit"
+            [disabled]="!interactive() || status() === 'submitting'"
+            [attr.aria-busy]="status() === 'submitting' ? 'true' : null"
+          >
+            <app-icon name="Mail" [size]="18" />
+            {{ status() === 'submitting' ? i18n.t('inheritanceGuide.signup.submitting') : i18n.t('inheritanceGuide.signup.submit') }}
+          </button>
+          <p class="privacy-note">
+            {{ i18n.t('inheritanceGuide.signup.privacyBefore') }}
+            <a class="text-link-inline" [routerLink]="localeUrl.localize('/privacy')">{{ i18n.t('nav.privacy') }}</a>{{ i18n.t('inheritanceGuide.signup.privacyAfter') }}
+          </p>
+        </div>
+      </form>
+    }
+
+    <div class="feedback-region" role="status" aria-live="polite">
+      @switch (status()) {
+        @case ('saved') {
+          <p class="feedback success"><app-icon name="CircleCheck" [size]="20" /> {{ i18n.t('inheritanceGuide.signup.success') }}</p>
+        }
+        @case ('failed') {
+          <p class="feedback error"><app-icon name="CircleAlert" [size]="20" /> {{ i18n.t('inheritanceGuide.signup.failure') }}</p>
+        }
+        @case ('rate_limited') {
+          <p class="feedback error"><app-icon name="CircleAlert" [size]="20" /> {{ i18n.t('inheritanceGuide.signup.rateLimited') }}</p>
+        }
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section faq-section" aria-labelledby="faq-heading">
+  <h2 id="faq-heading" class="centered-heading">{{ i18n.t('inheritanceGuide.faqHeading') }}</h2>
+  <div class="faq-list">
+    @for (item of faqs(); track item[0]) {
+      <details class="faq-item">
+        <summary>
+          <span>{{ item[0] }}</span>
+          <app-icon class="chevron" name="ChevronDown" [size]="20" />
+        </summary>
+        <p>{{ item[1] }}</p>
+      </details>
+    }
+  </div>
+
+  <div class="scope-note" role="note">
+    <app-icon name="Info" [size]="20" />
+    <p>
+      <strong>{{ i18n.t('inheritanceGuide.scopeStrong') }}</strong>
+      {{ i18n.t('inheritanceGuide.scopeBody') }}
+      <a class="text-link-inline" [routerLink]="localeUrl.localize('/methodology')">{{ i18n.t('nav.methodology') }}</a>
+      &middot;
+      <a class="text-link-inline" [routerLink]="localeUrl.localize('/disclaimer')">{{ i18n.t('nav.disclaimer') }}</a>
+    </p>
+  </div>
+</section>
+
+<section class="section final-cta">
+  <h2>{{ i18n.t('inheritanceGuide.finalHeading') }}</h2>
+  <p>{{ i18n.t('inheritanceGuide.finalBody') }}</p>
+  <div class="final-actions">
+    <a
+      class="btn btn-primary"
+      [href]="pdfUrl"
+      [attr.download]="pdfFilename"
+      type="application/pdf"
+      (click)="trackPdf('final', 'download')"
+    >
+      <app-icon name="Download" [size]="18" color="var(--color-on-primary)" />
+      {{ i18n.t('inheritanceGuide.downloadCta') }}
+    </a>
+    <a class="text-link view-link" [href]="pdfUrl" target="_blank" rel="noopener" type="application/pdf" (click)="trackPdf('final', 'view')">
+      {{ i18n.t('inheritanceGuide.viewPdf') }}
+      <app-icon name="ExternalLink" [size]="16" />
+      <span class="visually-hidden">{{ i18n.t('inheritanceGuide.opensNewTab') }}</span>
+    </a>
+  </div>
+  <a class="text-link calculator-link" [routerLink]="localeUrl.localize('/calculator')" (click)="trackCalculator()">
+    {{ i18n.t('inheritanceGuide.calculatorLink') }} <app-icon class="arrow" name="ArrowRight" [size]="16" />
+  </a>
+</section>

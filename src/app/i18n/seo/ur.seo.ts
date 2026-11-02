@@ -19,6 +19,12 @@ export const UR_SEO: SeoDictionary = {
   methodology: { title: 'اسلامی وراثت کے حساب کا طریقہ | Miraath Guide', description: 'Miraath Guide کے حنفی قواعد، مفروضات اور تعلیمی حدود کا جائزہ لیں۔' },
   about: { title: 'Miraath Guide کا تعارف | اسلامی وراثت کیلکولیٹر', description: 'فرائض کو واضح اور آسان بنانے والے تعلیمی اسلامی وراثت کیلکولیٹر کے بارے میں جانیں۔' },
   glossary: { title: 'فرائض کی اصطلاحات | Miraath Guide', description: 'حجب، کلالہ، عول، رد اور دیگر اسلامی وراثت کی اصطلاحات کی لغت۔' },
+  inheritanceGuide: {
+    title: 'مفت خاندانی وراثت اسٹارٹر کٹ (انگریزی PDF) | Miraath Guide',
+    description:
+      'Miraath Guide کی مفت خاندانی وراثت ورک بک ڈاؤن لوڈ کریں: حنفی مثالیں، ترکہ کی چیک لسٹ اور عملی ورک شیٹس تاکہ آپ اگلے قدم کی تیاری کر سکیں۔ PDF انگریزی میں ہے۔',
+    ogImage: '/images/inheritance-guide/starter-kit-cover.jpg',
+  },
   privacy: { title: 'رازداری پالیسی | Miraath Guide', description: 'جانیں کہ Miraath Guide آپ کے ڈیٹا کو کیسے سنبھالتا ہے: حساب آپ کے براؤزر میں رہتا ہے۔' },
   disclaimer: { title: 'دستبرداری | Miraath Guide', description: 'Miraath Guide کے نتیجے پر اعتماد سے پہلے اہم حدود پڑھیں۔' },
   notFound: { title: 'صفحہ نہیں ملا | Miraath Guide', description: 'یہ صفحہ منتقل ہو چکا یا موجود نہیں۔', robots: 'noindex, follow' },

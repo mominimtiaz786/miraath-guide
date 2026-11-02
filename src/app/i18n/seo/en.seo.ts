@@ -52,6 +52,13 @@ export const EN_SEO: SeoDictionary = {
     title: 'Faraid Glossary - Islamic Inheritance Terms | Miraath Guide',
     description: 'A glossary of key Islamic inheritance terms including Hajb, Kalalah, Awl, Radd and other concepts used throughout Miraath Guide.',
   },
+  inheritanceGuide: {
+    title: 'Free Family Inheritance Starter Kit PDF | Miraath Guide',
+    description:
+      "Download Miraath Guide's free family inheritance workbook with Hanafi examples, estate checklists and practical worksheets to prepare your next step.",
+    keywords: ['islamic inheritance workbook', 'family inheritance checklist', 'hanafi inheritance examples', 'inheritance worksheets pdf'],
+    ogImage: '/images/inheritance-guide/starter-kit-cover.jpg',
+  },
   privacy: {
     title: 'Privacy Policy | Miraath Guide',
     description:

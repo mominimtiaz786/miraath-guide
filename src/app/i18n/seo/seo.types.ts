@@ -11,6 +11,7 @@ export type SeoKey =
   | 'methodology'
   | 'about'
   | 'glossary'
+  | 'inheritanceGuide'
   | 'privacy'
   | 'disclaimer'
   | 'notFound';

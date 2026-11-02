@@ -6,6 +6,7 @@ export const EN_TRANSLATIONS = {
     tagline: 'Understand. Calculate. Share fairly.',
   },
   common: {
+    skipToContent: 'Skip to main content',
     start: 'Start',
     continue: 'Continue',
     back: 'Back',
@@ -41,6 +42,7 @@ export const EN_TRANSLATIONS = {
     privacy: 'Privacy Policy',
     disclaimer: 'Disclaimer',
     resources: 'Resources',
+    inheritanceGuide: 'Free Inheritance Guide',
     quickLinks: 'Quick Links',
     startCalculation: 'Start Calculation',
   },
@@ -141,6 +143,16 @@ export const EN_TRANSLATIONS = {
     tip: 'We will only ask about relatives who may affect the inheritance. You can edit your answers before viewing the results.',
     estatePlaceholder: 'e.g. 5,000,000',
     estateAria: 'Distributable estate value in PKR',
+    progressAria: 'Wizard progress',
+    sections: {
+      deceased: 'About the Deceased',
+      immediateFamily: 'Immediate Family',
+      childrenDescendants: 'Children & Descendants',
+      siblings: 'Siblings',
+      extendedFamily: 'Extended Family',
+      estate: 'Estate',
+      review: 'Review',
+    },
     deceasedGender: {
       question: 'What was the gender of the deceased?',
       helper: 'This helps us identify the applicable Quranic shares.',
@@ -402,6 +414,9 @@ export const EN_TRANSLATIONS = {
       videoRaddTitle: 'Radd in Practice (Examples)',
       readMinutes: '{{minutes}} min read',
       comingSoon: 'Coming soon - placeholder',
+      workbookTag: 'Free workbook',
+      workbookTitle: 'Family Inheritance Starter Kit',
+      workbookMeta: 'Free PDF · 7 worked examples · 9 worksheets',
     },
     featuredHeading: 'Featured resources',
     termsHeading: 'Key terms in Faraid',
@@ -559,7 +574,7 @@ export const EN_TRANSLATIONS = {
     privacy: {
       eyebrow: 'PRIVACY',
       heading: 'Your privacy, by design',
-      body: 'Miraath Guide runs entirely in your browser. Here is exactly what that means for your data.',
+      body: 'The Miraath Guide calculator runs entirely in your browser. Here is exactly what that means for your data, and what happens if you choose to sign up for resource updates.',
     },
     disclaimer: {
       eyebrow: 'DISCLAIMER',
@@ -588,7 +603,7 @@ export const EN_TRANSLATIONS = {
     educationalAfter: 'page for the full scope and limitations.',
     privacyHeading: 'Our privacy approach',
     privacyBefore:
-      'The application runs entirely in your browser. There is no account, no server, and no database - see the',
+      'The calculator runs entirely in your browser. There is no account, and your family details and results are never sent to a server or database - see the',
     privacyAfter: 'page for details.',
     reviewStrong: 'Scholarly review - placeholder.',
     reviewBody:
@@ -624,6 +639,113 @@ export const EN_TRANSLATIONS = {
       'Only the Hanafi school is modelled in this MVP.',
     ],
   },
+  inheritanceGuide: {
+    eyebrow: 'FREE FAMILY WORKBOOK',
+    heading: 'Family Inheritance Starter Kit',
+    tagline: 'Understand the rights. Organize the facts. Take a clearer next step.',
+    body: 'A practical workbook to help your family record the estate, understand worked examples, prepare useful questions, and plan the next conversation.',
+    downloadCta: 'Download the free workbook',
+    viewPdf: 'View PDF',
+    opensNewTab: '(opens in a new tab)',
+    downloadNote: 'Free PDF · English edition · No signup required',
+    factsLabel: 'Workbook at a glance',
+    facts: {
+      pages: '36 pages',
+      examples: '7 worked examples',
+      worksheets: '9 practical worksheets',
+    },
+    coverAlt: 'Cover of the Miraath Guide Family Inheritance Starter Kit, a 36-page practical family workbook',
+    insideEyebrow: "WHAT'S INSIDE",
+    insideHeading: 'Practical help for a difficult family task',
+    insideSub: 'A plain-English educational edition with Sunni Hanafi examples and Pakistan-aware preparation notes.',
+    inside: [
+      [
+        'Get the estate facts in order',
+        'Separate what the deceased owned from what belongs to others, and record debts, unpaid mahr, any will and the facts that are still missing.',
+      ],
+      [
+        'Understand worked examples',
+        'Follow seven complete examples with stated family assumptions, exact fractions and amounts - including cases where awl and radd apply.',
+      ],
+      [
+        'Prepare for a family house discussion',
+        'Compare selling, a buyout, keeping the property jointly or partitioning it, and the questions to settle before choosing.',
+      ],
+      [
+        'Use practical worksheets',
+        'Nine fillable worksheets bring family facts, assets, obligations and review notes into one working file.',
+      ],
+      [
+        'Have a clearer family conversation',
+        'Use a 45-minute meeting agenda, a seven-day organizing plan and a tracker for questions the family has not yet agreed.',
+      ],
+      [
+        'Prepare for qualified review',
+        'Take organized facts and open questions to an inheritance scholar or a local lawyer for advice on your case.',
+      ],
+    ],
+    howHeading: 'How to use it',
+    steps: [
+      [
+        'Download and read the starting guidance',
+        'Pages 3 to 5 explain what the kit covers, the first practical steps and the order in which an estate is established.',
+      ],
+      [
+        'Complete the worksheets privately',
+        'Fill in the case snapshot, the relatives register and the estate worksheets on your device or on paper. Keep completed copies private.',
+      ],
+      [
+        'Review open questions, then calculate',
+        'When the relevant facts are clear, use the Miraath Guide calculator and take the result and your open questions for qualified review.',
+      ],
+    ],
+    signup: {
+      heading: 'Get future guides and practical inheritance lessons',
+      body: 'Leave your email if you would like occasional Miraath Guide resources and updates. You can download this workbook without signing up.',
+      emailLabel: 'Email address',
+      consentLabel: 'I agree to receive occasional Miraath Guide resources and updates.',
+      submit: 'Keep me updated',
+      submitting: 'Saving…',
+      privacyBefore: 'We only use your email for these updates. See our',
+      privacyAfter: '.',
+      success: 'Thank you. Your interest has been saved. You can download the workbook below.',
+      failure: "We couldn't save your email right now. Please try again later. Your workbook is still available to download.",
+      rateLimited: 'Too many attempts from this connection. Please wait a few minutes and try again. Your workbook is still available to download.',
+      errors: {
+        emailRequired: 'Enter your email address.',
+        emailInvalid: 'Enter a valid email address, like name@example.com.',
+        consentRequired: 'Tick the box to agree to updates. You can also simply download the workbook without signing up.',
+      },
+    },
+    faqHeading: 'Questions',
+    faq: [
+      [
+        'Is the workbook free?',
+        'Yes. The PDF is free to download and use. There is no payment, account or login.',
+      ],
+      [
+        'Do I have to give my email address?',
+        'No. The download works without signing up. The email form is only for people who want occasional Miraath Guide resources and updates.',
+      ],
+      [
+        'Which language is the PDF in?',
+        'The workbook is currently available in English only. This page is translated, but every language version links to the same English PDF.',
+      ],
+      [
+        'Does it replace advice for my case?',
+        "No. It is an educational preparation workbook, not a fatwa, court order, legal opinion or title document, and no named scholar or lawyer has independently reviewed this edition. Its worked examples follow Sunni Hanafi rules for fully stated facts. Ask a qualified inheritance scholar and a local lawyer to review your family's actual case.",
+      ],
+      [
+        'Can I fill in the worksheets privately?',
+        'Yes. You can type into the PDF on your own device or print it and write by hand. The PDF has no submit button and does not send your entries anywhere. Keep completed copies private.',
+      ],
+    ],
+    scopeStrong: 'Educational edition.',
+    scopeBody: 'The workbook helps you prepare and organize. Its examples apply only to their stated assumptions, and the Pakistan-aware notes are preparation guidance, not legal advice. Read more:',
+    finalHeading: 'Start with the facts you already have',
+    finalBody: 'Download the workbook, complete the case snapshot, and write down the biggest uncertainty your family still needs to resolve.',
+    calculatorLink: 'Ready to calculate? Open the inheritance calculator',
+  },
   privacyPage: {
     cards: {
       noAccountHeading: 'No account required',
@@ -634,7 +756,7 @@ export const EN_TRANSLATIONS = {
         "Every answer you give in the wizard is held in your browser's memory and session storage only.",
       noUploadHeading: 'No calculation data uploaded',
       noUploadBody:
-        'Family details, estate values, and results are never sent to a server - there is no backend to send them to.',
+        'Family details, estate values, and results are never sent to a server - the calculator has no server component that receives them.',
       clearingHeading: 'Clearing removes it',
       clearingBody:
         'Refreshing the page, closing the tab, or using Clear Calculation removes your session data immediately.',
@@ -643,7 +765,7 @@ export const EN_TRANSLATIONS = {
     notDo: [
       'We do not load unnecessary external scripts.',
       'We do not store your family details, estate values, or results remotely.',
-      'We do not require - or ask for - your name, email, or any account information.',
+      'The calculator never asks for your name, email, or any account information.',
     ],
     storedHeading: 'What is stored, and where',
     storedSessionBefore: 'While you are using the guided wizard, your in-progress answers are kept in your browser\u2019s',
@@ -653,6 +775,14 @@ export const EN_TRANSLATIONS = {
       'Fonts are self-hosted with the application bundle rather than loaded from a third-party font service, so simply loading the page does not contact an external font provider either.',
     storedAnalytics:
       "We use Google Analytics to understand how users interact with our site. Google Analytics collects information such as your IP address, pages visited, and time spent on site. Data is governed by Google's privacy policy and our data retention practices.",
+    signupHeading: 'Optional resource updates',
+    signupItems: [
+      'The Free Inheritance Guide page offers an optional form to receive occasional Miraath Guide resources and updates. The workbook downloads without it.',
+      'If you sign up, we store your email address, a record that you ticked the consent box and when, the page and language you signed up from, and campaign tags from the link you followed (such as utm_source), if any.',
+      'These details are sent to and stored on the site operator’s server and are used only for those resources and updates. They are never combined with calculator answers, which stay on your device, and your email is never sent to Google Analytics.',
+    ],
+    signupRemovalBefore: 'You can ask for your email address to be removed at any time through the contact route on our',
+    signupRemovalAfter: 'page.',
     questionsHeading: 'Questions',
     questionsBefore: 'See the',
     questionsMiddle: 'page for the scope and limitations of the calculations themselves, or the',

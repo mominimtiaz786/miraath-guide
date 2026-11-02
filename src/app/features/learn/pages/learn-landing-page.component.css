@@ -121,6 +121,15 @@
   background: var(--color-bg-green-tint);
 }
 
+.workbook-card {
+  border-color: var(--color-gold-soft-30);
+  transition: box-shadow var(--transition-fast);
+}
+
+.workbook-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
 .glossary-grid {
   display: grid;
   grid-template-columns: 1fr;

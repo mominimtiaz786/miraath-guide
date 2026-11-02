@@ -15,6 +15,12 @@ export const FR_SEO: SeoDictionary = {
   methodology: { title: "Méthode de calcul de l'héritage islamique | Miraath Guide", description: 'Consultez la méthode hanafite, les hypothèses et les limites éducatives utilisées par Miraath Guide.' },
   about: { title: 'À propos de Miraath Guide | Calculateur islamique', description: 'Découvrez Miraath Guide, un calculateur éducatif conçu pour rendre les Faraid plus clairs.' },
   glossary: { title: 'Glossaire des Faraid | Miraath Guide', description: 'Glossaire des termes Hajb, Kalalah, Awl, Radd et autres notions de succession islamique.' },
+  inheritanceGuide: {
+    title: 'Kit gratuit sur l’héritage familial (PDF en anglais) | Miraath Guide',
+    description:
+      'Téléchargez le cahier gratuit de Miraath Guide sur l’héritage familial : exemples hanafites, listes de contrôle de la succession et fiches pratiques pour préparer la suite. PDF en anglais.',
+    ogImage: '/images/inheritance-guide/starter-kit-cover.jpg',
+  },
   privacy: { title: 'Politique de confidentialité | Miraath Guide', description: 'Découvrez comment Miraath Guide traite vos données : pas de compte, calculs dans votre navigateur.' },
   disclaimer: { title: 'Avertissement | Miraath Guide', description: 'Limites importantes à lire avant de vous appuyer sur un résultat de Miraath Guide.' },
   notFound: { title: 'Page introuvable | Miraath Guide', description: 'La page recherchée a peut-être été déplacée ou n’existe plus.', robots: 'noindex, follow' },

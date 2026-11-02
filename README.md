@@ -41,6 +41,20 @@ npm run build           # production build -> dist/mirath-guide
 npx ng build --configuration development  # unminified build, faster iteration
 ```
 
+## Inheritance guide page and optional email signup
+
+`/inheritance-guide` offers the free Family Inheritance Starter Kit PDF plus an optional
+"keep me updated" form. The calculator itself stays fully client-side; only that optional form
+posts to a small Node API (`POST /api/leads`) that stores signups in a private JSON file. Storage
+is off unless `LEADS_STORAGE_DRIVER=json`, and the current static Vercel deployment cannot store
+signups. Setup, configuration and the Vercel constraint: [docs/lead-signup.md](docs/lead-signup.md).
+
+```bash
+npm run api:leads      # terminal 1: standalone lead API (JSON at ./var/miraath-guide/leads.json)
+npm run start:leads    # terminal 2: ng serve, proxying /api to the lead API
+npm run test:leads     # storage + HTTP tests (add `-- --e2e` after `npm run build`)
+```
+
 ## Production build
 
 `npm run build` produces an optimized, lazy-route-split bundle in `dist/mirath-guide`. As of this

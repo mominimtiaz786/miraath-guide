@@ -53,6 +53,7 @@ const staticFamilies = [
   '/about',
   '/methodology',
   '/glossary',
+  '/inheritance-guide',
   '/privacy',
   '/disclaimer',
 ].map((path) => ({ path, lastmod: null }));

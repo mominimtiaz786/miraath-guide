@@ -97,6 +97,11 @@
         </p>
       </a>
     }
+    <a class="resource-card workbook-card" [routerLink]="localeUrl.localize('/inheritance-guide')">
+      <span class="tag">{{ i18n.t('learnPage.featured.workbookTag') }}</span>
+      <h3>{{ i18n.t('learnPage.featured.workbookTitle') }}</h3>
+      <p class="meta"><app-icon name="Download" [size]="14" /> {{ i18n.t('learnPage.featured.workbookMeta') }}</p>
+    </a>
     <div class="resource-card video-card">
       <span class="tag">{{ i18n.t('learnPage.videoLesson') }}</span>
       <h3>{{ i18n.t('learnPage.featured.videoIntroTitle') }}</h3>

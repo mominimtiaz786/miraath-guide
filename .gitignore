@@ -42,3 +42,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Lead signup runtime data - private, never commit (see docs/lead-signup.md)
+/var/
+leads.json
+.leads.json.*.tmp
